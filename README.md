@@ -2,7 +2,7 @@
 
 ## TeamName
 
-Logic Luminaries
+**Logic Luminaries**
 
 ### Project Abstract
 
@@ -11,7 +11,7 @@ The Sudoku game software is a straightforward and engaging puzzle application su
 <!-- This was the example paragraph that is being commented out.
 This is an example paragraph written in markdown. You can use *italics*, **bold**, and other formatting options. You can also <u>use inline html</u> to format your text. The example sections included in this document are not necessarily all the sections you will want, and it is possible that you won't use all the one's provided. It is your responsibility to create a document that adequately conveys all the information about your project specifications and requirements.
 -->
-<!--Please view this file's source to see `<!--comments-->` with guidance on how you might use the different sections of this document. -->
+<!--Please view this file's source to see `<!--comments->` with guidance on how you might use the different sections of this document. -->
 
 ### Customer
 
@@ -52,9 +52,9 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 <!--Use cases and user stories that support the user requirements in the previous section. The use cases should be based off user stories. Every major scenario should be represented by a use case, and every use case should say something not already illustrated by the other use cases. Diagrams (such as sequence charts) are encouraged. Ask the customer what are the most important use cases to implement by the deadline. You can have a total ordering, or mark use cases with “must have,” “useful,” or “optional.” For each use case you may list one or more concrete acceptance tests (concrete scenarios that the customer will try to see if the use case is implemented).-->
 
-Here is a sample user story from [Clean Agile](https://learning-oreilly-com.ezproxy.library.wisc.edu/library/view/clean-agile-back/9780135782002/ch03.xhtml#ch03lev1sec1) using a markdown block quote:
+<!-- Here is a sample user story from [Clean Agile](https://learning-oreilly-com.ezproxy.library.wisc.edu/library/view/clean-agile-back/9780135782002/ch03.xhtml#ch03lev1sec1) using a markdown block quote:
 
-> As the driver of a car, in order to increase my velocity, I will press my foot harder on the accelerator pedal.
+> As the driver of a car, in order to increase my velocity, I will press my foot harder on the accelerator pedal. -->
 
 <!-- 
 1. You
@@ -83,7 +83,7 @@ Here is a sample user story from [Clean Agile](https://learning-oreilly-com.ezpr
 
 <!--NOTE: Please include illustrations or screenshots of what your user interface would look like -- even if they’re rough -- and interleave it with your description.-->
 
-Images can be included with `![alt_text](image_path)`
+<!-- Images can be included with `![alt_text](image_path)` -->
 
 ### Security Requirements
 
