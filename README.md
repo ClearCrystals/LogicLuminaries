@@ -1,6 +1,13 @@
 # logicluminaries
 
+## Scrum Masters and Product Owners:
 
+| Sprints | PO    | SM     |
+| ------- | ----- | ------ |
+|       0 | Grace | Carlos |
+|       1 | Grace | Carlos |
+|       2 |       | Nima   |
+|       3 |       |        |
 
 ## Getting started
 
