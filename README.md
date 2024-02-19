@@ -27,12 +27,12 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 | ID   | Description                                                  | Priority | Status |
 | ---- | ------------------------------------------------------------ | -------- | ------ |
-| # | User can login | High      | Open   |
-| # | User can play a new game | High     | Open   |
-| # | User can edit and add numbers into a new game | High     | Open   |
-| # | User can see win screen | High     | Open   |
-| # | User can save game | High     | Open   |
-| # | User can leave and come back | Med      | Open   |
+| # | User can login | Low      | Open   |
+| # | User can play a new game | Low     | Open   |
+| # | User can edit and add numbers into a new game | Low     | Open   |
+| # | User can see win screen | Low     | Open   |
+| # | User can save game | Low     | Open   |
+| # | User can leave and come back | Low      | Open   |
 
 ^ Not assigned to ids yet -Grace
 
