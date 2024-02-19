@@ -23,21 +23,23 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 <!--This section lists the behavior that the users see. This information needs to be presented in a logical, organized fashion. It is most helpful if this section is organized in outline form: a bullet list of major topics (e.g., one for each kind of user, or each major piece of system functionality) each with some number of subtopics.-->
 
-Here is a user requirements sample from [Crookshanks](https://learning-oreilly-com.ezproxy.library.wisc.edu/library/view/practical-software-development/9781484206201/9781484206218_Ch02.xhtml):
+<!-- Here is a user requirements sample from [Crookshanks](https://learning-oreilly-com.ezproxy.library.wisc.edu/library/view/practical-software-development/9781484206201/9781484206218_Ch02.xhtml):-->
 
+#### Epics
 | ID   | Description                                                  | Priority | Status |
 | ---- | ------------------------------------------------------------ | -------- | ------ |
-| R11  | Generate, Backend, 9x9 grid of puzzle and solution | High      | Open   |
-| R12  | Provide, Backend, variaing levels of difficulty | High     | Open   |
-| R13  | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Open   |
-| R14  | Create an Interface, front end, where a user can solve the puzzle | Med      | Open   |
-| R15  | Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
-| R15  | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
-| R15  | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.  | Low     | Open   |
+| EPIC#1  | Generate, Backend, 9x9 grid of puzzle and solution | High      | Open   |
+| EPIC#2  | Provide, Backend, variaing levels of difficulty | High     | Open   |
+| EPIC#3  | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Open   |
+| EPIC#4  | Create an Interface, front end, where a user can solve the puzzle | Med      | Open   |
+| EPIC#5  | Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
+| EPIC#6  | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
+| EPIC#7  | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.  | Low     | Open   |
 
 
 <!--<div align="center"><small><i>Excerpt from Crookshanks Table 2-2 showing example user requirements for a timekeeping system</i></small></div>-->
 
+<!-- this is example that is being commented out
 - You 
   - Can
     - Use
@@ -45,6 +47,7 @@ Here is a user requirements sample from [Crookshanks](https://learning-oreilly-c
   - Points
     - In
     - Markdown
+-->
 
 ### Use Cases & User Stories
 
@@ -54,12 +57,26 @@ Here is a sample user story from [Clean Agile](https://learning-oreilly-com.ezpr
 
 > As the driver of a car, in order to increase my velocity, I will press my foot harder on the accelerator pedal.
 
+<!-- 
 1. You
    1. Can
       1. Also
 2. Use
    1. Numbered
       1. Lists
+-->
+
+#### Main Epics
+
+| ID   | Description                                                  | Priority | Status |
+| ---- | ------------------------------------------------------------ | -------- | ------ |
+| EPIC#1  | Generate, Backend, 9x9 grid of puzzle and solution | High      | Open   |
+| EPIC#2  | Provide, Backend, variaing levels of difficulty | High     | Open   |
+| EPIC#3  | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Open   |
+| EPIC#4  | Create an Interface, front end, where a user can solve the puzzle | Med      | Open   |
+| EPIC#5  | Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
+| EPIC#6  | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
+| EPIC#7  | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.  | Low     | Open   |
 
 ### User Interface Requirements
 
