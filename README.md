@@ -25,17 +25,16 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 <!-- Here is a user requirements sample from [Crookshanks](https://learning-oreilly-com.ezproxy.library.wisc.edu/library/view/practical-software-development/9781484206201/9781484206218_Ch02.xhtml):-->
 
-#### Epics
 | ID   | Description                                                  | Priority | Status |
 | ---- | ------------------------------------------------------------ | -------- | ------ |
-| EPIC#1  | Generate, Backend, 9x9 grid of puzzle and solution | High      | Open   |
-| EPIC#2  | Provide, Backend, variaing levels of difficulty | High     | Open   |
-| EPIC#3  | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Open   |
-| EPIC#4  | Create an Interface, front end, where a user can solve the puzzle | Med      | Open   |
-| EPIC#5  | Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
-| EPIC#6  | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
-| EPIC#7  | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.  | Low     | Open   |
+| # | User can login | High      | Open   |
+| # | User can play a new game | High     | Open   |
+| # | User can edit and add numbers into a new game | High     | Open   |
+| # | User can see win screen | High     | Open   |
+| # | User can save game | High     | Open   |
+| # | User can leave and come back | Med      | Open   |
 
+^ Not assigned to ids yet -Grace
 
 <!--<div align="center"><small><i>Excerpt from Crookshanks Table 2-2 showing example user requirements for a timekeeping system</i></small></div>-->
 
