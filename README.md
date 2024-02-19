@@ -11,7 +11,7 @@ The Sudoku game software is a straightforward and engaging puzzle application su
 <!-- This was the example paragraph that is being commented out.
 This is an example paragraph written in markdown. You can use *italics*, **bold**, and other formatting options. You can also <u>use inline html</u> to format your text. The example sections included in this document are not necessarily all the sections you will want, and it is possible that you won't use all the one's provided. It is your responsibility to create a document that adequately conveys all the information about your project specifications and requirements.
 -->
-Please view this file's source to see `<!--comments-->` with guidance on how you might use the different sections of this document. 
+<!--Please view this file's source to see `<!--comments-->` with guidance on how you might use the different sections of this document. -->
 
 ### Customer
 
@@ -27,11 +27,14 @@ Here is a user requirements sample from [Crookshanks](https://learning-oreilly-c
 
 | ID   | Description                                                  | Priority | Status |
 | ---- | ------------------------------------------------------------ | -------- | ------ |
-| R11  | Users should not have to sign into the system; their current network login should be used for identification. | Med      | Done   |
-| R12  | The user should pick a project first; the tasks available are a derivative of the project. | High     | Open   |
-| R13  | A full-time employee should not be able to submit a time card with less than 40 hours per week recorded. | High     | Open   |
-| R14  | A contractor can submit any number of hours up to 60 without special approval. | Med      | Open   |
-| R15  | A team lead can see his/her team's time cards before they are submitted but cannot approve them until the user submits it. | High     | Open   |
+| R11  | Generate, Backend, 9x9 grid of puzzle and solution | High      | Open   |
+| R12  | Provide, Backend, variaing levels of difficulty | High     | Open   |
+| R13  | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Open   |
+| R14  | Create an Interface, front end, where a user can solve the puzzle | Med      | Open   |
+| R15  | Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
+| R15  | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
+| R15  | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.  | Low     | Open   |
+
 
 <div align="center"><small><i>Excerpt from Crookshanks Table 2-2 showing example user requirements for a timekeeping system</i></small></div>
 
