@@ -1,22 +1,23 @@
-# logicluminaries
-
 # Requirements and Specification Document
 
 ## TeamName
 
-<!--The name of your team.-->
+Logic Luminaries
 
 ### Project Abstract
 
-<!--A one paragraph summary of what the software will do.-->
+The Sudoku game software is a straightforward and engaging puzzle application suitable for *all skill levels*. It has an intuitive interface, with options to choose different difficulty levels. Key features include hints for assistance and a timer for tracking game duration. The game involves filling a 9x9 grid so that each column, row, and 3x3 subgrid contains all digits from 1 to 9. This project aims to provide a fun and challenging experience for users, enhancing their problem-solving skills and concentration.
 
+<!-- This was the example paragraph that is being commented out.
 This is an example paragraph written in markdown. You can use *italics*, **bold**, and other formatting options. You can also <u>use inline html</u> to format your text. The example sections included in this document are not necessarily all the sections you will want, and it is possible that you won't use all the one's provided. It is your responsibility to create a document that adequately conveys all the information about your project specifications and requirements.
-
+-->
 Please view this file's source to see `<!--comments-->` with guidance on how you might use the different sections of this document. 
 
 ### Customer
 
 <!--A brief description of the customer for this software, both in general (the population who might eventually use such a system) and specifically for this document (the customer(s) who informed this document). Every project will have a customer from the CS506 instructional staff. Requirements should not be derived simply from discussion among team members. Ideally your customer should not only talk to you about requirements but also be excited later in the semester to use the system.-->
+
+The target customers for this Sudoku game software are puzzle enthusiasts of all ages and skill levels. It appeals to those who enjoy logical challenges and brain exercises, ranging from casual players seeking a fun pastime to serious puzzle solvers looking to test their skills. The game's user-friendly design and helpful features like hints and a timer make it accessible and engaging for a wide audience.
 
 ### User Requirements
 
