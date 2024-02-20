@@ -1,6 +1,6 @@
-# Requirements and Specification Document
+# Sudoku by Logic Luminaries
 
-## Sudoku by Logic Luminaries
+## Requirements and Specification Document
 
 ### Project Abstract
 
