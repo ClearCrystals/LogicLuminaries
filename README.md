@@ -342,7 +342,7 @@ deactivate DjangoBackend
 |       0 | Grace | Carlos |
 |       1 | Grace | Carlos |
 |       2 |       | Nima   |
-|       3 |       |        |
+|       3 | Bella |        |
 
 
 ## Authors and acknowledgment
