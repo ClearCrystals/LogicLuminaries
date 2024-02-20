@@ -1,8 +1,6 @@
 # Requirements and Specification Document
 
-## TeamName
-
-**Logic Luminaries**
+## Sudoku by Logic Luminaries
 
 ### Project Abstract
 
