@@ -341,8 +341,8 @@ deactivate DjangoBackend
 | ------- | ----- | ------ |
 |       0 | Grace | Carlos |
 |       1 | Grace | Carlos |
-|       2 |       | Nima   |
-|       3 | Bella |        |
+|       2 | Isaac | Nima   |
+|       3 | Bella | Claire |
 
 
 ## Authors and acknowledgment
