@@ -344,6 +344,14 @@ deactivate DjangoBackend
 |       2 | Isaac | Nima   |
 |       3 | Bella | Claire |
 
+## Roles:
+
+| Roles              | Names |
+| ------------------ | ----- |
+| Algorithm Engineer |       |
+| Backend Engineer   |       |
+| Frontend Engineer  |       |
+| Data Wrangler      |       |
 
 ## Authors and acknowledgment
 Show your appreciation to those who have contributed to the project.
