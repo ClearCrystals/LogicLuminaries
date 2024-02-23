@@ -346,12 +346,18 @@ deactivate DjangoBackend
 
 ## Roles:
 
-| Roles              | Names |
-| ------------------ | ----- |
-| Algorithm Engineer |       |
-| Backend Engineer   |       |
-| Frontend Engineer  |       |
-| Data Wrangler      |       |
+| Roles              | Major Role | Minor Role |
+| ------------------ | ---------- | ---------- |
+| Backend Engineer   |            |            |
+| Frontend Engineer  |            |            |
+| Data Wrangler      |            |            |
+|                    |            |            |
+| Algorithm Engineer |            |            |
+| Integration Manager |            |            |
+| QA Tester / Jack of All Trades |       |           |
+
+- Every should write code using test driven devolopment
+- Every member should write their own documentation in how to do stuff (so that another person can follow the instructions)
 
 ## Authors and acknowledgment
 Show your appreciation to those who have contributed to the project.
