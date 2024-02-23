@@ -320,14 +320,6 @@ participant MySQLDatabase
 ReactFrontend ->> DjangoBackend: HTTP Request (e.g., GET /api/data)
 activate DjangoBackend
 
-DjangoBackend ->> MySQLDatabase: Query (e.g., SELECT * FROM data_table)
-activate MySQLDatabase
-
-MySQLDatabase -->> DjangoBackend: Result Set
-deactivate MySQLDatabase
-
-DjangoBackend -->> ReactFrontend: JSON Response
-deactivate DjangoBackend
 ```
 
 ### Standards & Conventions
