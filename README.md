@@ -128,80 +128,6 @@ A <-->|"REST API"| B
 B <-->|Django ORM| C
 ```
 
-```mermaid
-flowchart RL
-subgraph Front End
-	A(Javascript: Vue)
-end
-	
-subgraph Back End
-	B(Python: Flask)
-end
-	
-subgraph Database
-	C[(MySQL)]
-end
-
-A <-->|"REST API"| B
-B <-->|SQLAlchemy| C
-```
-
-```mermaid
-flowchart RL
-subgraph Front End
-	A(Javascript: Vue)
-end
-	
-subgraph Back End
-	B(Javascript: Express)
-end
-	
-subgraph Database
-	C[(MySQL)]
-end
-
-A <-->|"REST API"| B
-B <--> C
-```
-
-```mermaid
-flowchart RL
-subgraph Front End
-	A(Static JS, CSS, HTML)
-end
-	
-subgraph Back End
-	B(Java: SpringBoot)
-end
-	
-subgraph Database
-	C[(MySQL)]
-end
-
-A <-->|HTTP| B
-B <--> C
-```
-
-```mermaid
-flowchart RL
-subgraph Front End
-	A(Mobile App)
-end
-	
-subgraph Back End
-	B(Python: Django)
-end
-	
-subgraph Database
-	C[(MySQL)]
-end
-
-A <-->|REST API| B
-B <-->|Django ORM| C
-```
-
-
-
 #### Database
 
 ```mermaid
@@ -320,6 +246,14 @@ participant MySQLDatabase
 ReactFrontend ->> DjangoBackend: HTTP Request (e.g., GET /api/data)
 activate DjangoBackend
 
+DjangoBackend ->> MySQLDatabase: Query (e.g., SELECT * FROM data_table)
+activate MySQLDatabase
+
+MySQLDatabase -->> DjangoBackend: Result Set
+deactivate MySQLDatabase
+
+DjangoBackend -->> ReactFrontend: JSON Response
+deactivate DjangoBackend
 ```
 
 ### Standards & Conventions
