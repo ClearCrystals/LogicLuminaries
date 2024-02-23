@@ -351,7 +351,7 @@ deactivate DjangoBackend
 | Backend Engineer   |            |            |
 | Frontend Engineer  |            |            |
 | Data Wrangler      |            |            |
-|                    |            |            |
+| ...                |            |            |
 | Algorithm Engineer |            |            |
 | Integration Manager |            |            |
 | QA Tester / Jack of All Trades |       |           |
