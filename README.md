@@ -62,6 +62,8 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
    1. Numbered
       1. Lists
 -->
+- #1-8 Sprint One: Setting up communitcation, choosing roles, choosing stack, setting up gitlab to our liking
+- #19-21 Installing software and getting set up with React, MySQL and Django
 
 #### Main Epics
 
