@@ -276,13 +276,13 @@ deactivate DjangoBackend
 
 | Roles              | Major Role | Minor Role |
 | ------------------ | ---------- | ---------- |
-| Backend Engineer   |            |            |
-| Frontend Engineer  |            |            |
-| Data Wrangler      |            |            |
+| Backend Engineer   |   Claire   |   Carlos   |
+| Frontend Engineer  |   Bella    |   Grace    |
+| Data Wrangler      |   Isaac    |   Bella    |
 | ...                |            |            |
-| Algorithm Engineer |            |            |
-| Integration Manager |            |            |
-| QA Tester / Jack of All Trades |       |           |
+| Algorithm Engineer |    Nima    |   Isaac    |
+| Integration Manager |    Grace    |    Nima    |
+| QA Tester / Jack of All Trades |  Carlos  |    Claire     |
 
 - Every should write code using test driven devolopment
 - Every member should write their own documentation in how to do stuff (so that another person can follow the instructions)
