@@ -279,7 +279,6 @@ deactivate DjangoBackend
 | Backend Engineer   |   Claire   |   Carlos   |
 | Frontend Engineer  |   Bella    |   Grace    |
 | Data Wrangler      |   Isaac    |   Bella    |
-| ...                |            |            |
 | Algorithm Engineer |    Nima    |   Isaac    |
 | Integration Manager |    Grace    |    Nima    |
 | QA Tester / Jack of All Trades |  Carlos  |    Claire     |
