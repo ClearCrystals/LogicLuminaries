@@ -2,7 +2,7 @@
 Always `git pull` on master before you start editing if you plan on pushing very soon
 
 #### Creating branches
-`git checkout -b gs/12-NAME`
+`git checkout main && git checkout -b gs/12-NAME`
 
 #### Commiting branches
 `git add . && git commit -m "YOUR MESSAGE" && git push`
