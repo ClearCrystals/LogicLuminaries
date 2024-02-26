@@ -9,4 +9,3 @@ Always `git pull` on master before you start editing if you plan on pushing very
 
 #### Many commits behind. Delete whatever I have and Fetch me the latest head
 `git reset --hard && git fetch main`
-
