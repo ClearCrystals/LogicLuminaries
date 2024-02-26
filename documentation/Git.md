@@ -1,5 +1,5 @@
 # Git Cheat Sheet
-Always `git pull` on master before you start editing
+Always `git pull` on master before you start editing if you plan on pushing very soon
 
 #### Creating branches
 `git checkout -b gs/12-NAME`
