@@ -10,7 +10,8 @@ Users are keyed by their id/username. Boards are keyed by their state. This is a
 
 
 ### Example query:
-``` SELECT id, state
+```sh 
+SELECT id, state
     FROM Boards
     WHERE isfinished == True
 ```
