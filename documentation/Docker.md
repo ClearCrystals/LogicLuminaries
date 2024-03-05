@@ -2,7 +2,7 @@
 1. Open Docker Desktop to start the docker daemon
 2. Navigate to projects root directory
 3. Run `docker compose -p sudoku up --build` to build images, install dependencies, and run the container
-4. Access Sudoku by navigating to `localhost:8000` in your web browser
+4. Access Sudoku by navigating to `localhost:3000` in your web browser
 5. Press `C-c` to exit docker
 
 # Docker Usage for Developers
@@ -10,14 +10,14 @@
     - `docker compose -p sudoku build`
     - `docker compose up` or `docker compose up -d`to run detached
 2. Access:
-    - Frontend: localhost:8000
-    - Backend: localhost:3000
+    - Frontend: localhost:3000
+    - Backend: localhost:8000
 3. `docker compose ps` to list project containers or `docker ps -a` to list all containers
 4. `docker compose stop` to stop containers if detached
 5. `docker compoes down` to stop and delete containers
 
 ## Using CLI with Docker:
-Mysql: `docker exec -it <db_id_or_name> sh`
+MySQL: `docker exec -it <db_id_or_name> sh`
 ```sh
 mysql -u user -p
 > Enter password: password
