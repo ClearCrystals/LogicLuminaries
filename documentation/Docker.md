@@ -1,24 +1,39 @@
-# Docker Containeriation
-1. Open `Docker Desktop` and navigate to project repo
-2. To do a basic build: `docker-compose up`
-3. To stop the emulation: `docker-compose down`
+# Docker Usage for End Users
+1. Open Docker Desktop to start the docker daemon
+2. Navigate to projects root directory
+3. Run `docker compose -p sudoku up --build` to build images, install dependencies, and run the container
+4. Access Sudoku by navigating to `localhost:8000` in your web browser
+5. Press `C-c` to exit docker
 
-or 
+# Docker Usage for Developers
+1. Either use the end-users' one-liner or build individually with:
+    - `docker compose -p sudoku build`
+    - `docker compose up` or `docker compose up -d`to run detached
+2. Access:
+    - Frontend: localhost:8000
+    - Backend: localhost:3000
+3. `docker compose ps` to list project containers or `docker ps -a` to list all containers
+4. `docker compose stop` to stop containers if detached
+5. `docker compoes down` to stop and delete containers
 
-- Just run a detached head and map a port 
-building image(go in the backend folder): 
-- `docker build -t sudoku-backend .`
-- `docker run -d -p 8000:8000 sudoku-backend`
-- http://localhost:8000
-- Nothing there as there isn't a backend implemented.
-- `docker stop sudoku-backend`
-- `docker rm sudoku-backend`
+## Using CLI with Docker:
+Mysql: `docker exec -it <db_id_or_name> sh`
+```sh
+mysql -u user -p
+> Enter password: password
+```
 
-building just the frontend(go in the frontend folder) 
-- `docker build -t sudoku-frontend .`
-- `docker run -d -p 3000:3000 sudoku-frontend`
-- http://localhost:3000
-- `docker stop sudoku-frontend`
-- `docker rm sudoku-frontend`
+Django: `docker exec -it <backend_id_or_name> sh`
+```sh
+django-admin ...
+```
 
-- See images: `docker ps`
+Node: `docker exec -it <frontend_id_or_name> sh`
+```sh
+node ...
+```
+
+## Want to Delete All Images/Containers/Networks/Volumes?
+To remove sudoku related: `docker compose down --rmi all --volumes`
+
+To remove everything: `docker stop $(docker ps -aq) && docker system prune -af --volumes`
