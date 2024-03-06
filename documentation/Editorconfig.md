@@ -1,11 +1,11 @@
 # Using .editorconfig
-The `.editorconfig` file in the root directory ensures we all have the same styling settings applied.
+The `.editorconfig` file in the root directory ensures we all have the same styling settings applied for all js files.
 
 ### What the file does
-This file is used to set 4 space indentation for all python files and 2 space indentation for all javascript files in the project.
+This file is used to set 2 space indentation for all javascript files in the project.
 
 ### Setting it up in your IDE
 No plugin installation is needed for many common IDEs, including IntelliJ and VSCode. However, VSCode requires downloading the `EditorConfig for VS Code` extension in order for the .editorconfig file to be applied whenever formatting with `Alt+Shift+f`. For a full list of supported IDEs, see: https://editorconfig.org/.
 
 ### Verifying proper setup
-Open our project directory in an IDE. Verify that the properties defined in .editorconfig are enforced when formatting .py and .js files. For example, change `indent_style = 2` to `indent_style = 6`, reformat a .js file, and see if the change is reflected.
+Open our project directory in an IDE. Verify that the properties defined in .editorconfig are enforced when formatting .js files. For example, change `indent_style = 2` to `indent_style = 6`, reformat a .js file, and see if the change is reflected.
