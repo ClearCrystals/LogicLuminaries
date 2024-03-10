@@ -28,6 +28,15 @@ u.save()
 
 Note: Django **does not** connect to the database until you call `save`
 
+###### Insert Shortcut
+There is a shortcut you can use to create a row in the database. The `create` method combined creating an instance and then applying the `save` function all in one go. An example code snippet is below. 
+
+```
+alt_u = User.objects.create(id="user", pwd="pass", token= token)
+```
+
+Note: It requires you to use `objects` on the **class**. See below for further details.
+
 ###### Get
 
 To retrieve rows of data from our database, we must create a QuerySet on our model class by calling `objects` on the **class**. This QuerySet can have zero or many filters and is the equivalent of the Select statement with `filter` representing the limiting causes such as Where and Limit. To get only a single row of data you can use the `get` method. 
