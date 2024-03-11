@@ -11,7 +11,7 @@
     - `docker compose up` or `docker compose up -d`to run detached
 2. Access:
     - Frontend: localhost:3000
-    - Backend: localhost:8000
+    - Backend: localhost:8000/sudoku
 3. `docker compose ps` to list project containers or `docker ps -a` to list all containers
 4. `docker compose stop` to stop containers if detached
 5. `docker compoes down` to stop and delete containers
