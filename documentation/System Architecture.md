@@ -7,7 +7,7 @@ subgraph Users
 end
 
 subgraph Front End
-	B(Javascript: React)
+	B(Javascript: Send user input to backend)
 end
 	
 subgraph Back End
