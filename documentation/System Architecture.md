@@ -1,30 +1,32 @@
 #### System Architecture
 
 ```mermaid
-flowchart RL
+flowchart TD
 subgraph Users
-    D(Usesr Interaction)
+    A(Usesr Interaction: Login, Moves)
 end
 
 subgraph Front End
-	A(Javascript: React)
+	B(Javascript: React)
 end
 	
 subgraph Back End
-	B(Python: Django with \nDjango Rest Framework)
+	C(Python: Gather user's data with Django)
+	D(Python: Edit user's board)
 end
 
 subgraph Algorithms
-    E(Methods to run Sudoku Game)
+    E(Methods to run Sudoku Game: Create board, edit board)
 end
 
 subgraph Database
-	C[(MySQL)]
+	F[(MySQL: Data Storage)]
 end
 
 A <--> B
 B <--> C
-A <--> D
-B <--> E
+B <--> D
+C <--> F
+D <--> E
 ```
 
