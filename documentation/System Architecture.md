@@ -11,22 +11,20 @@ subgraph Front End
 end
 	
 subgraph Back End
-	C(Python: Gather user's data with Django)
-	D(Python: Edit user's board)
+	C(Python: Gather user's data with Django \nEdit user's board)
 end
 
 subgraph Algorithms
-    E(Methods to run Sudoku Game: Create board, edit board)
+    D(Methods to run Sudoku Game: Create board, edit board)
 end
 
 subgraph Database
-	F[(MySQL: Data Storage)]
+	E[(MySQL: Data Storage)]
 end
 
 A <--> B
 B <--> C
-B <--> D
-C <--> F
-D <--> E
+C <--> D
+C <--> E
 ```
 
