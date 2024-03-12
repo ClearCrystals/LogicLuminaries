@@ -1,25 +1,25 @@
 #### System Architecture
 
 ```mermaid
-flowchart LR
+flowchart TD
 subgraph Users
-    A(Usesr Interaction: Login, Moves)
+    A(Usesr Interaction: \nLogin \nMoves)
 end
 
 subgraph Front End
-	B(Javascript: Send user input to backend)
+	B(Send user input to backend)
 end
 	
 subgraph Back End
-	C(Python: Gather user's data with Django \nEdit user's board)
+	C(Python: \nGather user's data with Django \nEdit user's board)
 end
 
 subgraph Algorithms
-    D(Methods to run Sudoku Game: Create board, edit board)
+    D(Methods to run Sudoku Game: \nCreate board \nEdit board)
 end
 
 subgraph Database
-	E[(MySQL: Data Storage)]
+	E[(MySQL: \nUser data \nBoard data)]
 end
 
 A <--> B
