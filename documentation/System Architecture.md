@@ -2,27 +2,27 @@
 
 ```mermaid
 flowchart TD
-subgraph Users
+subgraph one [Users]
     A(Usesr Interaction: \nLogin \nMoves)
 end
 
-subgraph Front End
+subgraph two [Front End]
 	B(Send user input to backend)
 end
 	
-subgraph Back End
+subgraph three [Back End]
 	C(Python: \nGather user's data with Django \nEdit user's board)
 end
 
-subgraph Algorithms
+subgraph four [Algorithms]
     D(Methods to run Sudoku Game: \nCreate board \nEdit board)
 end
 
-subgraph Database
+subgraph five [Database]
 	E[(MySQL: \nUser data \nBoard data)]
 end
 
-Users <--> Front End
+one <--> two
 B <--> C
 C <--> D
 C <--> E
