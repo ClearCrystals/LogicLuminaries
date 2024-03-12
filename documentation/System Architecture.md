@@ -22,7 +22,7 @@ subgraph Database
 	E[(MySQL: \nUser data \nBoard data)]
 end
 
-A <--> B
+Users <--> Front End
 B <--> C
 C <--> D
 C <--> E
