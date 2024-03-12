@@ -1,7 +1,7 @@
 #### System Architecture
 
 ```mermaid
-flowchart TD
+flowchart LR
 subgraph Users
     A(Usesr Interaction: Login, Moves)
 end
