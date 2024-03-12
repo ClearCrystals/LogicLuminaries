@@ -3,7 +3,7 @@
 ```mermaid
 flowchart TD
 subgraph one [Users]
-    A(Usesr Interaction: \nLogin \nMoves)
+    A(Users Interaction: \nLogin \nMoves)
 end
 
 subgraph two [Front End]
