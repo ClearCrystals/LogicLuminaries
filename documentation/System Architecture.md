@@ -23,8 +23,8 @@ subgraph five [Database]
 end
 
 one <--> two
-B <--> C
-C <--> D
-C <--> E
+two <--> three
+three <--> four
+three <--> five
 ```
 
