@@ -19,7 +19,7 @@ isfinished: 0 or 1 based on whether board is completed
 Users are keyed by their id/username. Boards are keyed by their id. This is a many-to-one relation, where one user can have many boards associated with them. Currently, all fields are either ints or strings, but this can be changed as determined.
 
 ### Relational diagram:
-
+![ERD](./Sudoku_DB_Schema_1_.png)
 
 ### Example query:
 ```sh 
