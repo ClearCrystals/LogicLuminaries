@@ -135,7 +135,7 @@ B <-->|Django ORM| C
 ---
 ERD for SudokuDB
 ---
-![ERD image](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/-/blob/eb6dc6e394f2918b57a5f7dddb481bdc770f670d/Sudoku_DB_Schema.png)
+![ERD image](./Sudoku_DB_Schema_1_.png)
 
 
 #### Class Diagram
