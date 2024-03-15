@@ -14,7 +14,7 @@
     - Backend: localhost:8000/sudoku
 3. `docker compose ps` to list project containers or `docker ps -a` to list all containers
 4. `docker compose stop` to stop containers if detached
-5. `docker compoes down` to stop and delete containers
+5. `docker compose down` to stop and delete containers
 
 ## Using CLI with Docker:
 MySQL: `docker exec -it <db_id_or_name> sh`

@@ -1,5 +1,5 @@
 # Sudoku by Logic Luminaries
-![Logo](./documentation/images/LLLogo.jpg)
+![Logo](./documentation/images/LLLogo.jpg){width=50%}
 ## Requirements and Specification Document
 
 ### Project Abstract
