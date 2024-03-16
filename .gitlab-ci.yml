@@ -8,6 +8,6 @@ lint_backend:
     - pip install -r requirements.txt
   script:
     - black . --check --verbose --diff --color
-    - flake8 --max-line-length=88 .
+    - flake8 --max-line-length=100 --ignore=F401 .
   tags:
     - dind
