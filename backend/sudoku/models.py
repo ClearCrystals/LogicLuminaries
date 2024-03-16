@@ -13,7 +13,5 @@ class Boards(models.Model):
     answer = models.CharField(max_length = 200) # consider different lengths
     difficulty = models.CharField(max_length = 30) # Could also use choice see below    
     style = models.CharField(max_length = 30) # what kind of sudoku puzzle
-    # For a many to one relationship (our database), foreign key should use Cascade
-    # https://docs.djangoproject.com/en/5.0/ref/models/fields/#foreignkey
-    user = models.ForeignKey(Users, on_delete=models.CASCADE) # Foreign key: the username
+    user = models.CharField(max_length = 30) # Foreign key: the username
     isFinished = models.IntegerField(default = 0)
