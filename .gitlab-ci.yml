@@ -1,5 +1,6 @@
 stages:
   - lint
+  - static_analysis
 
 lint_backend:
   stage: lint
@@ -9,5 +10,14 @@ lint_backend:
   script:
     - black . --check --verbose --diff --color
     - flake8 --max-line-length=100 --ignore=F401 .
+  tags:
+    - dind
+static_analysis_backend:
+  stage: static_analysis
+  image: python
+  before_script:
+    - pip install -r ./requirements.txt
+  script:
+    - mypy .
   tags:
     - dind
