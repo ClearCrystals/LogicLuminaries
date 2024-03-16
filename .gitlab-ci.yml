@@ -1,0 +1,25 @@
+stages:
+  - lint
+  - static_analysis
+
+lint_backend:
+  stage: lint
+  image: python:3
+  before_script:
+    - pip install -r requirements.txt
+  script:
+    - black . --check --verbose --diff --color
+    - flake8 --max-line-length=100 --ignore=F401 .
+  tags:
+    - dind
+
+static_analysis_backend:
+  stage: static_analysis
+  image: python
+  before_script:
+    - pip install -r ./requirements.txt
+  script:
+    echo "TODO - Add static analysis"
+    # - mypy .
+  tags:
+    - dind
