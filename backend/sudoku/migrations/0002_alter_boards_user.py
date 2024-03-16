@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sudoku', '0001_initial'),
+        ("sudoku", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='boards',
-            name='user',
+            model_name="boards",
+            name="user",
             field=models.CharField(max_length=30),
         ),
     ]
