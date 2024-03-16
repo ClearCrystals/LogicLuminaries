@@ -132,43 +132,11 @@ B <-->|Django ORM| C
 
 #### Database
 
-```mermaid
 ---
-title: Sample Database ERD for an Order System
+ERD for SudokuDB
 ---
-erDiagram
-    Customer ||--o{ Order : "placed by"
-    Order ||--o{ OrderItem : "contains"
-    Product ||--o{ OrderItem : "included in"
+![ERD image](./Sudoku_DB_Schema_1_.png)
 
-    Customer {
-        int customer_id PK
-        string name
-        string email
-        string phone
-    }
-
-    Order {
-        int order_id PK
-        int customer_id FK
-        string order_date
-        string status
-    }
-
-    Product {
-        int product_id PK
-        string name
-        string description
-        decimal price
-    }
-
-    OrderItem {
-        int order_item_id PK
-        int order_id FK
-        int product_id FK
-        int quantity
-    }
-```
 
 #### Class Diagram
 
