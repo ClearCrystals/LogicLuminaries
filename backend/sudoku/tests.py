@@ -1,6 +1,7 @@
 from django.test import TestCase
 from .sudoku import Sudoku
 
+
 class SudokuAlgoTests(TestCase):
     def test_sudoku_status(self):
         # Check the sudoku_status for a completed board
@@ -14,7 +15,7 @@ class SudokuAlgoTests(TestCase):
             [7, 1, 3, 9, 2, 4, 8, 5, 6],
             [9, 6, 1, 5, 3, 7, 2, 8, 4],
             [2, 8, 7, 4, 1, 9, 6, 3, 5],
-            [3, 4, 5, 2, 8, 6, 1, 7, 9]
+            [3, 4, 5, 2, 8, 6, 1, 7, 9],
         ]
         self.assertTrue(sudoku.sudoku_status(completed_board))
 
@@ -28,14 +29,14 @@ class SudokuAlgoTests(TestCase):
             [7, 1, 3, 9, 2, 4, 8, 5, 6],
             [9, 6, 1, 5, 3, 7, 2, 8, 4],
             [2, 8, 7, 4, 1, 9, 6, 3, 5],
-            [3, 4, 5, 2, 8, 6, 0, 7, 9]
+            [3, 4, 5, 2, 8, 6, 0, 7, 9],
         ]
         self.assertFalse(sudoku.sudoku_status(incomplete_board))
 
     def test_generate_sudoku(self):
         # Check that board is 9x9
         sudoku = Sudoku()
-        board = sudoku.generate_sudoku('easy')
+        board = sudoku.generate_sudoku("easy")
         self.assertEqual(len(board), 9)
         for row in board:
             self.assertEqual(len(row), 9)
@@ -52,7 +53,7 @@ class SudokuAlgoTests(TestCase):
             [7, 0, 0, 0, 2, 0, 0, 0, 6],
             [0, 6, 0, 0, 0, 0, 2, 8, 0],
             [0, 0, 0, 4, 1, 9, 0, 0, 5],
-            [0, 0, 0, 0, 8, 0, 0, 7, 9]
+            [0, 0, 0, 0, 8, 0, 0, 7, 9],
         ]
         solution = sudoku.solve_sudoku(test_board)
         self.assertTrue(sudoku.sudoku_status(solution))
