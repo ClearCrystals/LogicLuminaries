@@ -37,3 +37,13 @@ node ...
 To remove sudoku related: `docker compose down --rmi all --volumes`
 
 To remove everything: `docker stop $(docker ps -aq) && docker system prune -af --volumes`
+
+## Deployment
+When ready for deployment switch to npm ci for faster builds!
+```
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+        --mount=type=cache,target=/root/.npm \
+            npm ci --omit=dev
+```
+
