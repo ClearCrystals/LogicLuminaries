@@ -5,8 +5,12 @@ from django.db import models
 class Users(models.Model):
     id = models.CharField(primary_key=True, max_length=30)  # Primary key: the username
     pwd = models.CharField(max_length=30)  # the password
-    token = models.CharField(max_length=200)  # Used for authentication. What type?
+    email = models.CharField(max_length=200)  # Used for authentication. What type?
 
+#class User(models.Model):
+#    full_name = models.CharField(max_length=100)
+#    email = models.EmailField(unique=True)
+#    password = models.CharField(max_length=100)
 
 # Class used to make queries to the board database
 class Boards(models.Model):

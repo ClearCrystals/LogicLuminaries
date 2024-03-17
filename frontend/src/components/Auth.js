@@ -1,73 +1,88 @@
-import React, { useState } from "react"
-export default function (props) {
-    let [authMode, setAuthMode] = useState("signin")
+import React, { useState } from "react";
+import axios from "axios";
+import Cookies from 'js-cookie';
+
+axios.defaults.xsrfCookieName = 'csrfToken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+export default function AuthForm(props) {
+    const [email, setEmail] = useState("");
+    const [pwd, setPwd] = useState(""); // Updated to match serializer field
+    const [id, setId] = useState(""); // Represents the user ID for signup
+    let [authMode, setAuthMode] = useState("signin");
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const data = { email, pwd, id }; // Updated to match serializer fields
+
+        const url = "http://localhost:8000/api/sudoku/"; // Adjust URL as needed
+
+        const csrfToken = Cookies.get('csrftoken');
+
+        try {
+            console.log(JSON.stringify(data)); // Log data to be sent
+            let response = await axios.post(url, JSON.stringify(data), {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
+                }
+            });
+            console.log(response.data); // Log response data
+        } catch (error) {
+            console.error("Error during authentication:", error);
+        }
+    };
+
     const changeAuthMode = () => {
         setAuthMode(authMode === "signin" ? "signup" : "signin")
     }
-    if (authMode === "signin") {
-        return (
-            <div>
-                <form className="Auth-form">
-                    <h3>Sign In</h3>
-                    <div>
-                        <label>Email address</label>
-                        <input
-                            type="email"
-                            placeholder="Enter email"
-                        />
-                    </div>
-                    <div>
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            placeholder="Enter password"
-                        />
-                    </div>
-                    <button type="submit" className="btn btn-primary">
-                        Submit
-                    </button>
-                    <p className="forgot-password text-right mt-2">
-                        Forgot <a href="#">password?</a>
-                    </p>
-                </form>
-            </div>
-        )
-    }
+
     return (
-        <form className="Auth-form">
-            Already registered?{" "}
-            <span className="link-primary" onClick={changeAuthMode}>
-                Sign In
-            </span>
-            <div>
-                <label>Full Name</label>
-                <input
-                    type="email"
-                    placeholder="e.g Jane Doe"
-                />
-            </div>
-            <div>
-                <label>Email address</label>
-                <input
-                    type="email"
-                    placeholder="Email Address"
-                />
-            </div>
-            <div>
-                <label>Password</label>
-                <input
-                    type="password"
-                    placeholder="Password"
-                />
-            </div>
-            <div>
+        <div>
+            <form className="Auth-form" onSubmit={handleSubmit}>
+                <h3>{authMode === "signin" ? "Sign In" : "Sign Up"}</h3>
+                {authMode === "signup" && (
+                    <div>
+                        <label>ID</label>
+                        <input
+                            type="text"
+                            placeholder="Enter ID"
+                            value={id}
+                            onChange={e => setId(e.target.value)}
+                        />
+                    </div>
+                )}
+                <div>
+                    <label>Email address</label>
+                    <input
+                        type="email"
+                        placeholder="Enter email"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        placeholder="Enter password"
+                        value={pwd}
+                        onChange={e => setPwd(e.target.value)}
+                    />
+                </div>
                 <button type="submit" className="btn btn-primary">
                     Submit
                 </button>
-            </div>
-            <p className="text-center mt-2">
-                Forgot <a href="#">password?</a>
-            </p>
-        </form>
-    )
+                <p className="text-center mt-2">
+                    {authMode === "signin"
+                        ? "Need an account? "
+                        : "Already registered? "}
+                    <button className="link-like-button" onClick={changeAuthMode}>
+                        {authMode === "signin" ? "Sign Up" : "Sign In"}
+                    </button>
+                </p>
+            </form>
+        </div>
+    );
 }
