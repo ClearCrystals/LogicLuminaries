@@ -24,5 +24,5 @@ from .models import Users
 def index(request):
     return HttpResponse("Hello, world. You're at the sudoku index.")
 class UsersView(viewsets.ModelViewSet):
-    serializer_class = UsersSerializer
+    serializer_class = UsersSerializer # This is where user input data is
     queryset = Users.objects.all()

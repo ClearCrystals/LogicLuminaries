@@ -21,3 +21,4 @@ class Boards(models.Model):
     style = models.CharField(max_length=30)  # what kind of sudoku puzzle
     user = models.CharField(max_length=30)  # Foreign key: the username
     isFinished = models.IntegerField(default=0)
+    #TODO: switch to float
