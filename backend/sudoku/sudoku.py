@@ -1,3 +1,6 @@
+import random
+
+
 class Sudoku:
     """
     A class representing a Sudoku puzzle.
@@ -8,8 +11,8 @@ class Sudoku:
         difficulty (str): The difficulty level of the Sudoku puzzle.
 
     Methods:
-        __init__(self, difficulty="Medium"): Initializes a Sudoku object with the specified difficulty level.
-        generate_sudoku(self): Generates a Sudoku puzzle by solving a complete puzzle and removing cells based on the difficulty level.
+        __init__(self, difficulty="Medium"): Initializes a Sudoku object
+        generate_sudoku(self): Generates Sudoku by solving then removing cells based on difficulty.
         sudoku_status(self): Checks the status of the Sudoku puzzle (complete or incomplete).
         solve_sudoku(self): Solves the Sudoku puzzle using backtracking.
 
@@ -20,7 +23,7 @@ class Sudoku:
         Initializes a Sudoku object with the specified difficulty level.
 
         Args:
-            difficulty (str, optional): The difficulty level of the Sudoku puzzle. Defaults to "Medium".
+            difficulty (str, optional): The difficulty of the Sudoku puzzle
         """
         self.board = [[0 for _ in range(9)] for _ in range(9)]
         self.difficulty = difficulty
@@ -28,7 +31,7 @@ class Sudoku:
 
     def generate_sudoku(self):
         """
-        Generates a Sudoku puzzle by solving a complete puzzle and removing cells based on the difficulty level.
+        Generates a Sudoku puzzle by solving a puzzle then removes cells based on difficulty.
         """
         self.solve_sudoku()
         numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
