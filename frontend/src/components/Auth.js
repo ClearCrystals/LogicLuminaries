@@ -11,6 +11,7 @@ export default function AuthForm(props) {
     const [pwd, setPwd] = useState(""); 
     const [id, setId] = useState(""); 
     let [authMode, setAuthMode] = useState("signin");
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const navigate = useNavigate();
 
@@ -52,6 +53,7 @@ export default function AuthForm(props) {
             }
 
             console.log(`${authMode} response:`, response.data);
+            setShowSuccess(true);
         } catch (error) {
             console.error(`Error during ${authMode}:`, error);
         }    
@@ -59,10 +61,16 @@ export default function AuthForm(props) {
 
     const changeAuthMode = () => {
         setAuthMode(authMode === "signin" ? "signup" : "signin")
+        setShowSuccess(false);
     }
 
     return (
         <div>
+            {showSuccess && (
+                <div style={{ color: 'green', backgroundColor: 'lightgreen', padding: '10px', marginBottom: '10px' }}>
+                    Account created successfully! Please signin.
+                </div>
+            )}
             <form className="Auth-form" onSubmit={handleSubmit}>
                 <h3>{authMode === "signin" ? "Sign In" : "Sign Up"}</h3>
                 {authMode === "signup" && (
