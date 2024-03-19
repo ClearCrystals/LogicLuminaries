@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sudoku', '0003_rename_token_users_email'),
+        ("sudoku", "0003_rename_token_users_email"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='users',
-            name='pwd',
+            model_name="users",
+            name="pwd",
             field=models.CharField(max_length=128),
         ),
     ]
