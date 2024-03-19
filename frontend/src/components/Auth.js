@@ -1,37 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.xsrfCookieName = 'csrfToken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 export default function AuthForm(props) {
     const [email, setEmail] = useState("");
-    const [pwd, setPwd] = useState(""); // Updated to match serializer field
-    const [id, setId] = useState(""); // Represents the user ID for signup
+    const [pwd, setPwd] = useState(""); 
+    const [id, setId] = useState(""); 
     let [authMode, setAuthMode] = useState("signin");
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const modeFromURL = new URLSearchParams(window.location.search).get('mode');
+        if (modeFromURL && (modeFromURL === 'signup' || modeFromURL === 'signin')) {
+            setAuthMode(modeFromURL);
+        }
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const data = { email, pwd, id }; // Updated to match serializer fields
+        if (!email || !pwd) {
+            console.error("Email and password are required.");
+            return; // Prevent further execution
+        }
 
-        const url = "http://localhost:8000/api/sudoku/"; // Adjust URL as needed
+        const url = authMode === "signin" ? 
+                    "http://localhost:8000/sudoku/signin/" : 
+                    "http://localhost:8000/sudoku/signup/";
 
-        const csrfToken = Cookies.get('csrftoken');
+        const data = authMode === "signin" ? 
+                     { email, pwd } : 
+                     { id, email, pwd };
+
+        const csrfToken = Cookies.get('csrfToken');
 
         try {
-            console.log(JSON.stringify(data)); // Log data to be sent
+            console.log(`Sending data to ${url}:`, JSON.stringify(data));
             let response = await axios.post(url, JSON.stringify(data), {
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': csrfToken,
                 }
             });
-            console.log(response.data); // Log response data
+            if (response.status === 200) { // Assuming 200 is the success status code
+                navigate("/components/Games"); // Adjust the path as per your route configuration
+            }
+
+            console.log(`${authMode} response:`, response.data);
         } catch (error) {
-            console.error("Error during authentication:", error);
-        }
+            console.error(`Error during ${authMode}:`, error);
+        }    
     };
 
     const changeAuthMode = () => {

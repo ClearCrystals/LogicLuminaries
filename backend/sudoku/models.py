@@ -4,9 +4,8 @@ from django.db import models
 # Class used to make queries to the user database
 class Users(models.Model):
     id = models.CharField(primary_key=True, max_length=30)  # Primary key: the username
-    pwd = models.CharField(max_length=30)  # the password
-    email = models.CharField(max_length=200)  # Used for authentication. What type?
-
+    pwd = models.CharField(max_length=128) 
+    email = models.CharField(max_length=200)  
 #class User(models.Model):
 #    full_name = models.CharField(max_length=100)
 #    email = models.EmailField(unique=True)

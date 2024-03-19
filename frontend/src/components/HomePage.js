@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
@@ -9,6 +9,10 @@ const HomePage = () => {
       </header>
       <main>
         <p>Welcome to the home page! This is a basic example of a React project.</p>
+        <div className="btn-group" role="group" aria-label="Authentication Buttons">
+          <Link to="/components/auth?mode=signup" className="btn btn-primary">Signup</Link>
+          <Link to="/components/auth?mode=signin" className="btn btn-primary">Signin</Link>
+        </div>
       </main>
     </div>
   );
