@@ -9,14 +9,15 @@ from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.hashers import check_password
-#from rest_framework.views import APIView
-#from rest_framework.response import Response
-#from rest_framework import status
+
+# from rest_framework.views import APIView
+# from rest_framework.response import Response
+# from rest_framework import status
 
 # @method_decorator(csrf_exempt, name='dispatch')
-#class SudokuAPIView(APIView):
-    #def get(self, request, *args, **kwargs):
-    #    return Response(data, status=status.HTTP_200_OK)
+# class SudokuAPIView(APIView):
+# def get(self, request, *args, **kwargs):
+#    return Response(data, status=status.HTTP_200_OK)
 #    def post(self, request, format=None):
 #        serializer = UserSerializer(data=request.data)
 #        print("TEST", serializer)
@@ -29,11 +30,14 @@ from django.contrib.auth.hashers import check_password
 
 def index(request):
     return HttpResponse("Hello, world. You're at the sudoku index.")
+
+
 class UsersView(viewsets.ModelViewSet):
-    serializer_class = UsersSerializer # This is where user input data is
+    serializer_class = UsersSerializer  # This is where user input data is
     queryset = Users.objects.all()
 
-@api_view(['POST'])
+
+@api_view(["POST"])
 def signup_view(request):
     serializer = UsersSerializer(data=request.data)
     if serializer.is_valid():
@@ -44,16 +48,21 @@ def signup_view(request):
         print("Serializer errors:", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST'])
+
+@api_view(["POST"])
 def signin_view(request):
-    email = request.data.get('email')
-    password = request.data.get('pwd')
+    email = request.data.get("email")
+    password = request.data.get("pwd")
     try:
         user = Users.objects.get(email=email)
     except Users.DoesNotExist:
-        return Response({"message": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(
+            {"message": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
+        )
 
     if check_password(password, user.pwd):
         return Response({"message": "User authenticated"}, status=status.HTTP_200_OK)
     else:
-        return Response({"message": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(
+            {"message": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
+        )

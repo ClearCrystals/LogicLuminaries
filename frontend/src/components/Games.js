@@ -14,7 +14,7 @@ const Games = () => {
           {/* <Link to="/components/KillerSudoku" className="btn btn-primary">Play Killer Sudoku</Link> */}
         </div>
         <div className="btn-group" role="group" aria-label="Logout Button">
-        <Link to="/components/auth?mode=signin" className="btn btn-primary">Logout</Link>
+          <Link to="/components/auth?mode=signin" className="btn btn-primary">Logout</Link>
         </div>
       </main>
     </div>

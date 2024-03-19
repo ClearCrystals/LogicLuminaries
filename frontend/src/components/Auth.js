@@ -8,8 +8,8 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 export default function AuthForm(props) {
     const [email, setEmail] = useState("");
-    const [pwd, setPwd] = useState(""); 
-    const [id, setId] = useState(""); 
+    const [pwd, setPwd] = useState("");
+    const [id, setId] = useState("");
     let [authMode, setAuthMode] = useState("signin");
     const [showSuccess, setShowSuccess] = useState(false);
 
@@ -30,13 +30,13 @@ export default function AuthForm(props) {
             return; // Prevent further execution
         }
 
-        const url = authMode === "signin" ? 
-                    "http://localhost:8000/sudoku/signin/" : 
-                    "http://localhost:8000/sudoku/signup/";
+        const url = authMode === "signin" ?
+            "http://localhost:8000/sudoku/signin/" :
+            "http://localhost:8000/sudoku/signup/";
 
-        const data = authMode === "signin" ? 
-                     { email, pwd } : 
-                     { id, email, pwd };
+        const data = authMode === "signin" ?
+            { email, pwd } :
+            { id, email, pwd };
 
         const csrfToken = Cookies.get('csrfToken');
 
@@ -56,7 +56,7 @@ export default function AuthForm(props) {
             setShowSuccess(true);
         } catch (error) {
             console.error(`Error during ${authMode}:`, error);
-        }    
+        }
     };
 
     const changeAuthMode = () => {
