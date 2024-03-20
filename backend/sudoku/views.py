@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.hashers import check_password
 
+
 def index(request):
     return HttpResponse("Hello, world. You're at the sudoku index.")
 
@@ -17,6 +18,7 @@ def index(request):
 class UsersView(viewsets.ModelViewSet):
     serializer_class = UsersSerializer  # This is where user input data is
     queryset = Users.objects.all()
+
 
 """
     Handles the user signup process.
@@ -36,6 +38,8 @@ class UsersView(viewsets.ModelViewSet):
                   it returns the user data with a 201 CREATED status. On failure, it
                   returns the validation errors with a 400 BAD REQUEST status.
     """
+
+
 @api_view(["POST"])
 def signup_view(request):
     serializer = UsersSerializer(data=request.data)
@@ -46,8 +50,7 @@ def signup_view(request):
         print("Received data:", request.data)
         print("Serializer errors:", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-"""
+        """
     Handle the user signin process via POST request.
 
     Authenticates a user based on the provided email and password. It first checks if
@@ -58,12 +61,13 @@ def signup_view(request):
     Parameters:
     request (Request): A Django REST framework Request object containing the user's
                        email and password.
-
     Returns:
     Response: A Django REST framework Response object. Returns a success message with
               a 200 OK status if the authentication is successful. Returns an error
               message with a 401 UNAUTHORIZED status if the credentials are invalid.
     """
+
+
 @api_view(["POST"])
 def signin_view(request):
     email = request.data.get("email")
