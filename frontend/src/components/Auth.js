@@ -6,6 +6,19 @@ import { useNavigate } from "react-router-dom";
 axios.defaults.xsrfCookieName = 'csrfToken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
+/**
+ * Represents an authentication form for signin and signup.
+ * 
+ * This component allows a user to either sign in or sign up
+ * based on the selected authentication mode. The mode can
+ * be switched between 'signin' and 'signup'. The form submits
+ * the data to a specified URL and then navigates to another
+ * page upon successful authentication.
+ * 
+ * @param {Object} props - The properties passed to the component.
+ * @returns {React.Component} The `AuthForm` component.
+ */
+
 export default function AuthForm(props) {
     const [email, setEmail] = useState("");
     const [pwd, setPwd] = useState("");

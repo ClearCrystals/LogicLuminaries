@@ -10,24 +10,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.hashers import check_password
 
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
-# from rest_framework import status
-
-# @method_decorator(csrf_exempt, name='dispatch')
-# class SudokuAPIView(APIView):
-# def get(self, request, *args, **kwargs):
-#    return Response(data, status=status.HTTP_200_OK)
-#    def post(self, request, format=None):
-#        serializer = UserSerializer(data=request.data)
-#        print("TEST", serializer)
-#        if serializer.is_valid():
-#            print("AM I HERE?")
-#            serializer.save()
-#            return Response(serializer.data, status=status.HTTP_201_CREATED)
-#        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 def index(request):
     return HttpResponse("Hello, world. You're at the sudoku index.")
 
@@ -36,7 +18,24 @@ class UsersView(viewsets.ModelViewSet):
     serializer_class = UsersSerializer  # This is where user input data is
     queryset = Users.objects.all()
 
+"""
+    Handles the user signup process.
 
+    This view function processes POST requests for user registration. It uses a
+    serializer to validate and save the new user data. If the provided data is
+    valid, it creates a new user and returns the user data with a 201 CREATED status.
+    If the data is invalid, it prints the received data and errors, and returns the
+    errors with a 400 BAD REQUEST status.
+
+    Args:
+        request (Request): The Django REST framework request object containing
+                           the user data.
+
+    Returns:
+        Response: A Django REST framework response object. On successful user creation,
+                  it returns the user data with a 201 CREATED status. On failure, it
+                  returns the validation errors with a 400 BAD REQUEST status.
+    """
 @api_view(["POST"])
 def signup_view(request):
     serializer = UsersSerializer(data=request.data)
@@ -48,7 +47,23 @@ def signup_view(request):
         print("Serializer errors:", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+"""
+    Handle the user signin process via POST request.
 
+    Authenticates a user based on the provided email and password. It first checks if
+    a user with the given email exists. If the user exists and the provided password
+    matches the stored password hash, it returns a success response. Otherwise, it
+    returns an unauthorized response.
+
+    Parameters:
+    request (Request): A Django REST framework Request object containing the user's
+                       email and password.
+
+    Returns:
+    Response: A Django REST framework Response object. Returns a success message with
+              a 200 OK status if the authentication is successful. Returns an error
+              message with a 401 UNAUTHORIZED status if the credentials are invalid.
+    """
 @api_view(["POST"])
 def signin_view(request):
     email = request.data.get("email")
