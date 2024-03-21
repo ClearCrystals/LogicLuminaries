@@ -26,6 +26,7 @@ mysql -u user -p
 Django: `docker exec -it <backend_id_or_name> sh`
 ```sh
 django-admin ...
+python manage.py makemigrations
 ```
 
 Node: `docker exec -it <frontend_id_or_name> sh`
