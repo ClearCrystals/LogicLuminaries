@@ -54,12 +54,29 @@ class Sudoku:
                 num_to_remove -= 1
 
     def sudoku_status(self):
+        """
+        Returns the completion percentage of the Sudoku Puzzle.
+
+        Returns:
+            float: The completion percentage of the Sudoku puzzle.
+        """
         total_cells = 81
         filled_cells = sum(cell != 0 for row in self.board for cell in row)
         percentage = (filled_cells / total_cells) * 100
         return percentage
 
     def __is_safe(self, row, col, num):
+        """
+        Checks if it is safe to place a number in a specific cell.
+
+        Args:
+            row (int): The row index of the cell.
+            col (int): The column index of the cell.
+            num (int): The number to be placed in the cell.
+
+        Returns:
+            bool: True if it is safe to place the number, False otherwise.
+        """
         # Check the row
         for x in range(9):
             if self.board[row][x] == num:
@@ -81,6 +98,12 @@ class Sudoku:
         return True
 
     def solve_sudoku(self):
+        """
+        Solves the Sudoku puzzle using backtracking.
+
+        Returns:
+            bool: True if the puzzle is solvable, False otherwise.
+        """
         for row in range(9):
             for col in range(9):
                 if self.board[row][col] == 0:
