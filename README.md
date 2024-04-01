@@ -25,14 +25,14 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 | ID   | Description                                                  | Priority | Status |
 | ---- | ------------------------------------------------------------ | -------- | ------ |
-| # | User can login | Low      | Open   |
-| # | User can play a new game | Low     | Open   |
-| # | User can edit and add numbers into a new game | Low     | Open   |
-| # | User can see win screen | Low     | Open   |
-| # | User can save game | Low     | Open   |
-| # | User can leave and come back | Low      | Open   |
+| 30 | User can login | High      | Complete   |
+| * | User can play a new game | High     | Open   |
+| * | User can edit and add numbers into a new game | High     | Open   |
+| * | User can see win screen | Low     | Open   |
+| * | User can save game | Med     | Open   |
+| * | User can leave and come back | Med      | Open   |
 
-^ Not assigned to ids yet -Grace
+* Not assigned to IDs yet
 
 <!--<div align="center"><small><i>Excerpt from Crookshanks Table 2-2 showing example user requirements for a timekeeping system</i></small></div>-->
 
@@ -62,14 +62,16 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
    1. Numbered
       1. Lists
 -->
-- #1-8 Sprint One: Setting up communitcation, choosing roles, choosing stack, setting up gitlab to our liking
-- #19-21 Installing software and getting set up with React, MySQL and Django
+- Issues 1-18 Setting up communitcation, choosing roles, choosing stack, setting up gitlab to our liking
+- Issues 19-21 Installing software and getting set up with React, MySQL and Django
+- Issues 22-53 Defining backend models, frontend interface, integrating the two
+- Issues 54-60 Making adjustments to previous definitions after completing walking skeleton, implementing styling 
 
 #### Main Epics
 
 | ID   | Description                                                  | Priority | Status |
 | ---- | ------------------------------------------------------------ | -------- | ------ |
-| EPIC#1  | Generate, Backend, 9x9 grid of puzzle and solution | High      | Open   |
+| EPIC#1  | Generate, Backend, 9x9 grid of puzzle and solution | High      | Complete   |
 | EPIC#2  | Provide, Backend, variaing levels of difficulty | High     | Open   |
 | EPIC#3  | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Open   |
 | EPIC#4  | Create an Interface, front end, where a user can solve the puzzle | Med      | Open   |
@@ -227,6 +229,8 @@ deactivate DjangoBackend
 ```
 
 ### Standards & Conventions
+
+See CodingStandardsDocument for a list of our design paradigms.
 
 <!--Here you can document your coding standards and conventions. This includes decisions about naming, style guides, etc.-->
 
