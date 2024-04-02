@@ -12,7 +12,7 @@ from .models import Users
 
     Attributes:
         model: The class model that the serializer will use to connect to the corresponding table
-        fields: the attributes of that class model which are also the columns of the corresponding 
+        fields: the attributes of that class model which are also the columns of the corresponding
                 table
 
     Methods:
