@@ -4,7 +4,7 @@ from django.db import models
     Handles SQL queries to the Users table
 
     This is the Django model class that is used to connect to the Users
-    table in our MySQL database. Because of this, attributes for this 
+    table in our MySQL database. Because of this, attributes for this
     class match the columns in the table.
 
     Attributes:
@@ -26,7 +26,7 @@ class Users(models.Model):
     Handles SQL queries to the Boards table
 
     This is the Django model class that is used to connect to the Boards
-    table in our MySQL database. Because of this, attributes for this 
+    table in our MySQL database. Because of this, attributes for this
     class match the columns in the table.
 
     Attributes:
