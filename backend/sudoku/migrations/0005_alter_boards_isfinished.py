@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sudoku', '0004_alter_users_pwd'),
+        ("sudoku", "0004_alter_users_pwd"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='boards',
-            name='isFinished',
+            model_name="boards",
+            name="isFinished",
             field=models.FloatField(default=0.0),
         ),
     ]
