@@ -15,8 +15,9 @@ class Sudoku:
         generate_sudoku(self): Generates Sudoku by solving then removing cells based on difficulty.
         sudoku_status(self): Checks the status of the Sudoku puzzle (complete or incomplete).
         solve_sudoku(self): Solves the Sudoku puzzle using backtracking.
-
     """
+
+    __DIFFICULTY = {"Easy": 40, "Medium": 28, "Hard": 17}
 
     def __init__(self, difficulty="Medium"):
         """
@@ -43,7 +44,8 @@ class Sudoku:
                 self.board[row][col] = numbers[(row * 3 + row // 3 + col) % 9]
 
         # Remove numbers based on difficulty
-        num_to_remove = 81 - self.__DIFFICULTY[self.difficulty]
+        total_cells = 81
+        num_to_remove = total_cells - self.__DIFFICULTY[self.difficulty]
         while num_to_remove > 0:
             row = random.randint(0, 8)
             col = random.randint(0, 8)
@@ -52,7 +54,64 @@ class Sudoku:
                 num_to_remove -= 1
 
     def sudoku_status(self):
-        pass
+        """
+        Returns the completion percentage of the Sudoku Puzzle.
+
+        Returns:
+            float: The completion percentage of the Sudoku puzzle.
+        """
+        total_cells = 81
+        filled_cells = sum(cell != 0 for row in self.board for cell in row)
+        percentage = (filled_cells / total_cells) * 100
+        return percentage
+
+    def __is_safe(self, row, col, num):
+        """
+        Checks if it is safe to place a number in a specific cell.
+
+        Args:
+            row (int): The row index of the cell.
+            col (int): The column index of the cell.
+            num (int): The number to be placed in the cell.
+
+        Returns:
+            bool: True if it is safe to place the number, False otherwise.
+        """
+        # Check the row
+        for x in range(9):
+            if self.board[row][x] == num:
+                return False
+
+        # Check the column
+        for x in range(9):
+            if self.board[x][col] == num:
+                return False
+
+        # Check the 3x3 grid
+        start_row = row - row % 3
+        start_col = col - col % 3
+        for i in range(3):
+            for j in range(3):
+                if self.board[i + start_row][j + start_col] == num:
+                    return False
+
+        return True
 
     def solve_sudoku(self):
-        pass
+        """
+        Solves the Sudoku puzzle using backtracking.
+
+        Returns:
+            bool: True if the puzzle is solvable, False otherwise.
+        """
+        for row in range(9):
+            for col in range(9):
+                if self.board[row][col] == 0:
+                    for num in range(1, 10):
+                        if self.__is_safe(row, col, num):
+                            self.board[row][col] = num
+                            if self.solve_sudoku():
+                                return self.board
+                            self.board[row][col] = 0
+                    return False
+        return True
