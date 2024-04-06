@@ -2,13 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework import viewsets
-from .serializers import UsersSerializer
-from .models import Users
+from .serializers import UsersSerializer, BoardSerializer
+from .models import Users, Boards
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.hashers import check_password
+from .sudoku import Sudoku
 
 
 def index(request):
@@ -85,3 +86,48 @@ def signin_view(request):
         return Response(
             {"message": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
         )
+
+class BoardView(viewsets.ModelViewSet):
+    serializer_class = BoardSerializer
+
+
+@api_view(['POST'])
+def get_game_by_difficulty(request):
+    print("DEBUG", request.data)
+    difficulty = request.data.get('difficulty')  # Default to 'easy'
+    style = request.data.get('style')
+    user = request.data.get('user')
+    # ["id", "state", "answer", "difficulty", "style", "user", "isFinished"]
+    # Create board w/ algo
+    # Save it to board database
+    # Send board to frontend
+    game = Sudoku()
+    board = game.generate_sudoku()  # Get the first matching board
+    b = Boards(state=str(board), answer=str(game.solve_sudoku()), difficulty=difficulty, style=style, user=user, isFinished=game.sudoku_status())
+    b.save()
+    serializer = BoardSerializer(b)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def load_saved_game(request, username):
+    # finding the game
+    try:
+        board = Boards.objects.filter(user=username, isFinished=0).latest('id')  # Adjust as needed
+        serializer = BoardSerializer(board)
+        return Response(serializer.data)
+    except Boards.DoesNotExist:
+        return Response({'message': 'No saved game found'}, status=404)
+    
+@api_view(['POST'])
+def save_game_state(request):
+    # make changes to the board
+    board_id = request.data.get('user')
+    new_state = request.data.get('state')
+
+    try:
+        board = Boards.objects.get(id=board_id)
+        board.state = new_state
+        board.save()
+        return Response({'message': 'Game saved successfully'})
+    except Boards.DoesNotExist:
+        return Response({'message': 'Board not found'}, status=404)

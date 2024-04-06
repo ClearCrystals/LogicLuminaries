@@ -1,6 +1,6 @@
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
-from .models import Users
+from .models import Users, Boards
 
 """
     Used to validate and save Users data.
@@ -29,3 +29,11 @@ class UsersSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data["pwd"] = make_password(validated_data["pwd"])
         return super(UsersSerializer, self).create(validated_data)
+
+class BoardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Boards
+        # Need all?
+        fields = ["id", "state", "answer", "difficulty", "style", "user", "isFinished"]
+
+    
