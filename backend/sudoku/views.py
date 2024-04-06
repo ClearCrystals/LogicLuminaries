@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.hashers import check_password
 from .sudoku import Sudoku
+import json
 
 
 def index(request):
@@ -93,7 +94,7 @@ class BoardView(viewsets.ModelViewSet):
 
 @api_view(['POST'])
 def get_game_by_difficulty(request):
-    print("DEBUG", request.data)
+    #print("DEBUG", request.data)
     difficulty = request.data.get('difficulty')  # Default to 'easy'
     style = request.data.get('style')
     user = request.data.get('user')
@@ -101,11 +102,13 @@ def get_game_by_difficulty(request):
     # Create board w/ algo
     # Save it to board database
     # Send board to frontend
-    game = Sudoku()
-    board = game.generate_sudoku()  # Get the first matching board
-    b = Boards(state=str(board), answer=str(game.solve_sudoku()), difficulty=difficulty, style=style, user=user, isFinished=game.sudoku_status())
+    game = Sudoku(difficulty)
+    b = Boards(state=str(game.board), answer=str(game.solve_sudoku()), difficulty=difficulty, style=style, user=user, isFinished=game.sudoku_status())
     b.save()
     serializer = BoardSerializer(b)
+    print("BOARD", game.board)
+    print("MODEL", b.state)
+    print("DEBUG", serializer.data)
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -121,13 +124,18 @@ def load_saved_game(request, username):
 @api_view(['POST'])
 def save_game_state(request):
     # make changes to the board
-    board_id = request.data.get('user')
-    new_state = request.data.get('state')
+    board_id = request.data.get('board_id')
+    new_state = json.loads(request.data.get('state'))
 
     try:
         board = Boards.objects.get(id=board_id)
-        board.state = new_state
-        board.save()
+        game = Sudoku()
+        game.board = new_state
+        if game.solve_sudoku():
+            board.state = new_state
+            board.save()
+        else:
+            return Response({'message': "Bad move"})
         return Response({'message': 'Game saved successfully'})
     except Boards.DoesNotExist:
         return Response({'message': 'Board not found'}, status=404)

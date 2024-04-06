@@ -12,29 +12,36 @@ const SudokuGrid = () => {
   const [gridData, setGridData] = useState(createEmptyGrid());
   const [selectedCell, setSelectedCell] = useState({ row: null, col: null });
   const [showNumberSelector, setShowNumberSelector] = useState(false);
-
+  const [id, setId] = useState(0)
+   
   const url ="http://localhost:8000/api/board/"
   const data = {
-    difficulty: "easy",
+    difficulty: "Easy",
     style: "normal",
     user: "user"
   }
   useEffect(() => {
+     
     const fetchData = async () => {
-        const csrfToken = Cookies.get('csrfToken')  
+        const csrfToken = Cookies.get('csrfToken')
         try {
+            const csrfToken = Cookies.get('csrfToken')
             console.log(`Sending data to ${url}:`, JSON.stringify(data));
             let response = await axios.post(url, JSON.stringify(data), {
                 headers: {
-                    // "difficulty": "easy",
-                    // "style": "normal",
-                    // "user": "get user"
+                    
                     'Content-Type': 'application/json',
                     'X-CSRFToken': csrfToken,
                 }
             });
             if (response.status === 200) { // Assuming 200 is the success status code
-              console.log("Print data")  
+                console.log("Fetched data:", response.data);
+
+                // Assuming response.data.state is your grid data
+                // Parse it to a format that your component can use
+                const parsedGridData = JSON.parse(response.data.state);
+                setId(response.data.id)
+                setGridData(parsedGridData); 
             }
 
             console.log(`${data} response:`, response.data);
@@ -44,10 +51,24 @@ const SudokuGrid = () => {
       }
 
       fetchData()
-    }, [url, data]);
+    }, []);
 
   const saveGridData = () => {
-    axios.post('http://localhost:8000/api/board/', { gridData })
+    const csrfToken = Cookies.get('csrfToken')
+    let d = {
+      board_id: id,
+      state: JSON.stringify(gridData),
+      //row: ,
+      //column: ,
+      //num: ,
+    }
+    axios.post("http://localhost:8000/api/save/", JSON.stringify(d), {
+      headers: {
+          
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken,
+      }
+    })
       .then(response => {
         console.log('Grid saved');
       })
