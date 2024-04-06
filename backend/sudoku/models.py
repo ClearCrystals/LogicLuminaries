@@ -45,8 +45,8 @@ class Users(models.Model):
 
 class Boards(models.Model):
     id = models.AutoField(primary_key=True)
-    state = models.CharField(max_length=200)
-    answer = models.CharField(max_length=200)
+    state = models.CharField(max_length=500)
+    answer = models.CharField(max_length=500)
     difficulty = models.CharField(max_length=30)
     style = models.CharField(max_length=30)
     user = models.CharField(max_length=30)
