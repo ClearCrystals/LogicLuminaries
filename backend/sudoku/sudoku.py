@@ -115,3 +115,33 @@ class Sudoku:
                             self.board[row][col] = 0
                     return False
         return True
+
+if __name__ == "__main__":
+    sudoku = Sudoku("Easy")
+
+    # sudoku.board = [
+    #     [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    #     [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    #     [0, 9, 8, 0, 0, 0, 0, 6, 0],
+    #     [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    #     [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    #     [7, 0, 1, 0, 2, 0, 0, 0, 6],
+    #     [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    #     [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    #     [0, 0, 0, 0, 8, 0, 0, 7, 9],
+    # ]
+    print("Initial Sudoku Board:")
+    for row in sudoku.board:
+        print(row)
+    print(f"Sudoku Status: {sudoku.sudoku_status()}")
+
+    solved_board = sudoku.solve_sudoku()
+    if solved_board:
+        print("Solved Sudoku Board:")
+        for row in solved_board:
+            print(row)
+    else:
+        print("Unable to solve the Sudoku.")
+
+    status = sudoku.sudoku_status()
+    print(f"Sudoku Status: {status}\n")

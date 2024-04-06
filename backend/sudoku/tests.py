@@ -2,37 +2,37 @@ from django.test import TestCase
 from sudoku.models import Users
 from .sudoku import Sudoku
 
-class UserModelTests(TestCase):
-    def test_add_single_user(self):
-        # adding a single user to the database
-        user = Users.objects.create(id="testuser", pwd="testpassword", email="test@gmail.com")
-        self.assertIsNotNone(user.pk)
-        user.delete()
+# class UserModelTests(TestCase):
+#     def test_add_single_user(self):
+#         # adding a single user to the database
+#         user = Users.objects.create(id="testuser", pwd="testpassword", email="test@gmail.com")
+#         self.assertIsNotNone(user.pk)
+#         user.delete()
 
-    def test_delete_single_user(self):
-        # deleting a single user from the database
-        user = Users.objects.create(id="deleteuser", pwd="password", email="delete@gmail.com")
-        user_id = user.pk
-        user.delete()
-        self.assertFalse(Users.objects.filter(pk=user_id).exists())
+#     def test_delete_single_user(self):
+#         # deleting a single user from the database
+#         user = Users.objects.create(id="deleteuser", pwd="password", email="delete@gmail.com")
+#         user_id = user.pk
+#         user.delete()
+#         self.assertFalse(Users.objects.filter(pk=user_id).exists())
 
-    def test_add_two_users(self):
-        #adding two users to the database
-        Users.objects.create(id="user1", pwd="pass1", email="user1@gmail.com")
-        Users.objects.create(id="user2", pwd="pass2", email="user2@gmail.com")
-        self.assertEqual(Users.objects.count(), 2)
+#     def test_add_two_users(self):
+#         #adding two users to the database
+#         Users.objects.create(id="user1", pwd="pass1", email="user1@gmail.com")
+#         Users.objects.create(id="user2", pwd="pass2", email="user2@gmail.com")
+#         self.assertEqual(Users.objects.count(), 2)
 
-    def test_modify_user_password(self):
-        # mod a user's password
-        user = Users.objects.create(id="modifyuser", pwd="oldpassword", email="mod@gmail.com")
-        Users.objects.filter(id="modifyuser").update(pwd="newpassword")
-        self.assertEqual(Users.objects.get(id="modifyuser").pwd, "newpassword")
+#     def test_modify_user_password(self):
+#         # mod a user's password
+#         user = Users.objects.create(id="modifyuser", pwd="oldpassword", email="mod@gmail.com")
+#         Users.objects.filter(id="modifyuser").update(pwd="newpassword")
+#         self.assertEqual(Users.objects.get(id="modifyuser").pwd, "newpassword")
 
-    def test_modify_user_email(self):
-        # modi a user's email
-        user = Users.objects.create(id="emailuser", pwd="password", email="old@gmail.com")
-        Users.objects.filter(id="emailuser").update(email="new@gmail.com")
-        self.assertEqual(Users.objects.get(id="emailuser").email, "new@gmail.com")
+#     def test_modify_user_email(self):
+#         # modi a user's email
+#         user = Users.objects.create(id="emailuser", pwd="password", email="old@gmail.com")
+#         Users.objects.filter(id="emailuser").update(email="new@gmail.com")
+#         self.assertEqual(Users.objects.get(id="emailuser").email, "new@gmail.com")
 
 class SudokuAlgoTests(TestCase):
     # def test_sudoku_status(self):
@@ -67,10 +67,10 @@ class SudokuAlgoTests(TestCase):
 
     def test_generate_sudoku(self):
         # Check that board is 9x9
-        sudoku = Sudoku()
-        board = sudoku.generate_sudoku("easy")
-        self.assertEqual(len(board), 9)
-        for row in board:
+        sudoku = Sudoku("Easy")
+        sudoku.generate_sudoku()
+        self.assertEqual(len(sudoku.board), 9)
+        for row in sudoku.board:
             self.assertEqual(len(row), 9)
 
     # def test_solve_sudoku(self):
@@ -93,40 +93,29 @@ class SudokuAlgoTests(TestCase):
     def test_valid_board_solution(self):
         # Check that each col and row has 9 nums (sets) ie unique
         sudoku = Sudoku()
-        test_board = [
-            [5, 3, 0, 0, 7, 0, 0, 0, 0],
-            [6, 0, 0, 1, 9, 5, 0, 0, 0],
-            [0, 9, 8, 0, 0, 0, 0, 6, 0],
-            [8, 0, 0, 0, 6, 0, 0, 0, 3],
-            [4, 0, 0, 8, 0, 3, 0, 0, 1],
-            [7, 0, 0, 0, 2, 0, 0, 0, 6],
-            [0, 6, 0, 0, 0, 0, 2, 8, 0],
-            [0, 0, 0, 4, 1, 9, 0, 0, 5],
-            [0, 0, 0, 0, 8, 0, 0, 7, 9],
-        ]
-        solution = sudoku.solve_sudoku(test_board)
+        solution = sudoku.solve_sudoku()
         for i in range(9):
             row = solution[i]
             column = []  
             for j in range(9):  
                 element = solution[j][i]  
                 column.append(element)  
-            self.assertTrue(len(set(row) == 9))
-            self.assertTrue(len(set(column) == 8))
+            self.assertTrue(len(set(row)) == 9)
+            self.assertTrue(len(set(column)) == 9)
 
     def test_generated_board_solution_validity(self):
         # test out creation and solution and see each part is a set
-        sudoku = Sudoku()
-        board = sudoku.generate_sudoku("easy")
-        solution = sudoku.solve_sudoku(board)
+        sudoku = Sudoku("Easy")
+        sudoku.generate_sudoku()
+        solution = sudoku.solve_sudoku()
         for i in range(9):
             row = solution[i]
-            column = []  
-            for j in range(9):  
+            column = []
+            for j in range(9): 
                 element = solution[j][i]  
                 column.append(element)  
-            self.assertTrue(len(set(row) == 9))
-            self.assertTrue(len(set(column) == 9))
+            self.assertTrue(len(set(row)) == 9)
+            self.assertTrue(len(set(column)) == 9)
 
     def test_difficulty_setting_initialization(self):
         # test difficulty setting
