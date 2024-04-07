@@ -43,9 +43,9 @@ const SudokuGame = () => {
         )}
         {gameMode === 'new' && !difficulty && (
           <div className="btn-group" role="group" aria-label="Difficulty Selection Buttons">
-            <button onClick={() => handleDifficultySelect('easy')} className="btn btn-primary">Easy</button>
-            <button onClick={() => handleDifficultySelect('medium')} className="btn btn-primary">Medium</button>
-            <button onClick={() => handleDifficultySelect('hard')} className="btn btn-primary">Hard</button>
+            <button onClick={() => handleDifficultySelect('Easy')} className="btn btn-primary">Easy</button>
+            <button onClick={() => handleDifficultySelect('Medium')} className="btn btn-primary">Medium</button>
+            <button onClick={() => handleDifficultySelect('Hard')} className="btn btn-primary">Hard</button>
           </div>
         )}
         {difficulty && <SudokuGrid difficulty={difficulty} />}

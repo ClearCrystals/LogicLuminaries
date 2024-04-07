@@ -7,16 +7,17 @@ import _ from 'lodash';
 axios.defaults.xsrfCookieName = 'csrfToken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-const SudokuGrid = () => {
+const SudokuGrid = ({ difficulty }) => {
   const createEmptyGrid = () => Array(9).fill(Array(9).fill(''));
   const [gridData, setGridData] = useState(createEmptyGrid());
   const [selectedCell, setSelectedCell] = useState({ row: null, col: null });
   const [showNumberSelector, setShowNumberSelector] = useState(false);
   const [id, setId] = useState(0)
+  const [correctAnswer, setCorrectAnswer] = useState(null);
    
   const url ="http://localhost:8000/api/board/"
   const data = {
-    difficulty: "Easy",
+    difficulty: difficulty,
     style: "normal",
     user: "user"
   }
@@ -39,8 +40,11 @@ const SudokuGrid = () => {
                 // Assuming response.data.state is your grid data
                 // Parse it to a format that your component can use
                 const parsedGridData = JSON.parse(response.data.state);
+                const parsedAnswer = JSON.parse(response.data.answer);
+                
                 setId(response.data.id)
                 setGridData(parsedGridData); 
+                setCorrectAnswer(parsedAnswer);
             }
 
             console.log(`${data} response:`, response.data);
@@ -50,7 +54,7 @@ const SudokuGrid = () => {
       }
 
       fetchData()
-    }, []);
+    }, [difficulty]);
 
   const saveGridData = () => {
     const csrfToken = Cookies.get('csrfToken')
@@ -98,9 +102,17 @@ const SudokuGrid = () => {
   };
 
   const handleSubmit = () => {
-    // Define what happens when the submit button is clicked.
-    // For example, validate the Sudoku solution, save the game state, etc.
-    console.log("Submit button clicked");
+    if (!correctAnswer) {
+        console.error("No correct answer available for comparison.");
+        return;
+      }
+    
+      // Assuming both gridData and correctAnswer are arrays of arrays
+      const isCorrect = gridData.every((row, rowIndex) =>
+        row.every((cell, colIndex) => cell.toString() === correctAnswer[rowIndex][colIndex].toString())
+      );
+    
+      console.log(isCorrect ? "Correct solution!" : "Incorrect solution.");
   };
 
   return (
