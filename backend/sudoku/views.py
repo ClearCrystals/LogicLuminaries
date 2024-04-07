@@ -88,8 +88,10 @@ def signin_view(request):
             {"message": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
         )
 
+
 class BoardView(viewsets.ModelViewSet):
     serializer_class = BoardSerializer
+
 
 @api_view(["POST"])
 def get_game_by_difficulty(request):
