@@ -6,13 +6,17 @@ from .sudoku import Sudoku
 class UserModelTests(TestCase):
     def test_add_single_user(self):
         # Adding a single user to the database
-        user = Users.objects.create(id="testuser", pwd="testpassword", email="test@gmail.com")
+        user = Users.objects.create(
+            id="testuser", pwd="testpassword", email="test@gmail.com"
+        )
         self.assertIsNotNone(user.pk)
         user.delete()
 
     def test_delete_single_user(self):
         # Deleting a single user from the database
-        user = Users.objects.create(id="deleteuser", pwd="password", email="delete@gmail.com")
+        user = Users.objects.create(
+            id="deleteuser", pwd="password", email="delete@gmail.com"
+        )
         user_id = user.pk
         user.delete()
         self.assertFalse(Users.objects.filter(pk=user_id).exists())
@@ -25,13 +29,17 @@ class UserModelTests(TestCase):
 
     def test_modify_user_password(self):
         # Modify a user's password
-        user = Users.objects.create(id="modifyuser", pwd="oldpassword", email="mod@gmail.com")
+        user = Users.objects.create(
+            id="modifyuser", pwd="oldpassword", email="mod@gmail.com"
+        )
         Users.objects.filter(id="modifyuser").update(pwd="newpassword")
         self.assertEqual(Users.objects.get(id="modifyuser").pwd, "newpassword")
 
     def test_modify_user_email(self):
         # Modify a user's email
-        user = Users.objects.create(id="emailuser", pwd="password", email="old@gmail.com")
+        user = Users.objects.create(
+            id="emailuser", pwd="password", email="old@gmail.com"
+        )
         Users.objects.filter(id="emailuser").update(email="new@gmail.com")
         self.assertEqual(Users.objects.get(id="emailuser").email, "new@gmail.com")
 
