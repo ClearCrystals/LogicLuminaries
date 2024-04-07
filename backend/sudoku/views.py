@@ -117,6 +117,7 @@ def get_game_by_difficulty(request):
     print("DEBUG", serializer.data)
     return Response(serializer.data)
 
+
 @api_view(["GET"])
 def load_saved_game(request, username):
     # finding the game
