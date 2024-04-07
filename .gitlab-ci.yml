@@ -15,6 +15,13 @@ lint_backend:
   tags:
     - dind
 
+lint_frontend:
+  stage: lint
+  script:
+    - echo placeholder
+  tags:
+    - dind
+
 static_analysis_backend:
   stage: static_analysis
   image: python
@@ -36,11 +43,19 @@ unit_test_backend:
   after_script:
     - coverage report
     - coverage xml > coverage.xml
+    - cat coverage.xml
   artifacts:
     reports:
       coverage_report:
         coverage_format: cobertura
         path: ./coverage.xml
   coverage: /(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/
+  tags:
+    - dind
+
+release:
+  stage: release
+  script:
+    - echo placeholder
   tags:
     - dind
