@@ -103,12 +103,12 @@ def get_game_by_difficulty(request):
     # Send board to frontend
     game = Sudoku(difficulty)
     b = Boards(
-        state=str(game.board), 
-        answer=str(game.solve_sudoku()), 
-        difficulty=difficulty, 
-        style=style, 
-        user=user, 
-        isFinished=game.sudoku_status()
+        state=str(game.board),
+        answer=str(game.solve_sudoku()),
+        difficulty=difficulty,
+        style=style,
+        user=user,
+        isFinished=game.sudoku_status(),
     )
     b.save()
     serializer = BoardSerializer(b)
@@ -128,7 +128,7 @@ def load_saved_game(request, username):
         return Response(serializer.data)
     except Boards.DoesNotExist:
         return Response({"message": "No saved game found"}, status=404)
-    
+
 @api_view(["POST"])
 def save_game_state(request):
     # make changes to the board
