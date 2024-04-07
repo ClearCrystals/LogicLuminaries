@@ -23,7 +23,6 @@ const SudokuGrid = () => {
   useEffect(() => {
      
     const fetchData = async () => {
-        const csrfToken = Cookies.get('csrfToken')
         try {
             const csrfToken = Cookies.get('csrfToken')
             console.log(`Sending data to ${url}:`, JSON.stringify(data));
@@ -98,6 +97,12 @@ const SudokuGrid = () => {
     }
   };
 
+  const handleSubmit = () => {
+    // Define what happens when the submit button is clicked.
+    // For example, validate the Sudoku solution, save the game state, etc.
+    console.log("Submit button clicked");
+  };
+
   return (
     <Container>
       {gridData.map((row, rowIndex) => (
@@ -126,6 +131,13 @@ const SudokuGrid = () => {
           ))}
         </Row>
       )}
+      <Row className="mt-3">
+        <Col>
+          <Button variant="primary" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Col>
+      </Row>
     </Container>
   );
 };

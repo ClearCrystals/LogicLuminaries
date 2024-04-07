@@ -35,5 +35,3 @@ class BoardSerializer(serializers.ModelSerializer):
         model = Boards
         # Need all?
         fields = ["id", "state", "answer", "difficulty", "style", "user", "isFinished"]
-
-    

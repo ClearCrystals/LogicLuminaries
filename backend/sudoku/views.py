@@ -14,7 +14,7 @@ import json
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the sudoku index.")
+    return HttpResponse("Hello, world. You are at the sudoku index.")
 
 
 class UsersView(viewsets.ModelViewSet):
@@ -61,7 +61,7 @@ def signup_view(request):
     returns an unauthorized response.
 
     Parameters:
-    request (Request): A Django REST framework Request object containing the user's
+    request (Request): A Django REST framework Request object containing the user"s
                        email and password.
     Returns:
     Response: A Django REST framework Response object. Returns a success message with
@@ -92,12 +92,12 @@ class BoardView(viewsets.ModelViewSet):
     serializer_class = BoardSerializer
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 def get_game_by_difficulty(request):
     #print("DEBUG", request.data)
-    difficulty = request.data.get('difficulty')  # Default to 'easy'
-    style = request.data.get('style')
-    user = request.data.get('user')
+    difficulty = request.data.get("difficulty")  # Default to "easy"
+    style = request.data.get("style")
+    user = request.data.get("user")
     # ["id", "state", "answer", "difficulty", "style", "user", "isFinished"]
     # Create board w/ algo
     # Save it to board database
@@ -111,21 +111,21 @@ def get_game_by_difficulty(request):
     print("DEBUG", serializer.data)
     return Response(serializer.data)
 
-@api_view(['GET'])
+@api_view(["GET"])
 def load_saved_game(request, username):
     # finding the game
     try:
-        board = Boards.objects.filter(user=username, isFinished=0).latest('id')  # Adjust as needed
+        board = Boards.objects.filter(user=username, isFinished=0).latest("id")  # Adjust as needed
         serializer = BoardSerializer(board)
         return Response(serializer.data)
     except Boards.DoesNotExist:
-        return Response({'message': 'No saved game found'}, status=404)
+        return Response({"message": "No saved game found"}, status=404)
     
-@api_view(['POST'])
+@api_view(["POST"])
 def save_game_state(request):
     # make changes to the board
-    board_id = request.data.get('board_id')
-    new_state = json.loads(request.data.get('state'))
+    board_id = request.data.get("board_id")
+    new_state = json.loads(request.data.get("state"))
 
     try:
         board = Boards.objects.get(id=board_id)
@@ -135,7 +135,7 @@ def save_game_state(request):
             board.state = new_state
             board.save()
         else:
-            return Response({'message': "Bad move"})
-        return Response({'message': 'Game saved successfully'})
+            return Response({"message": "Bad move"})
+        return Response({"message": "Game saved successfully"})
     except Boards.DoesNotExist:
-        return Response({'message': 'Board not found'}, status=404)
+        return Response({"message": "Board not found"}, status=404)
