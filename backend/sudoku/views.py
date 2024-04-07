@@ -129,6 +129,7 @@ def load_saved_game(request, username):
     except Boards.DoesNotExist:
         return Response({"message": "No saved game found"}, status=404)
 
+
 @api_view(["POST"])
 def save_game_state(request):
     # make changes to the board
