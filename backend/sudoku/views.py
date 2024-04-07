@@ -91,7 +91,6 @@ def signin_view(request):
 class BoardView(viewsets.ModelViewSet):
     serializer_class = BoardSerializer
 
-
 @api_view(["POST"])
 def get_game_by_difficulty(request):
     # print("DEBUG", request.data)

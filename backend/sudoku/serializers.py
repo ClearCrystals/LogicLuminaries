@@ -30,6 +30,7 @@ class UsersSerializer(serializers.ModelSerializer):
         validated_data["pwd"] = make_password(validated_data["pwd"])
         return super(UsersSerializer, self).create(validated_data)
 
+
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Boards
