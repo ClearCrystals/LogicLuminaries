@@ -94,7 +94,7 @@ class BoardView(viewsets.ModelViewSet):
 
 @api_view(["POST"])
 def get_game_by_difficulty(request):
-    #print("DEBUG", request.data)
+    # print("DEBUG", request.data)
     difficulty = request.data.get("difficulty")  # Default to "easy"
     style = request.data.get("style")
     user = request.data.get("user")
@@ -103,7 +103,14 @@ def get_game_by_difficulty(request):
     # Save it to board database
     # Send board to frontend
     game = Sudoku(difficulty)
-    b = Boards(state=str(game.board), answer=str(game.solve_sudoku()), difficulty=difficulty, style=style, user=user, isFinished=game.sudoku_status())
+    b = Boards(
+        state=str(game.board), 
+        answer=str(game.solve_sudoku()), 
+        difficulty=difficulty, 
+        style=style, 
+        user=user, 
+        isFinished=game.sudoku_status()
+    )
     b.save()
     serializer = BoardSerializer(b)
     print("BOARD", game.board)
