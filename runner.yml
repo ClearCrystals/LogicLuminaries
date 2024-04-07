@@ -10,5 +10,5 @@ services:
       - builds:/app/builds
     working_dir: /app
 volumes:
-  config: { }
+  config: {}
   builds: {}

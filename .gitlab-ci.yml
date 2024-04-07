@@ -1,15 +1,25 @@
+# Execute in order as below
 stages:
   - lint
   - static_analysis
+  - unit_test
+  - release
 
 lint_backend:
-  stage: lint
+  stage: lint                                          # When to do it
   image: python:3
   before_script:
-    - pip install -r requirements.txt
+    - pip install -r requirements.txt                 # from lecture
   script:
-    - black . --check --verbose --diff --color
-    - flake8 --max-line-length=100 --ignore=F401 .
+    - black . --check --verbose --diff --color        # verbose -> check not change
+    - flake8 --max-line-length=100 --ignore=F401 .    # max width of 100  F401 --> not used imports
+  tags:
+    - dind
+
+lint_frontend:
+  stage: lint
+  script:
+    - echo placeholder
   tags:
     - dind
 
@@ -21,5 +31,32 @@ static_analysis_backend:
   script:
     echo "TODO - Add static analysis"
     # - mypy .
+  tags:
+    - dind
+
+unit_test_backend:
+  stage: unit_test
+  image: python
+  before_script:
+    - pip install -r ./requirements.txt
+  script:
+    - coverage run --omit=/usr/*,backend/manage.py,backend/sudoku/tests.py,backend/sudoku/migrations/*,backend/src/settings.py backend/manage.py test backend/sudoku
+  after_script:
+    - coverage report
+    - coverage xml > coverage.xml
+    - cat coverage.xml
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: ./coverage.xml
+  coverage: /(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/
+  tags:
+    - dind
+
+release:
+  stage: release
+  script:
+    - echo placeholder
   tags:
     - dind
