@@ -29,17 +29,13 @@ class UserModelTests(TestCase):
 
     def test_modify_user_password(self):
         # Modify a user's password
-        Users.objects.create(
-            id="modifyuser", pwd="oldpassword", email="mod@gmail.com"
-        )
+        Users.objects.create(id="modifyuser", pwd="oldpassword", email="mod@gmail.com")
         Users.objects.filter(id="modifyuser").update(pwd="newpassword")
         self.assertEqual(Users.objects.get(id="modifyuser").pwd, "newpassword")
 
     def test_modify_user_email(self):
         # Modify a user's email
-        Users.objects.create(
-            id="emailuser", pwd="password", email="old@gmail.com"
-        )
+        Users.objects.create(id="emailuser", pwd="password", email="old@gmail.com")
         Users.objects.filter(id="emailuser").update(email="new@gmail.com")
         self.assertEqual(Users.objects.get(id="emailuser").email, "new@gmail.com")
 
