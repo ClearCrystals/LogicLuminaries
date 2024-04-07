@@ -1,4 +1,16 @@
 services:
+  # db:
+  #   image: mysql:8.0
+  #   environment:
+  #     MYSQL_DATABASE: mydb
+  #     MYSQL_USER: user
+  #     MYSQL_PASSWORD: password
+  #     MYSQL_ROOT_PASSWORD: password
+  #   restart: always
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
   gitlab-runner:
     build:
       context: .
@@ -10,5 +22,6 @@ services:
       - builds:/app/builds
     working_dir: /app
 volumes:
-  config: { }
+  # mysql_data:
+  config: {}
   builds: {}

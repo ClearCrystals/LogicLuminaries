@@ -32,7 +32,7 @@ unit_test_backend:
   before_script:
     - pip install -r ./requirements.txt
   script:
-    - coverage run --omit=/usr/*,backend/manage.py,backend/sudoku/tests.py,backend/sudoku/migrations/*,backend/src/settings.py backend/manage.py test
+    - coverage run --omit=/usr/*,backend/manage.py,backend/sudoku/tests.py,backend/sudoku/migrations/*,backend/src/settings.py backend/manage.py test backend/sudoku
   after_script:
     - coverage report
     - coverage xml > coverage.xml
