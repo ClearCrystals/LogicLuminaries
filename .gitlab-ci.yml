@@ -3,6 +3,7 @@ stages:
   - lint
   - static_analysis
   - unit_test
+  - release
 
 lint_backend:
   stage: lint                                          # When to do it
