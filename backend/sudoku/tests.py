@@ -29,7 +29,7 @@ class UserModelTests(TestCase):
 
     def test_modify_user_password(self):
         # Modify a user's password
-        user = Users.objects.create(
+        Users.objects.create(
             id="modifyuser", pwd="oldpassword", email="mod@gmail.com"
         )
         Users.objects.filter(id="modifyuser").update(pwd="newpassword")
@@ -37,7 +37,7 @@ class UserModelTests(TestCase):
 
     def test_modify_user_email(self):
         # Modify a user's email
-        user = Users.objects.create(
+        Users.objects.create(
             id="emailuser", pwd="password", email="old@gmail.com"
         )
         Users.objects.filter(id="emailuser").update(email="new@gmail.com")
