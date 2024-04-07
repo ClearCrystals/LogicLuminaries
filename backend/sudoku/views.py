@@ -135,7 +135,9 @@ def save_game_state(request):
     new_state = json.loads(request.data.get("state"))
 
     try:
-        board = Boards.objects.get(id=board_id)
+        board = Boards.objects.get(
+            id=board_id
+        )
         game = Sudoku()
         game.board = new_state
         if game.solve_sudoku():
