@@ -122,7 +122,9 @@ def get_game_by_difficulty(request):
 def load_saved_game(request, username):
     # finding the game
     try:
-        board = Boards.objects.filter(user=username, isFinished=0).latest("id")  # Adjust as needed
+        board = Boards.objects.filter(user=username, isFinished=0).latest(
+            "id"
+        )  # Adjust as needed
         serializer = BoardSerializer(board)
         return Response(serializer.data)
     except Boards.DoesNotExist:
@@ -135,9 +137,7 @@ def save_game_state(request):
     new_state = json.loads(request.data.get("state"))
 
     try:
-        board = Boards.objects.get(
-            id=board_id
-        )
+        board = Boards.objects.get(id=board_id)
         game = Sudoku()
         game.board = new_state
         if game.solve_sudoku():
