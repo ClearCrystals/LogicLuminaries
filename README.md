@@ -26,13 +26,14 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 | ID   | Description                                                  | Priority | Status |
 | ---- | ------------------------------------------------------------ | -------- | ------ |
 | 30 | User can login | High      | Complete   |
-| * | User can play a new game | High     | Open   |
-| * | User can edit and add numbers into a new game | High     | Open   |
-| * | User can see win screen | Low     | Open   |
-| * | User can save game | Med     | Open   |
-| * | User can leave and come back | Med      | Open   |
+| 53 | User can play a new game | High     | Complete   |
+| 53 | User can edit and add numbers into a new game | High     | Complete   |
+| 72 | User can see win screen | Low     | Open   |
+| 68 | User can save game | Med     | Complete   |
+| 70 | User can leave and come back | High      | Open   |
+| # | User can select variant | Med | Open |
 
-* Not assigned to IDs yet
+'#' Means not assigned to an ID yet
 
 <!--<div align="center"><small><i>Excerpt from Crookshanks Table 2-2 showing example user requirements for a timekeeping system</i></small></div>-->
 
@@ -63,9 +64,11 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
       1. Lists
 -->
 - Issues 1-18 Setting up communitcation, choosing roles, choosing stack, setting up gitlab to our liking
-- Issues 19-21 Installing software and getting set up with React, MySQL and Django
+- Issues 19-21 Installing software and getting set up with React, MySQL, and Django
 - Issues 22-53 Defining backend models, frontend interface, integrating the two
 - Issues 54-60 Making adjustments to previous definitions after completing walking skeleton, implementing styling 
+- Issues 61-69 Adding integrated functionality to walking skeleton, coverage testing for generation algorithm
+- Issues 70-72 Completing frontend/backend/database data transfer, expanding coverage testing, adding win screen
 
 #### Main Epics
 
@@ -73,11 +76,10 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 | ---- | ------------------------------------------------------------ | -------- | ------ |
 | EPIC#1  | Generate, Backend, 9x9 grid of puzzle and solution | High      | Complete   |
 | EPIC#2  | Provide, Backend, variaing levels of difficulty | High     | Open   |
-| EPIC#3  | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Open   |
+| EPIC#3  | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Complete   |
 | EPIC#4  | Create an Interface, front end, where a user can solve the puzzle | Med      | Open   |
-| EPIC#5  | Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
-| EPIC#6  | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
-| EPIC#7  | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.  | Low     | Open   |
+| EPIC#5  | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
+| EPIC#6  | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.  | Low     | Open   |
 
 ### User Interface Requirements
 
@@ -255,7 +257,7 @@ See CodingStandardsDocument for a list of our design paradigms.
 | Integration Manager |    Grace    |    Nima    |
 | QA Tester / Jack of All Trades |  Carlos  |    Claire     |
 
-- Every should write code using test driven devolopment
+- Every member should write code using test driven devolopment
 - Every member should write their own documentation in how to do stuff (so that another person can follow the instructions)
 
 ## Authors and acknowledgment
@@ -265,4 +267,5 @@ Show your appreciation to those who have contributed to the project.
 For open source projects, say how it is licensed.
 
 ## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Healthy and progressing towards completion.
+<!--If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.-->
