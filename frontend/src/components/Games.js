@@ -1,4 +1,5 @@
 import React from 'react';
+import {Container, Row, Col,Button, Navbar, Nav} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 /**
@@ -16,21 +17,43 @@ import { Link } from 'react-router-dom';
 
 const Games = () => {
   return (
+  <div>
     <div>
-      <header>
-        <h1>Welcome</h1>
-      </header>
-      <main>
-        {/* <p>List of Games</p> */}
-        <div className="btn-group" role="group" aria-label="Authentication Buttons">
-          <Link to="/components/SudokuGame" className="btn btn-primary">Play Sudoku</Link>
-          {/* <Link to="/components/KillerSudoku" className="btn btn-primary">Play Killer Sudoku</Link> */}
-        </div>
-        <div className="btn-group" role="group" aria-label="Logout Button">
-          <Link to="/components/auth?mode=signin" className="btn btn-primary">Logout</Link>
-        </div>
-      </main>
+      <Navbar bg="dark" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand>Sudoku</Navbar.Brand>
+          <Link to="/"><Nav>Logout</Nav></Link>
+        </Container>
+      </Navbar>
     </div>
+    <div>
+      <Container id="gamesContainer">
+      <header>
+        <br></br>
+        <h1><b>Welcome</b></h1>
+        <br></br>
+      </header>
+      <Row>
+        <Col className='gamesCol'>
+            <h3><b>Start a new puzzle?</b></h3>
+            <br></br>
+            <div>
+              <Link to="/components/SudokuGame">
+                <Button variant="secondary" size="lg">Generate</Button>
+              </Link>
+            </div>
+        </Col>
+        <Col className='gamesCol'>
+          <div>
+            <h3>Load an old puzzle?</h3>
+            <br></br>
+            <p>TODO load puzzles as cards</p>
+          </div>
+        </Col>
+      </Row>
+      </Container>
+    </div>
+  </div>
   );
 }
 

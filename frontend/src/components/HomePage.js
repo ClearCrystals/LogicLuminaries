@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Image from 'react-bootstrap/Image';
+import {Container, Row, Col, Image, Button} from 'react-bootstrap';
+
 
 /**
  * HomePage component serving as the landing page of the Sudoku App.
@@ -18,29 +16,37 @@ import Image from 'react-bootstrap/Image';
 
 const HomePage = () => {
   return (
-    <Container>
+    <div id="homeContainer">
+    <Container fluid>
       <Row>
-        <Col><Image src="frontend\public\free_sudoku.jpg" alt="board image" fluid /></Col>
-        <Col>
-        {
-        <div>
+        <Col id="homeCol1"><Image src="free_sudoku.jpg" alt="board image" id="board_image" fluid /></Col>
+        <Col id="homeCol2">
           <header>
-            <h1>Sudoku App</h1>
+            <Image src="ll_logo.png" alt="logo" id="logo" rounded/>
+            <h1 class="hometext"><b>Welcome to Sudoku</b></h1>
           </header>
           <main>
-            <h2>Welcome to Sudoku<br></br></h2>
-            <h5>Solve, save, and explore new board styles in one place.<br></br></h5>
-            <h5>Register or Login to begin.<br></br></h5>
-            <div className="btn-group" role="group" aria-label="Authentication Buttons">
-              <Link to="/components/auth?mode=signup" className="btn btn-primary">Register</Link>
-              <Link to="/components/auth?mode=signin" className="btn btn-primary">Login</Link>
+            <br></br>
+            <div class="hometext">
+              <h5>Solve, save, and explore new board styles in one place.</h5>
+              <h5>Register or Login to begin.</h5>
+            </div>
+            <br></br>
+            <div className='home_buttons'>
+              <div className="d-grid gap-2">
+                <Link to="/components/auth?mode=signup" >
+                  <Button variant = "secondary" size="lg" >Register</Button>
+                </Link>
+                <Link to="/components/auth?mode=signin" >
+                  <Button variant = "secondary" size="lg">Login</Button>
+                </Link>
+              </div>
             </div>
           </main>
-        </div>
-        }
         </Col>
       </Row>
     </Container>
+    </div>
   );
 }
 

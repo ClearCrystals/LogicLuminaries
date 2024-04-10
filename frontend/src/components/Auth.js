@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import {Container, Row, Col} from 'react-bootstrap';
 
 axios.defaults.xsrfCookieName = 'csrfToken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -78,55 +79,61 @@ export default function AuthForm(props) {
     }
 
     return (
-        <div>
-            {showSuccess && (
-                <div style={{ color: 'green', backgroundColor: 'lightgreen', padding: '10px', marginBottom: '10px' }}>
-                    Account created successfully! Please signin.
-                </div>
-            )}
-            <form className="Auth-form" onSubmit={handleSubmit}>
-                <h3>{authMode === "signin" ? "Sign In" : "Sign Up"}</h3>
-                {authMode === "signup" && (
-                    <div>
-                        <label>ID</label>
-                        <input
-                            type="text"
-                            placeholder="Enter ID"
-                            value={id}
-                            onChange={e => setId(e.target.value)}
-                        />
+        <div id="authContainer">
+            <Container>
+                <Row>
+                <Col id="authCol">
+                {showSuccess && (
+                    <div style={{ color: 'green', backgroundColor: 'lightgreen', padding: '10px', marginBottom: '10px' }}>
+                        Account created successfully! Please signin.
                     </div>
                 )}
-                <div>
-                    <label>Email address</label>
-                    <input
-                        type="email"
-                        placeholder="Enter email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        placeholder="Enter password"
-                        value={pwd}
-                        onChange={e => setPwd(e.target.value)}
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary">
-                    Submit
-                </button>
-                <p className="text-center mt-2">
-                    {authMode === "signin"
-                        ? "Need an account? "
-                        : "Already registered? "}
-                    <button className="link-like-button" onClick={changeAuthMode}>
-                        {authMode === "signin" ? "Sign Up" : "Sign In"}
+                <form className="Auth-form" onSubmit={handleSubmit}>
+                    <h1 style={{textAlign: 'center'}}>{authMode === "signin" ? "Sign In" : "Sign Up"}</h1>
+                    {authMode === "signup" && (
+                        <div className="form_item">
+                            <label className="form_label">ID </label>
+                            <input
+                                type="text"
+                                placeholder="Enter ID"
+                                value={id}
+                                onChange={e => setId(e.target.value)}
+                            />
+                        </div>
+                    )}
+                    <div className="form_item">
+                        <label className="form_label">Email address </label>
+                        <input
+                            type="email"
+                            placeholder="Enter email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className="form_item">
+                        <label className="form_label">Password </label>
+                        <input
+                            type="password"
+                            placeholder="Enter password"
+                            value={pwd}
+                            onChange={e => setPwd(e.target.value)}
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-primary">
+                        Submit
                     </button>
-                </p>
-            </form>
+                    <p className="text-center mt-2">
+                        {authMode === "signin"
+                            ? "Need an account? "
+                            : "Already registered? "}
+                        <button className="link-like-button" onClick={changeAuthMode}>
+                            {authMode === "signin" ? "Sign Up" : "Sign In"}
+                        </button>
+                    </p>
+                </form>
+                </Col>
+                </Row>
+            </Container>
         </div>
     );
 }

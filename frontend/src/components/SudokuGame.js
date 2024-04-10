@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {Container, Button, Navbar, Nav} from 'react-bootstrap';
 
 /**
  * SudokuGame component for displaying the Sudoku game interface.
@@ -17,16 +18,25 @@ import { Link } from 'react-router-dom';
 const SudokuGame = () => {
   return (
     <div>
-      <header>
-        <h1>Sudoku App</h1>
-      </header>
-      <main>
-        <p>Sudoku Game</p>
-        <div className="btn-group" role="group" aria-label="Authentication Buttons">
-          <Link to="/components/Games" className="btn btn-primary">Back</Link>
-
-        </div>
-      </main>
+      <div>
+      <Navbar bg="dark" data-bs-theme="dark">
+        <Container>
+        <Link to="/components/Games"><Navbar.Brand>Sudoku</Navbar.Brand></Link>
+        <Link to="/"><Nav>Logout</Nav></Link>
+        </Container>
+      </Navbar>
+    </div>
+    <div>
+      <Container id="gameSpace">
+      <h2><b>Generated game</b></h2>
+      <br></br>
+      <p>I'm assuming that the 9x9 board generation is on grace's branch... or I just didn't pull from main recently enough...</p>
+      <br></br>
+      <Link to="/components/Games">
+        <Button variant = "secondary">Back</Button>
+      </Link>
+      </Container>
+    </div>
     </div>
   );
 }
