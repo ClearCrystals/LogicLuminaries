@@ -1,6 +1,20 @@
 from django.urls import path
 from . import views
 
+"""
+    This is a list of URLs that the Django framework uses for the API.
+    Each of these URL links are used by the React frontend to send data
+    to the database.
+
+    URLs
+        "": generic index page that isn't used by frontend
+        signin: the page that handles the sign in request
+        signup: the page that handles the sign up request
+        board: the page that handles creating a new board
+        save: the page that handles saving a board
+"""
+
+
 urlpatterns = [
     path("", views.index, name="index"),
     path("signin/", views.signin_view, name="signin"),

@@ -33,6 +33,7 @@ class Users(models.Model):
         id: The primary key and just a number that is unique for each board
         state: The current state of the sudoku board
         answer: The solution for the sudoku board
+        initial: The inital state of the sudoku board
         difficulty: The difficulty of the board. Difficulty is defined as how filled
                     in the board was at the start
         style: The type of sudoku puzzle it is. Could be normal sudoku, killer sudoku, etc.
@@ -47,6 +48,7 @@ class Boards(models.Model):
     id = models.AutoField(primary_key=True)
     state = models.CharField(max_length=500)
     answer = models.CharField(max_length=500)
+    initial = models.CharField(max_length=500, default="")
     difficulty = models.CharField(max_length=30)
     style = models.CharField(max_length=30)
     user = models.CharField(max_length=30)
