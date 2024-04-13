@@ -31,8 +31,22 @@ class UsersSerializer(serializers.ModelSerializer):
         return super(UsersSerializer, self).create(validated_data)
 
 
+"""
+    Used to validate and save Boards data.
+
+    This class is used when transferring data from the frontend to the database.
+    It takes in data, validates it, and then saves it using the Boards model from
+    models.py. In other words, this is the class that uses the models to connect to
+    the database.
+
+    Attributes:
+        model: The class model that the serializer will use to connect to the corresponding table
+        fields: the attributes of that class model which are also the columns of the corresponding
+                table
+"""
+
+
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Boards
-        # Need all?
         fields = ["id", "state", "answer", "difficulty", "style", "user", "isFinished"]
