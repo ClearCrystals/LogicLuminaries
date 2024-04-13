@@ -1,81 +1,80 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import axios from 'axios';
-import Cookies from 'js-cookie';
-import _ from 'lodash';
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import axios from "axios";
+import Cookies from "js-cookie";
+import _ from "lodash";
 
-axios.defaults.xsrfCookieName = 'csrfToken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.xsrfCookieName = "csrfToken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const SudokuGrid = ({ difficulty, username }) => {
-  const createEmptyGrid = () => Array(9).fill(Array(9).fill(''));
+  const createEmptyGrid = () => Array(9).fill(Array(9).fill(""));
   const [gridData, setGridData] = useState(createEmptyGrid());
   const [selectedCell, setSelectedCell] = useState({ row: null, col: null });
   const [showNumberSelector, setShowNumberSelector] = useState(false);
-  const [id, setId] = useState(0)
+  const [id, setId] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState(null);
-   
-  const url ="http://localhost:8000/api/board/"
+
+  const url = "http://localhost:8000/api/board/";
   const data = {
     difficulty: difficulty,
     style: "normal",
-    user: username
-  }
+    user: username,
+  };
   useEffect(() => {
-     
     const fetchData = async () => {
-        try {
-            const csrfToken = Cookies.get('csrfToken')
-            console.log(`Sending data to ${url}:`, JSON.stringify(data));
-            let response = await axios.post(url, JSON.stringify(data), {
-                headers: {
-                    
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken,
-                }
-            });
-            if (response.status === 200) { // Assuming 200 is the success status code
-                console.log("Fetched data:", response.data);
+      try {
+        const csrfToken = Cookies.get("csrfToken");
+        console.log(`Sending data to ${url}:`, JSON.stringify(data));
+        let response = await axios.post(url, JSON.stringify(data), {
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+          },
+        });
+        if (response.status === 200) {
+          // Assuming 200 is the success status code
+          console.log("Fetched data:", response.data);
 
-                // Assuming response.data.state is your grid data
-                // Parse it to a format that your component can use
-                const parsedGridData = JSON.parse(response.data.state);
-                const parsedAnswer = JSON.parse(response.data.answer);
-                
-                setId(response.data.id)
-                setGridData(parsedGridData); 
-                setCorrectAnswer(parsedAnswer);
-            }
+          // Assuming response.data.state is your grid data
+          // Parse it to a format that your component can use
+          const parsedGridData = JSON.parse(response.data.state);
+          const parsedAnswer = JSON.parse(response.data.answer);
 
-            console.log(`${data} response:`, response.data);
-        } catch (error) {
-            console.error(`Error during ${data}:`, error);
+          setId(response.data.id);
+          setGridData(parsedGridData);
+          setCorrectAnswer(parsedAnswer);
         }
+
+        console.log(`${data} response:`, response.data);
+      } catch (error) {
+        console.error(`Error during ${data}:`, error);
       }
-      fetchData()
-    }, [difficulty]);
+    };
+    fetchData();
+  }, [difficulty]);
 
   const saveGridData = () => {
-    const csrfToken = Cookies.get('csrfToken')
+    const csrfToken = Cookies.get("csrfToken");
     let d = {
       board_id: id,
       state: JSON.stringify(gridData),
       //row: ,
       //column: ,
       //num: ,
-    }
-    axios.post("http://localhost:8000/api/save/", JSON.stringify(d), {
-      headers: {
-          
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrfToken,
-      }
-    })
-      .then(response => {
-        console.log('Grid saved');
+    };
+    axios
+      .post("http://localhost:8000/api/save/", JSON.stringify(d), {
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
       })
-      .catch(error => {
-        console.error('Error saving grid', error);
+      .then((response) => {
+        console.log("Grid saved");
+      })
+      .catch((error) => {
+        console.error("Error saving grid", error);
       });
   };
 
@@ -89,29 +88,32 @@ const SudokuGrid = ({ difficulty, username }) => {
   const handleNumberSelect = (number) => {
     if (selectedCell.row != null && selectedCell.col != null) {
       // Deep copy of gridData
-      let newData = gridData.map(row => [...row]);
-  
+      let newData = gridData.map((row) => [...row]);
+
       newData[selectedCell.row][selectedCell.col] = number.toString();
       setGridData(newData);
       setSelectedCell({ row: null, col: null }); // Optionally deselect after choosing a number
       setShowNumberSelector(false);
-  
+
       debouncedSaveGridData();
     }
   };
 
   const handleSubmit = () => {
     if (!correctAnswer) {
-        console.error("No correct answer available for comparison.");
-        return;
-      }
-    
-      // Assuming both gridData and correctAnswer are arrays of arrays
-      const isCorrect = gridData.every((row, rowIndex) =>
-        row.every((cell, colIndex) => cell.toString() === correctAnswer[rowIndex][colIndex].toString())
-      );
-    
-      console.log(isCorrect ? "Correct solution!" : "Incorrect solution.");
+      console.error("No correct answer available for comparison.");
+      return;
+    }
+
+    // Assuming both gridData and correctAnswer are arrays of arrays
+    const isCorrect = gridData.every((row, rowIndex) =>
+      row.every(
+        (cell, colIndex) =>
+          cell.toString() === correctAnswer[rowIndex][colIndex].toString(),
+      ),
+    );
+
+    console.log(isCorrect ? "Correct solution!" : "Incorrect solution.");
   };
 
   return (
@@ -134,8 +136,11 @@ const SudokuGrid = ({ difficulty, username }) => {
       {showNumberSelector && (
         <Row className="mt-3">
           {[...Array(9)].map((_, index) => (
-            <Col key={index} xs={1}>    
-              <Button variant="outline-primary" onClick={() => handleNumberSelect(index + 1)}>
+            <Col key={index} xs={1}>
+              <Button
+                variant="outline-primary"
+                onClick={() => handleNumberSelect(index + 1)}
+              >
                 {index + 1}
               </Button>
             </Col>

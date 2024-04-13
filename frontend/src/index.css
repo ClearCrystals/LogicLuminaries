@@ -1,29 +1,31 @@
-html,body, #root {
+html,
+body,
+#root {
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-#homeContainer{
+#homeContainer {
   background-color: rgba(52, 82, 112, 1);
   text-align: center;
   height: 100%;
 }
 
-#logo{
+#logo {
   width: 20%;
   height: 20%;
 }
 
-.hometext{
+.hometext {
   color: #fff;
   padding-top: 2%;
   padding-bottom: 2%;
@@ -31,25 +33,25 @@ code {
   text-align: center;
 }
 
-.home_buttons{
+.home_buttons {
   padding-top: 2%;
   padding-bottom: 2%;
   text-align: center;
 }
 
-.Auth-form{
+.Auth-form {
   align-content: center;
   text-align: center;
 }
 
-#authContainer{
+#authContainer {
   background-color: rgba(52, 82, 112, 1);
   color: #fff;
   text-align: center;
   height: 100%;
 }
 
-.form_item{
+.form_item {
   padding-bottom: 2%;
   padding-right: 1%;
   padding-top: 1%;
@@ -57,24 +59,24 @@ code {
   text-align: left;
 }
 
-.form_label{
+.form_label {
   padding-bottom: 1%;
   text-align: center;
 }
 
-#authCol{
+#authCol {
   padding: 10%;
   margin: 5%;
   border-radius: 10%;
   background-color: rgba(70, 125, 156, 1);
 }
 
-#gamesContainer{
+#gamesContainer {
   text-align: center;
   height: 100%;
 }
 
-.gamesCol{
+.gamesCol {
   background-color: rgba(217, 217, 217, 1);
   color: rgba(52, 82, 112, 1);
   padding: 10%;
@@ -82,6 +84,6 @@ code {
   border-radius: 10%;
 }
 
-#gameSpace{
+#gameSpace {
   padding: 5%;
 }
