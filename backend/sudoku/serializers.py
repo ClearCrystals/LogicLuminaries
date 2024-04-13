@@ -49,4 +49,4 @@ class UsersSerializer(serializers.ModelSerializer):
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Boards
-        fields = ["id", "state", "answer", "difficulty", "style", "user", "isFinished"]
+        fields = ["id", "state", "answer", "initial", "difficulty", "style", "user", "isFinished"]
