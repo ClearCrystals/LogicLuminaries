@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {Container, Button, Navbar, Nav} from 'react-bootstrap';
+import {Container, Button, Navbar, Nav, ButtonGroup} from 'react-bootstrap';
 import SudokuGrid from './SudokuGrid';
 /**
  * SudokuGame component for displaying the Sudoku game interface.
@@ -56,29 +56,36 @@ const SudokuGame = () => {
       </div>
       <div>
       <Container id="gameSpace">
-      <h2><b>Generated game</b></h2>
-      <br></br>
-      {!gameMode && (
-          <div className="btn-group" role="group" aria-label="Game Mode Selection Buttons">
-            <button onClick={() => handleGameModeSelect('new')} className="btn btn-primary">New Game</button>
-            <button onClick={() => handleGameModeSelect('saved')} className="btn btn-primary">Load Saved Game</button>
+        {!gameMode && (
+          <div>
+            <h3>Game Mode Select</h3>
+            <br></br>
+            <ButtonGroup size="lg" className='mb-2'>
+              <Button onClick={() => handleGameModeSelect('new') } variant="primary">New Game</Button>
+              <Button onClick={() => handleGameModeSelect('saved')} variant="primary">Load Saved Game</Button>
+            </ButtonGroup>
           </div>
-        )}
-        {gameMode === 'new' && !difficulty && (
-          <div className="btn-group" role="group" aria-label="Difficulty Selection Buttons">
-            <button onClick={() => handleDifficultySelect('Easy')} className="btn btn-primary">Easy</button>
-            <button onClick={() => handleDifficultySelect('Medium')} className="btn btn-primary">Medium</button>
-            <button onClick={() => handleDifficultySelect('Hard')} className="btn btn-primary">Hard</button>
+          )}
+          {gameMode === 'new' && !difficulty && (
+          <div>
+            <h3>Difficulty Select</h3>
+            <p>An easy board will have fewer empty cells. A hard one will have the most.</p>
+            <br></br>
+            <ButtonGroup size="lg" className='mb-2'>
+              <Button onClick={() => handleDifficultySelect('Easy')} variant="primary">Easy</Button>
+              <Button onClick={() => handleDifficultySelect('Medium')} variant="primary">Medium</Button>
+              <Button onClick={() => handleDifficultySelect('Hard')} variant="primary">Hard</Button>
+            </ButtonGroup>
           </div>
         )}
         {difficulty && <SudokuGrid difficulty={difficulty} />}
         {gameMode === 'saved' && savedGridData && <SudokuGrid gridData={savedGridData} />}
-      <br></br>
-      <Link to="/components/Games">
-        <Button variant = "secondary">Back</Button>
-      </Link>
+        <br></br>
+        <Link to="/components/Games">
+          <Button variant = "secondary">Back</Button>
+        </Link>
       </Container>
-    </div>
+      </div>
     </div>
   );
 };
