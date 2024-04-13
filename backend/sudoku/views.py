@@ -127,7 +127,6 @@ def load_saved_game(request):
     try:
         print("USERNAME", request.query_params.get("username"))
         board = Boards.objects.filter(user=request.query_params.get("username"))
-        #print("BOARDS", board)
         serializer = BoardSerializer(board, many=True)
         return Response(serializer.data)
     except Boards.DoesNotExist:

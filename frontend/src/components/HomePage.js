@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {Container, Row, Col, Image, Button} from 'react-bootstrap';
+
 
 /**
  * HomePage component serving as the landing page of the Sudoku App.
@@ -14,17 +16,29 @@ import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
-    <div>
-      <header>
-        <h1>Sudoku App</h1>
-      </header>
-      <main>
-        <p>Welcome to the home page! This is a basic example of a React project.</p>
-        <div className="btn-group" role="group" aria-label="Authentication Buttons">
-          <Link to="/components/auth?mode=signup" className="btn btn-primary">Signup</Link>
-          <Link to="/components/auth?mode=signin" className="btn btn-primary">Signin</Link>
-        </div>
-      </main>
+    <div id="homeContainer">
+    <header>
+      <Image src="ll_logo.png" alt="logo" id="logo" rounded/>
+      <h1 class="hometext"><b>Welcome to Sudoku</b></h1>
+    </header>
+    <main>
+    <br></br>
+    <div class="hometext">
+      <h5>Solve, save, and explore new board styles in one place.</h5>
+      <h5>Register or Login to begin.</h5>
+    </div>
+    <br></br>
+    <div className='home_buttons'>
+      <div className="d-grid gap-2">
+        <Link to="/components/auth?mode=signup" >
+           <Button variant = "secondary" size="lg" >Register</Button>
+        </Link>
+        <Link to="/components/auth?mode=signin" >
+          <Button variant = "secondary" size="lg">Login</Button>
+        </Link>
+    </div>
+    </div>
+    </main>
     </div>
   );
 }

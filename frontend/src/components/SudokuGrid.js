@@ -52,7 +52,6 @@ const SudokuGrid = ({ difficulty, username }) => {
             console.error(`Error during ${data}:`, error);
         }
       }
-
       fetchData()
     }, [difficulty]);
 
