@@ -11,6 +11,7 @@ from rest_framework import status
 from django.contrib.auth.hashers import check_password
 from .sudoku import Sudoku
 import json
+from django.http import JsonResponse
 
 
 def index(request):
@@ -106,6 +107,7 @@ def get_game_by_difficulty(request):
     game = Sudoku(difficulty)
     b = Boards(
         state=str(game.board),
+        initial=str(game.board),
         answer=str(game.solve_sudoku()),
         difficulty=difficulty,
         style=style,
@@ -121,12 +123,22 @@ def get_game_by_difficulty(request):
 
 
 @api_view(["GET"])
-def load_saved_game(request, username):
+def load_saved_game(request):
     # finding the game
     try:
-        board = Boards.objects.filter(user=username, isFinished=0).latest(
-            "id"
-        )  # Adjust as needed
+        print("USERNAME", request.query_params.get("username"))
+        board = Boards.objects.filter(user=request.query_params.get("username"))
+        serializer = BoardSerializer(board, many=True)
+        return Response(serializer.data)
+    except Boards.DoesNotExist:
+        return Response({"message": "No saved game found"}, status=404)
+
+
+@api_view(["GET"])
+def choose_saved_game(request):
+    # finding the game
+    try:
+        board = Boards.objects.filter(id=request.data.get("id"))
         serializer = BoardSerializer(board)
         return Response(serializer.data)
     except Boards.DoesNotExist:

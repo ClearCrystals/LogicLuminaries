@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import {Container, Row, Col} from 'react-bootstrap';
+import { useUser } from './UserContext';
 
 axios.defaults.xsrfCookieName = 'csrfToken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -25,7 +27,7 @@ export default function AuthForm(props) {
     const [id, setId] = useState("");
     let [authMode, setAuthMode] = useState("signin");
     const [showSuccess, setShowSuccess] = useState(false);
-
+    const { setUsername } = useUser(); // Get setUsername from context
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -61,8 +63,14 @@ export default function AuthForm(props) {
                     'X-CSRFToken': csrfToken,
                 }
             });
-            if (response.status === 200) { // Assuming 200 is the success status code
-                navigate("/components/Games"); // Adjust the path as per your route configuration
+            if (response.status === 200) {
+                if (authMode === "signin") {
+                    setUsername(email); // Set username in context after successful sign in
+                } else if (authMode === "signup") {
+                    setUsername(email); // Also set it after signing up
+                    setShowSuccess(true);
+                }
+                navigate("/components/Games"); // Navigate after setting the context
             }
 
             console.log(`${authMode} response:`, response.data);
@@ -78,55 +86,61 @@ export default function AuthForm(props) {
     }
 
     return (
-        <div>
-            {showSuccess && (
-                <div style={{ color: 'green', backgroundColor: 'lightgreen', padding: '10px', marginBottom: '10px' }}>
-                    Account created successfully! Please signin.
-                </div>
-            )}
-            <form className="Auth-form" onSubmit={handleSubmit}>
-                <h3>{authMode === "signin" ? "Sign In" : "Sign Up"}</h3>
-                {authMode === "signup" && (
-                    <div>
-                        <label>ID</label>
-                        <input
-                            type="text"
-                            placeholder="Enter ID"
-                            value={id}
-                            onChange={e => setId(e.target.value)}
-                        />
+        <div id="authContainer">
+            <Container>
+                <Row>
+                <Col id="authCol">
+                {showSuccess && (
+                    <div style={{ color: 'green', backgroundColor: 'lightgreen', padding: '10px', marginBottom: '10px' }}>
+                        Account created successfully! Please signin.
                     </div>
                 )}
-                <div>
-                    <label>Email address</label>
-                    <input
-                        type="email"
-                        placeholder="Enter email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        placeholder="Enter password"
-                        value={pwd}
-                        onChange={e => setPwd(e.target.value)}
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary">
-                    Submit
-                </button>
-                <p className="text-center mt-2">
-                    {authMode === "signin"
-                        ? "Need an account? "
-                        : "Already registered? "}
-                    <button className="link-like-button" onClick={changeAuthMode}>
-                        {authMode === "signin" ? "Sign Up" : "Sign In"}
+                <form className="Auth-form" onSubmit={handleSubmit}>
+                    <h1 style={{textAlign: 'center'}}>{authMode === "signin" ? "Sign In" : "Sign Up"}</h1>
+                    {authMode === "signup" && (
+                        <div className="form_item">
+                            <label className="form_label">ID </label>
+                            <input
+                                type="text"
+                                placeholder="Enter ID"
+                                value={id}
+                                onChange={e => setId(e.target.value)}
+                            />
+                        </div>
+                    )}
+                    <div className="form_item">
+                        <label className="form_label">Email address </label>
+                        <input
+                            type="email"
+                            placeholder="Enter email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className="form_item">
+                        <label className="form_label">Password </label>
+                        <input
+                            type="password"
+                            placeholder="Enter password"
+                            value={pwd}
+                            onChange={e => setPwd(e.target.value)}
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-primary">
+                        Submit
                     </button>
-                </p>
-            </form>
+                    <p className="text-center mt-2">
+                        {authMode === "signin"
+                            ? "Need an account? "
+                            : "Already registered? "}
+                        <button className="link-like-button" onClick={changeAuthMode}>
+                            {authMode === "signin" ? "Sign Up" : "Sign In"}
+                        </button>
+                    </p>
+                </form>
+                </Col>
+                </Row>
+            </Container>
         </div>
     );
 }

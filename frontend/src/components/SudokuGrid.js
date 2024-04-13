@@ -7,7 +7,7 @@ import _ from 'lodash';
 axios.defaults.xsrfCookieName = 'csrfToken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-const SudokuGrid = ({ difficulty }) => {
+const SudokuGrid = ({ difficulty, username }) => {
   const createEmptyGrid = () => Array(9).fill(Array(9).fill(''));
   const [gridData, setGridData] = useState(createEmptyGrid());
   const [selectedCell, setSelectedCell] = useState({ row: null, col: null });
@@ -19,7 +19,7 @@ const SudokuGrid = ({ difficulty }) => {
   const data = {
     difficulty: difficulty,
     style: "normal",
-    user: "user"
+    user: username
   }
   useEffect(() => {
      
@@ -52,7 +52,6 @@ const SudokuGrid = ({ difficulty }) => {
             console.error(`Error during ${data}:`, error);
         }
       }
-
       fetchData()
     }, [difficulty]);
 
@@ -135,7 +134,7 @@ const SudokuGrid = ({ difficulty }) => {
       {showNumberSelector && (
         <Row className="mt-3">
           {[...Array(9)].map((_, index) => (
-            <Col key={index} xs={1}>
+            <Col key={index} xs={1}>    
               <Button variant="outline-primary" onClick={() => handleNumberSelect(index + 1)}>
                 {index + 1}
               </Button>

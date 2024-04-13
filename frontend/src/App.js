@@ -6,18 +6,21 @@ import HomePage from './components/HomePage';
 import Auth from "./components/Auth";
 import Games from "./components/Games";
 import SudokuGame from './components/SudokuGame';
+import { UserProvider } from './components/UserContext';
 
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/components/auth" element={<Auth />} />
-        <Route path="/components/games" element={<Games />} />
-        <Route path="/components/sudokugame" element={<SudokuGame />} />
-      </Routes>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/components/auth" element={<Auth />} />
+          <Route path="/components/games" element={<Games />} />
+          <Route path="/components/sudokugame" element={<SudokuGame />} />
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   )
 }
 
