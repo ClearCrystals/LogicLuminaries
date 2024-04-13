@@ -111,9 +111,7 @@ def get_game_by_difficulty(request):
         difficulty=difficulty,
         style=style,
         user=user,
-        isFinished=game.sudoku_status(),
-
-        
+        isFinished=game.sudoku_status(),  
     )
     b.save()
     serializer = BoardSerializer(b)
