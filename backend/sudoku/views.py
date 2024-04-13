@@ -13,6 +13,7 @@ from .sudoku import Sudoku
 import json
 from django.http import JsonResponse
 
+
 def index(request):
     return HttpResponse("Hello, world. You are at the sudoku index.")
 
