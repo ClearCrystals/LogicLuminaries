@@ -112,6 +112,7 @@ def get_game_by_difficulty(request):
         style=style,
         user=user,
         isFinished=game.sudoku_status(),
+
     )   
     b.save()
     serializer = BoardSerializer(b)
@@ -131,7 +132,7 @@ def load_saved_game(request):
         return Response(serializer.data)
     except Boards.DoesNotExist:
         return Response({"message": "No saved game found"}, status=404)
-    
+
 @api_view(["GET"])
 def choose_saved_game(request):
     # finding the game
@@ -141,7 +142,6 @@ def choose_saved_game(request):
         return Response(serializer.data)
     except Boards.DoesNotExist:
         return Response({"message": "No saved game found"}, status=404)
-
 
 @api_view(["POST"])
 def save_game_state(request):
