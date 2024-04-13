@@ -17,35 +17,28 @@ import {Container, Row, Col, Image, Button} from 'react-bootstrap';
 const HomePage = () => {
   return (
     <div id="homeContainer">
-    <Container fluid>
-      <Row>
-        <Col id="homeCol1"><Image src="free_sudoku.jpg" alt="board image" id="board_image" fluid /></Col>
-        <Col id="homeCol2">
-          <header>
-            <Image src="ll_logo.png" alt="logo" id="logo" rounded/>
-            <h1 class="hometext"><b>Welcome to Sudoku</b></h1>
-          </header>
-          <main>
-            <br></br>
-            <div class="hometext">
-              <h5>Solve, save, and explore new board styles in one place.</h5>
-              <h5>Register or Login to begin.</h5>
-            </div>
-            <br></br>
-            <div className='home_buttons'>
-              <div className="d-grid gap-2">
-                <Link to="/components/auth?mode=signup" >
-                  <Button variant = "secondary" size="lg" >Register</Button>
-                </Link>
-                <Link to="/components/auth?mode=signin" >
-                  <Button variant = "secondary" size="lg">Login</Button>
-                </Link>
-              </div>
-            </div>
-          </main>
-        </Col>
-      </Row>
-    </Container>
+    <header>
+      <Image src="ll_logo.png" alt="logo" id="logo" rounded/>
+      <h1 class="hometext"><b>Welcome to Sudoku</b></h1>
+    </header>
+    <main>
+    <br></br>
+    <div class="hometext">
+      <h5>Solve, save, and explore new board styles in one place.</h5>
+      <h5>Register or Login to begin.</h5>
+    </div>
+    <br></br>
+    <div className='home_buttons'>
+      <div className="d-grid gap-2">
+        <Link to="/components/auth?mode=signup" >
+           <Button variant = "secondary" size="lg" >Register</Button>
+        </Link>
+        <Link to="/components/auth?mode=signin" >
+          <Button variant = "secondary" size="lg">Login</Button>
+        </Link>
+    </div>
+    </div>
+    </main>
     </div>
   );
 }
