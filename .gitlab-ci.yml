@@ -33,7 +33,7 @@ static_analysis_backend:
     - pip install -r ./requirements.txt
     - export DJANGO_TESTING=1
   script:
-    - PYTHONPATH=backend:$PYTHONPATH mypy backend
+    - PYTHONPATH=backend:$PYTHONPATH mypy -p backend
   tags:
     - dind
 
