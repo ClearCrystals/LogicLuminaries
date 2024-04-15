@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
-import sys
+import os
 from pathlib import Path
 from typing import List
 
@@ -80,18 +80,7 @@ WSGI_APPLICATION = "src.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "mydb",
-        "USER": "user",
-        "PASSWORD": "password",
-        "HOST": "db",
-        "PORT": "3306",
-    }
-}
-
-if "test" in sys.argv:
+if os.environ.get('DJANGO_TESTING'):
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",

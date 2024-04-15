@@ -19,6 +19,7 @@ json5==0.9.20
 mccabe==0.7.0
 mypy==1.8.0
 mypy-extensions==1.0.0
+mysqlclient==2.2.4
 packaging==23.2
 pathspec==0.12.1
 platformdirs==4.2.0
