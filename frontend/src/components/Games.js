@@ -1,6 +1,6 @@
-import React from 'react';
-import {Container, Row, Col,Button, Navbar, Nav} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Container, Row, Col, Button, Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 /**
  * Games component that displays a list of game options.
@@ -17,44 +17,52 @@ import { Link } from 'react-router-dom';
 
 const Games = () => {
   return (
-  <div>
     <div>
-      <Navbar bg="dark" data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand>Sudoku</Navbar.Brand>
-          <Link to="/"><Nav>Logout</Nav></Link>
+      <div>
+        <Navbar bg="dark" data-bs-theme="dark">
+          <Container>
+            <Navbar.Brand>Sudoku</Navbar.Brand>
+            <Link to="/">
+              <Nav>Logout</Nav>
+            </Link>
+          </Container>
+        </Navbar>
+      </div>
+      <div>
+        <Container id="gamesContainer">
+          <header>
+            <br></br>
+            <h1>
+              <b>Welcome</b>
+            </h1>
+            <br></br>
+          </header>
+          <Row>
+            <Col className="gamesCol">
+              <h3>
+                <b>Start a new puzzle?</b>
+              </h3>
+              <br></br>
+              <div>
+                <Link to="/components/SudokuGame">
+                  <Button variant="secondary" size="lg">
+                    Generate
+                  </Button>
+                </Link>
+              </div>
+            </Col>
+            <Col className="gamesCol">
+              <div>
+                <h3>Load an old puzzle?</h3>
+                <br></br>
+                <p>TODO load puzzles as cards</p>
+              </div>
+            </Col>
+          </Row>
         </Container>
-      </Navbar>
+      </div>
     </div>
-    <div>
-      <Container id="gamesContainer">
-      <header>
-        <br></br>
-        <h1><b>Welcome</b></h1>
-        <br></br>
-      </header>
-      <Row>
-        <Col className='gamesCol'>
-            <h3><b>Start a new puzzle?</b></h3>
-            <br></br>
-            <div>
-              <Link to="/components/SudokuGame">
-                <Button variant="secondary" size="lg">Generate</Button>
-              </Link>
-            </div>
-        </Col>
-        <Col className='gamesCol'>
-          <div>
-            <h3>Load an old puzzle?</h3>
-            <br></br>
-            <p>TODO load puzzles as cards</p>
-          </div>
-        </Col>
-      </Row>
-      </Container>
-    </div>
-  </div>
   );
-}
+};
 
 export default Games;
