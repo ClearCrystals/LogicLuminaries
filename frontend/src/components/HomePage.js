@@ -15,6 +15,7 @@ import { Container, Row, Col, Image, Button } from "react-bootstrap";
 
 const HomePage = () => {
   return (
+    //TODO fix xl screen
     <div id="homeContainer">
       <header>
         <Image src="ll_logo.png" alt="logo" id="logo" rounded />

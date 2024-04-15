@@ -37,6 +37,8 @@ export default function AuthForm(props) {
     }
   }, []);
 
+//   This is where authentication needs to occur. Other pages will be blocked depending on auth token.
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -85,6 +87,7 @@ export default function AuthForm(props) {
   };
 
   return (
+    //add back button on sign in
     <div id="authContainer">
       <Container>
         <Row>
@@ -105,6 +108,7 @@ export default function AuthForm(props) {
               <h1 style={{ textAlign: "center" }}>
                 {authMode === "signin" ? "Sign In" : "Sign Up"}
               </h1>
+              {/* TODO: bootstrap forms */}
               {authMode === "signup" && (
                 <div className="form_item">
                   <label className="form_label">ID </label>
