@@ -115,3 +115,66 @@ class Sudoku:
                             self.board[row][col] = 0
                     return False
         return True
+
+
+class KillerSudoku:
+    def __init__(self, difficulty="Medium"):
+        self.normal_sudoku = Sudoku(difficulty)
+        self.empty_board = [row[:] for row in self.normal_sudoku.board]
+        self.solved_board = self.normal_sudoku.solve_sudoku()
+        self.cages = {}
+        self.generate_cages()
+
+    def generate_cages(self):
+    
+        all_cells = [(row, col) for row in range(9) for col in range(9)]
+        random.shuffle(all_cells)  
+        
+        visited = set()
+        cage_id = 1
+        
+        for start_cell in all_cells:
+            if start_cell in visited:
+                continue  
+            
+            current_cage = []
+            cells_to_visit = [start_cell]
+            cells_in_cage = random.randint(2, 5)
+            
+            while cells_to_visit and len(current_cage) < cells_in_cage:
+                cell = cells_to_visit.pop()
+                if cell in visited:
+                    continue
+                
+                current_cage.append(cell)
+                visited.add(cell)
+                
+                
+                row, col = cell
+                
+                # up, right, down, left
+                possible_directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+                random.shuffle(possible_directions)  
+                
+                for change in possible_directions:
+                    dif_row, dif_col = change
+                    adj_cell = (row + dif_row, col + dif_col)
+                    if 0 <= adj_cell[0] < 9 and 0 <= adj_cell[1] < 9 and adj_cell not in visited:
+                        cells_to_visit.append(adj_cell)
+            
+            # sum thes cage
+            cage_sum = sum(self.solved_board[row][col] for row, col in current_cage)
+            self.cages[cage_id] = {'sum': cage_sum, 'cells': current_cage}
+            cage_id += 1
+
+    def is_cage_valid(self, cage_id):
+        cage = self.cages[cage_id]
+        cage_sum = sum(self.solved_board[row][col] for row, col in cage['cells'])
+        return cage_sum == cage['sum']
+
+    def solve_killer_sudoku(self):
+        for cage_id in self.cages:
+            if not self.is_cage_valid(cage_id):
+                return False
+        return True
+
