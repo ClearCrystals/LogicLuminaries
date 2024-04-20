@@ -162,7 +162,7 @@ class KillerSudoku(Sudoku):
             current_cage = []
             cells_to_visit = [start_cell]
             cells_in_cage = random.randint(2, 5)
-            # Step and traverse randomly from cell to cell until wanted length or no more possible locations
+            # Step and traverse randomly until wanted length or no more possible locations
             while cells_to_visit and len(current_cage) < cells_in_cage:
                 cell = cells_to_visit.pop()
                 if cell in visited:
@@ -177,12 +177,12 @@ class KillerSudoku(Sudoku):
                     dif_row, dif_col = change
                     adj_cell = (row + dif_row, col + dif_col)
                     if (
-                        0 <= adj_cell[0] < 9
-                        and 0 <= adj_cell[1] < 9
-                        and adj_cell not in visited
+                        0 <= adj_cell[0] < 9 and
+                        0 <= adj_cell[1] < 9 and
+                        adj_cell not in visited
                     ):
                         cells_to_visit.append(adj_cell)
-            # Ones cage has a desired number of cells, or no where else to traverse sum and add to dictionary
+            # Cages have desired cells, or nowhere else to traverse sum and add to dictionary
             cage_sum = sum(self.solved_board[row][col] for row, col in current_cage)
             self.cages[cage_id] = {"sum": cage_sum, "cells": current_cage}
             cage_id += 1
