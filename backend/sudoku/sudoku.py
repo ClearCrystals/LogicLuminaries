@@ -128,7 +128,7 @@ class KillerSudoku:
         cages (dict): Contains all the cages. Their sum and the cells pertaining to that sum.
         solved_board (list): Contains all the answers to the board.
 
-        
+
 
     Methods:
         __init__(self, difficulty="Medium"): Initializes a Killer Sudoku object
@@ -145,19 +145,19 @@ class KillerSudoku:
         self.generate_cages()
 
     def generate_cages(self):
-    
+
         # Make a list of all possible locations and shuffle as to not miss a location
         all_cells = [(row, col) for row in range(9) for col in range(9)]
-        random.shuffle(all_cells)  
+        random.shuffle(all_cells)
 
         # Make a set of where you visit the cells, and unique id for cage dict
         visited = set()
         cage_id = 1
-        
+
         # Iterate over all the possible locations
         for start_cell in all_cells:
             if start_cell in visited:
-                continue  
+                continue
             # If the cells has not been visited create a cage around it with ran length
             current_cage = []
             cells_to_visit = [start_cell]
@@ -171,7 +171,7 @@ class KillerSudoku:
                 visited.add(cell)
                 row, col = cell
                 possible_directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-                random.shuffle(possible_directions)  
+                random.shuffle(possible_directions)
                 # Step randomly into a different location only adjacent locations possible
                 for change in possible_directions:
                     dif_row, dif_col = change
