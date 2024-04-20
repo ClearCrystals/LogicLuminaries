@@ -141,6 +141,7 @@ class SudokuAlgoTests(TestCase):
         total_zeros = sum(cell == 0 for row in sudoku.board for cell in row)
         self.assertEqual(total_zeros, 64)
 
+
 class KillerSudokuAlgoTests(TestCase):
     def test_killer_sudoku_init(self):
         killer_sudoku = KillerSudoku("Hard")
