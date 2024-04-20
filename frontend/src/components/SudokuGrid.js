@@ -7,7 +7,7 @@ import _ from "lodash";
 axios.defaults.xsrfCookieName = "csrfToken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-const SudokuGrid = ({ difficulty, username }) => {
+const SudokuGrid = ({ difficulty, username, savedGrid }) => {
   const createEmptyGrid = () => Array(9).fill(Array(9).fill(""));
   const [gridData, setGridData] = useState(createEmptyGrid());
   const [selectedCell, setSelectedCell] = useState({ row: null, col: null });
@@ -21,37 +21,50 @@ const SudokuGrid = ({ difficulty, username }) => {
     style: "normal",
     user: username,
   };
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const csrfToken = Cookies.get("csrfToken");
-        console.log(`Sending data to ${url}:`, JSON.stringify(data));
-        let response = await axios.post(url, JSON.stringify(data), {
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": csrfToken,
-          },
-        });
-        if (response.status === 200) {
-          // Assuming 200 is the success status code
-          console.log("Fetched data:", response.data);
 
-          // Assuming response.data.state is your grid data
-          // Parse it to a format that your component can use
-          const parsedGridData = JSON.parse(response.data.state);
-          const parsedAnswer = JSON.parse(response.data.answer);
+  const fetchData = async () => {
+    try {
+      const csrfToken = Cookies.get("csrfToken");
+      console.log(`Sending data to ${url}:`, JSON.stringify(data));
+      let response = await axios.post(url, JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": csrfToken,
+        },
+      });
+      if (response.status === 200) {
+        // Assuming 200 is the success status code
+        console.log("Fetched data:", response.data);
 
-          setId(response.data.id);
-          setGridData(parsedGridData);
-          setCorrectAnswer(parsedAnswer);
-        }
+        // Assuming response.data.state is your grid data
+        // Parse it to a format that your component can use
+        const parsedGridData = JSON.parse(response.data.state);
+        const parsedAnswer = JSON.parse(response.data.answer);
 
-        console.log(`${data} response:`, response.data);
-      } catch (error) {
-        console.error(`Error during ${data}:`, error);
+        setId(response.data.id);
+        setGridData(parsedGridData);
+        setCorrectAnswer(parsedAnswer);
       }
-    };
-    fetchData();
+
+      console.log(`${data} response:`, response.data);
+    } catch (error) {
+      console.error(`Error during ${data}:`, error);
+    }
+  };
+
+  useEffect(() => {
+    if (savedGrid != undefined) {
+      console.log(savedGrid)
+      const parsedGridData = JSON.parse(savedGrid.state);
+      const parsedAnswer = JSON.parse(savedGrid.answer);
+  
+      setId(savedGrid.id);
+      setGridData(parsedGridData);
+      setCorrectAnswer(parsedAnswer);
+    } else {
+      fetchData();
+    }
+    
   }, [difficulty]);
 
   const saveGridData = () => {
@@ -89,8 +102,8 @@ const SudokuGrid = ({ difficulty, username }) => {
     if (selectedCell.row != null && selectedCell.col != null) {
       // Deep copy of gridData
       let newData = gridData.map((row) => [...row]);
-
-      newData[selectedCell.row][selectedCell.col] = number.toString();
+      //toString()
+      newData[selectedCell.row][selectedCell.col] = number;
       setGridData(newData);
       setSelectedCell({ row: null, col: null }); // Optionally deselect after choosing a number
       setShowNumberSelector(false);

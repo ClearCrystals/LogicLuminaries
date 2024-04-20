@@ -40,7 +40,7 @@ const Games = () => {
           <Row>
             <Col className="gamesCol">
               <h3>
-                <b>Start a new puzzle?</b>
+                <b>Play classic sudoku</b>
               </h3>
               <br></br>
               <div>
@@ -53,9 +53,11 @@ const Games = () => {
             </Col>
             <Col className="gamesCol">
               <div>
-                <h3>Load an old puzzle?</h3>
+                <h3>
+                  <b>Play killer sudoku</b>  
+                </h3>
                 <br></br>
-                <p>TODO load puzzles as cards</p>
+                <p>TODO add killer generation</p>
               </div>
             </Col>
           </Row>
