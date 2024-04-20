@@ -12,7 +12,6 @@ class Sudoku:
 
     Methods:
         __init__(self, difficulty="Medium"): Initializes a Sudoku object
-        generate_sudoku(self): Generates Sudoku by solving then removing cells based on difficulty.
         sudoku_status(self): Checks the status of the Sudoku puzzle (complete or incomplete).
         solve_sudoku(self): Solves the Sudoku puzzle using backtracking.
     """
@@ -28,9 +27,9 @@ class Sudoku:
         """
         self.board = [[0 for _ in range(9)] for _ in range(9)]
         self.difficulty = difficulty
-        self.generate_sudoku()
+        self._generate_sudoku()
 
-    def generate_sudoku(self):
+    def _generate_sudoku(self):
         """
         Generates a Sudoku puzzle by solving a puzzle then removes cells based on difficulty.
         """
@@ -117,7 +116,7 @@ class Sudoku:
         return True
 
 
-class KillerSudoku:
+class KillerSudoku(Sudoku):
     """
     A class representing a killer sudoku puzzle variant
 
@@ -132,19 +131,20 @@ class KillerSudoku:
 
     Methods:
         __init__(self, difficulty="Medium"): Initializes a Killer Sudoku object
-        generate_cages(self): Generates the cages for the given board
         is_cage_valid(self): Checks the validity of the cages and checks their sum.
         solve_killer_sudoku(self): Fills the board up with answers.
     """
 
     def __init__(self, difficulty="Medium"):
-        self.normal_sudoku = Sudoku(difficulty)
-        self.empty_board = [row[:] for row in self.normal_sudoku.board]
-        self.solved_board = self.normal_sudoku.solve_sudoku()
+        super().__init__(difficulty)
+        temp = [row[:] for row in self.board]
+        self.solve_sudoku()
+        self.solved_board = [row[:] for row in self.board]
+        self.board = temp
         self.cages = {}
-        self.generate_cages()
+        self._generate_cages()
 
-    def generate_cages(self):
+    def _generate_cages(self):
 
         # Make a list of all possible locations and shuffle as to not miss a location
         all_cells = [(row, col) for row in range(9) for col in range(9)]
@@ -188,8 +188,54 @@ class KillerSudoku:
         cage_sum = sum(self.solved_board[row][col] for row, col in cage["cells"])
         return cage_sum == cage["sum"]
 
-    def solve_killer_sudoku(self):
-        for cage_id in self.cages:
-            if not self.is_cage_valid(cage_id):
-                return False
-        return True
+    def sudoku_status(self):
+        """
+        Returns the completion status of the Killer Sudoku Puzzle.
+
+        Returns:
+            float: The completion percentage of the Sudoku puzzle.
+        """
+        filled_percentage = super().sudoku_status()
+
+        # If all cages aren't valid, return 0
+        all_cages_valid = all(self.is_cage_valid(cage_id) for cage_id in self.cages)
+        return filled_percentage if all_cages_valid else 0.0
+
+
+if __name__ == "__main__":
+    sudoku = Sudoku("Easy")
+
+    print("Initial Sudoku Board:")
+    for row in sudoku.board:
+        print(row)
+    print(f"Sudoku Status: {sudoku.sudoku_status()}")
+
+    solved_board = sudoku.solve_sudoku()
+    if solved_board:
+        print("Solved Sudoku Board:")
+        for row in solved_board:
+            print(row)
+    else:
+        print("Unable to solve the Sudoku.")
+
+    status = sudoku.sudoku_status()
+    print(f"Sudoku Status: {status}\n")
+
+    killer_sudoku = KillerSudoku("Medium")
+
+    print("\nInitial Killer Sudoku Board:")
+    for row in killer_sudoku.board:
+        print(row)
+    print(killer_sudoku.sudoku_status())
+
+    print("\nCages:")
+    for cage_id, cage_info in killer_sudoku.cages.items():
+        print(f"Cage ID: {cage_id}, Sum: {cage_info['sum']}, Cells: {cage_info['cells']}")
+
+    if killer_sudoku.solve_sudoku():
+        print("\nSolved Killer Sudoku Board:")
+        for row in killer_sudoku.board:
+            print(row)
+    else:
+        print("Unable to solve the Killer Sudoku.")
+    print(killer_sudoku.sudoku_status())

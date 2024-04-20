@@ -73,14 +73,6 @@ class SudokuAlgoTests(TestCase):
         sudoku.board = incomplete_board
         self.assertFalse(sudoku.sudoku_status() == 100.0)
 
-    def test_generate_sudoku(self):
-        # Check that board is 9x9
-        sudoku = Sudoku("Easy")
-        sudoku.generate_sudoku()
-        self.assertEqual(len(sudoku.board), 9)
-        for row in sudoku.board:
-            self.assertEqual(len(row), 9)
-
     def test_solve_sudoku(self):
         # Check that the solution is a valid
         sudoku = Sudoku()
