@@ -1,6 +1,6 @@
 from django.test import TestCase
 from sudoku.models import Users
-from .sudoku import Sudoku
+from .sudoku import Sudoku, KillerSudoku
 
 
 class UserModelTests(TestCase):
@@ -140,3 +140,34 @@ class SudokuAlgoTests(TestCase):
         sudoku = Sudoku("Hard")
         total_zeros = sum(cell == 0 for row in sudoku.board for cell in row)
         self.assertEqual(total_zeros, 64)
+
+class KillerSudokuAlgoTests(TestCase):
+    def test_killer_sudoku_init(self):
+        killer_sudoku = KillerSudoku("Hard")
+        self.assertEqual(len(killer_sudoku.board), 9)
+        self.assertEqual(killer_sudoku.difficulty, "Hard")
+
+    def test_killer_sudoku_status(self):
+        killer_sudoku = KillerSudoku("Hard")
+        status = killer_sudoku.sudoku_status()
+        self.assertTrue(0 <= status <= 100)
+
+    def test_solve_killer_sudoku(self):
+        killer_sudoku = KillerSudoku("Hard")
+        result = killer_sudoku.solve_sudoku()
+        self.assertTrue(result)
+
+    def test_is_cage_valid(self):
+        killer_sudoku = KillerSudoku("Hard")
+        for cage_id in killer_sudoku.cages:
+            self.assertTrue(killer_sudoku.is_cage_valid(cage_id))
+
+    def test_generate_killer_sudoku(self):
+        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku.generate_sudoku()
+        self.assertEqual(len(killer_sudoku.board), 9)
+
+    def test_difficulty_setting_initialization(self):
+        for difficulty in ["Easy", "Medium", "Hard"]:
+            killer_sudoku = KillerSudoku(difficulty=difficulty)
+            self.assertEqual(killer_sudoku.difficulty, difficulty)
