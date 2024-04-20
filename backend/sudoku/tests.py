@@ -144,7 +144,7 @@ class SudokuAlgoTests(TestCase):
         self.assertEqual(total_zeros, 64)
 
 
-class KillerSudokuAlgoTests(TestCase):
+class KillerSudokuAlgoTests(unittest.TestCase):
     def test_killer_sudoku_init(self):
         killer_sudoku = KillerSudoku("Hard")
         self.assertEqual(len(killer_sudoku.board), 9)
