@@ -1,7 +1,8 @@
 from django.test import TestCase
 from sudoku.models import Users
 from .sudoku import Sudoku, KillerSudoku
-import random
+import unittest
+from unittest.mock import patch
 
 
 class UserModelTests(TestCase):
@@ -174,12 +175,10 @@ class KillerSudokuAlgoTests(TestCase):
             killer_sudoku = KillerSudoku(difficulty=difficulty)
             self.assertEqual(killer_sudoku.difficulty, difficulty)
 
-    def test_generate_cages_with_duplicate_cells(self):
-        # Seed the random number generator to get a predictable outcome
-        random.seed(1)
+    @patch('random.shuffle')
+    @patch('random.randint')
+    def test_generate_cages_with_duplicate_cells(self, mock_randint, mock_shuffle):
+        mock_randint.side_effect = [2, 0, 8, 0, 8]
+        mock_shuffle.side_effect = [None, None, [(0, 1), (1, 0), (0, -1), (-1, 0)]]
         killer_sudoku = KillerSudoku("Hard")
-        # Reset the random number generator to its normal state
-        random.seed()
-        # Make an assertion about the expected outcome
-        # This is just a placeholder. You would need to replace this with an actual assertion
-        self.assertTrue(killer_sudoku.sudoku_status() > 0)
+        self.assertTrue(all(killer_sudoku.is_cage_valid(cage_id) for cage_id in killer_sudoku.cages))
