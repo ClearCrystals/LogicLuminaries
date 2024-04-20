@@ -176,9 +176,11 @@ class KillerSudoku(Sudoku):
                 for change in possible_directions:
                     dif_row, dif_col = change
                     adj_cell = (row + dif_row, col + dif_col)
-                    if (0 <= adj_cell[0] < 9
-                            and 0 <= adj_cell[1] < 9
-                            and adj_cell not in visited):
+                    if (
+                        0 <= adj_cell[0] < 9
+                        and 0 <= adj_cell[1] < 9
+                        and adj_cell not in visited
+                    ):
                         cells_to_visit.append(adj_cell)
             # Cages have desired cells, or nowhere else to traverse sum and add to dictionary
             cage_sum = sum(self.solved_board[row][col] for row, col in current_cage)
