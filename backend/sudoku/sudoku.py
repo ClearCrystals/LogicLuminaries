@@ -176,7 +176,11 @@ class KillerSudoku(Sudoku):
                 for change in possible_directions:
                     dif_row, dif_col = change
                     adj_cell = (row + dif_row, col + dif_col)
-                    if 0 <= adj_cell[0] < 9 and 0 <= adj_cell[1] < 9 and adj_cell not in visited:
+                    if (
+                        0 <= adj_cell[0] < 9
+                        and 0 <= adj_cell[1] < 9
+                        and adj_cell not in visited
+                    ):
                         cells_to_visit.append(adj_cell)
             # Ones cage has a desired number of cells, or no where else to traverse sum and add to dictionary
             cage_sum = sum(self.solved_board[row][col] for row, col in current_cage)
@@ -200,42 +204,3 @@ class KillerSudoku(Sudoku):
         # If all cages aren't valid, return 0
         all_cages_valid = all(self.is_cage_valid(cage_id) for cage_id in self.cages)
         return filled_percentage if all_cages_valid else 0.0
-
-
-if __name__ == "__main__":
-    sudoku = Sudoku("Easy")
-
-    print("Initial Sudoku Board:")
-    for row in sudoku.board:
-        print(row)
-    print(f"Sudoku Status: {sudoku.sudoku_status()}")
-
-    solved_board = sudoku.solve_sudoku()
-    if solved_board:
-        print("Solved Sudoku Board:")
-        for row in solved_board:
-            print(row)
-    else:
-        print("Unable to solve the Sudoku.")
-
-    status = sudoku.sudoku_status()
-    print(f"Sudoku Status: {status}\n")
-
-    killer_sudoku = KillerSudoku("Medium")
-
-    print("\nInitial Killer Sudoku Board:")
-    for row in killer_sudoku.board:
-        print(row)
-    print(killer_sudoku.sudoku_status())
-
-    print("\nCages:")
-    for cage_id, cage_info in killer_sudoku.cages.items():
-        print(f"Cage ID: {cage_id}, Sum: {cage_info['sum']}, Cells: {cage_info['cells']}")
-
-    if killer_sudoku.solve_sudoku():
-        print("\nSolved Killer Sudoku Board:")
-        for row in killer_sudoku.board:
-            print(row)
-    else:
-        print("Unable to solve the Killer Sudoku.")
-    print(killer_sudoku.sudoku_status())
