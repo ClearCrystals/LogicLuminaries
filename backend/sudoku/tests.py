@@ -172,3 +172,11 @@ class KillerSudokuAlgoTests(TestCase):
         for difficulty in ["Easy", "Medium", "Hard"]:
             killer_sudoku = KillerSudoku(difficulty=difficulty)
             self.assertEqual(killer_sudoku.difficulty, difficulty)
+    
+    def test_generate_cages_with_duplicate_cells(self):
+        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku.cages = {1: {"sum": 10, "cells": [(0, 0), (0, 1)]}}
+        killer_sudoku._generate_cages()
+        cage_validity = [killer_sudoku.is_cage_valid(cage_id) 
+                         for cage_id in killer_sudoku.cages]
+        self.assertTrue(all(cage_validity))
