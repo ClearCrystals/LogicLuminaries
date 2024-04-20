@@ -31,6 +31,7 @@ const SudokuGame = () => {
         },
       );
       console.log(response);
+      setSavedGames(response.data);
       // setSavedGridData(response.data.gridData);
       // setDifficulty(response.data.difficulty);
     } catch (error) {
@@ -148,7 +149,7 @@ const SudokuGame = () => {
           {difficulty && (
             <SudokuGrid difficulty={difficulty} username={username} />
           )}
-          {selectedGame && <SudokuGrid gridData={selectedGame.gridData} />}
+          {selectedGame && <SudokuGrid savedGrid={selectedGame} />}
           <br></br>
           <Link to="/components/Games">
             <Button variant="secondary">Back</Button>

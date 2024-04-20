@@ -9,7 +9,7 @@ end
 subgraph two [Front End]
 	B(Send user input to backend)
 end
-	
+
 subgraph three [Back End]
 	C(Python: \nGather user's data with Django \nEdit user's board)
 end
@@ -27,4 +27,3 @@ two <--> three
 three <--> four
 three <--> five
 ```
-
