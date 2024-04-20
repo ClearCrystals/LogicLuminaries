@@ -180,17 +180,16 @@ class KillerSudoku:
                         cells_to_visit.append(adj_cell)
             # Ones cage has a desired number of cells, or no where else to traverse sum and add to dictionary
             cage_sum = sum(self.solved_board[row][col] for row, col in current_cage)
-            self.cages[cage_id] = {'sum': cage_sum, 'cells': current_cage}
+            self.cages[cage_id] = {"sum": cage_sum, "cells": current_cage}
             cage_id += 1
 
     def is_cage_valid(self, cage_id):
         cage = self.cages[cage_id]
-        cage_sum = sum(self.solved_board[row][col] for row, col in cage['cells'])
-        return cage_sum == cage['sum']
+        cage_sum = sum(self.solved_board[row][col] for row, col in cage["cells"])
+        return cage_sum == cage["sum"]
 
     def solve_killer_sudoku(self):
         for cage_id in self.cages:
             if not self.is_cage_valid(cage_id):
                 return False
         return True
-
