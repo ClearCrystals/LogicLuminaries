@@ -29,7 +29,8 @@ u.save()
 Note: Django **does not** connect to the database until you call `save`
 
 ###### Insert Shortcut
-There is a shortcut you can use to create a row in the database. The `create` method combined creating an instance and then applying the `save` function all in one go. An example code snippet is below. 
+
+There is a shortcut you can use to create a row in the database. The `create` method combined creating an instance and then applying the `save` function all in one go. An example code snippet is below.
 
 ```
 alt_u = User.objects.create(id="user", pwd="pass", token= token)
@@ -39,7 +40,7 @@ Note: It requires you to use `objects` on the **class**. See below for further d
 
 ###### Get
 
-To retrieve rows of data from our database, we must create a QuerySet on our model class by calling `objects` on the **class**. This QuerySet can have zero or many filters and is the equivalent of the Select statement with `filter` representing the limiting causes such as Where and Limit. To get only a single row of data you can use the `get` method. 
+To retrieve rows of data from our database, we must create a QuerySet on our model class by calling `objects` on the **class**. This QuerySet can have zero or many filters and is the equivalent of the Select statement with `filter` representing the limiting causes such as Where and Limit. To get only a single row of data you can use the `get` method.
 
 See an example Select all users statement.
 
@@ -62,6 +63,7 @@ one_user = User.get(id="Bucky Badger")
 Note: QuerySets are lazy thus creating a QuerySet does not involve database activity. The SQL query is only run once the QuerySet is evaluated. For more information, view Making Queries reference.
 
 ###### Update
+
 Once you have an instance, either via creating a new instance or retrieving one via get, you can then make any change then call `save` is the equivalent of the Update. For example:
 
 ```
@@ -77,19 +79,22 @@ You are also able to edit several rows at once with the `update` method. For exa
 r_users.update(token=newToken)
 ```
 
-
 ###### Delete
+
 Similar to update, when you have an instance or a QuerySelect, you can call `delete` on those and that is the equivalent of the Delete SQL method.
 
 For example, this is deleting all the users that start with "R".
+
 ```
 r_users.delete()
 ```
 
 And this is deleting the user we first created in the Insert section.
+
 ```
 u.delete()
 ```
 
 ### References:
+
 [Making queries](https://docs.djangoproject.com/en/5.0/topics/db/queries/)

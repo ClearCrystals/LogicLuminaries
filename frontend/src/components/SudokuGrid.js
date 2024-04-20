@@ -54,17 +54,16 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
 
   useEffect(() => {
     if (savedGrid != undefined) {
-      console.log(savedGrid)
+      console.log(savedGrid);
       const parsedGridData = JSON.parse(savedGrid.state);
       const parsedAnswer = JSON.parse(savedGrid.answer);
-  
+
       setId(savedGrid.id);
       setGridData(parsedGridData);
       setCorrectAnswer(parsedAnswer);
     } else {
       fetchData();
     }
-    
   }, [difficulty]);
 
   const saveGridData = () => {

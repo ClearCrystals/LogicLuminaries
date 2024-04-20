@@ -54,7 +54,7 @@ const Games = () => {
             <Col className="gamesCol">
               <div>
                 <h3>
-                  <b>Play killer sudoku</b>  
+                  <b>Play killer sudoku</b>
                 </h3>
                 <br></br>
                 <p>TODO add killer generation</p>

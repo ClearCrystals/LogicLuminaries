@@ -1,7 +1,9 @@
 # Sudoku database schema
+
 Our app will use one table to store users and another to store boards. They are located in the sudoku-db-1 container.
 
 ### Signature:
+
 `user(id, pwd, token)`  
 id: username user inputs to access account  
 pwd: password user inputs to access account  
@@ -13,20 +15,24 @@ difficulty: easy, medium, or hard
 answer: solution (final state)  
 style: variant selected by user  
 user: user id (who is solving this board)  
-isfinished: 0 or 1 based on whether board is completed  
+isfinished: 0 or 1 based on whether board is completed
 
 ### Relations and typing:
+
 Users are keyed by their id/username. Boards are keyed by their id. This is a many-to-one relation, where one user can have many boards associated with them. Currently, all fields are either ints or strings, but this can be changed as determined.
 
 ### Relational diagram:
+
 ![ERD](./Sudoku_DB_Schema_1_.png)
 
 ### Example query:
-```sh 
+
+```sh
 SELECT id, state
     FROM Boards
     WHERE isfinished == True
 ```
 
 ### Modifying the table:
+
 See https://www.w3schools.com/mysql/mysql_alter.asp.
