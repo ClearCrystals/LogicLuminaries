@@ -106,7 +106,7 @@ class SudokuAlgoTests(TestCase):
     def test_generated_board_solution_validity(self):
         # Test out creation and solution and see each part is a set
         sudoku = Sudoku("Easy")
-        sudoku.generate_sudoku()
+        sudoku._generate_sudoku()
         solution = sudoku.solve_sudoku()
         for i in range(9):
             row = solution[i]
@@ -165,14 +165,14 @@ class KillerSudokuAlgoTests(TestCase):
 
     def test_generate_killer_sudoku(self):
         killer_sudoku = KillerSudoku("Hard")
-        killer_sudoku.generate_sudoku()
+        killer_sudoku._generate_sudoku()
         self.assertEqual(len(killer_sudoku.board), 9)
 
     def test_difficulty_setting_initialization(self):
         for difficulty in ["Easy", "Medium", "Hard"]:
             killer_sudoku = KillerSudoku(difficulty=difficulty)
             self.assertEqual(killer_sudoku.difficulty, difficulty)
-    
+
     def test_generate_cages_with_duplicate_cells(self):
         killer_sudoku = KillerSudoku("Hard")
         killer_sudoku.cages = {1: {"sum": 10, "cells": [(0, 0), (0, 1)]}}
