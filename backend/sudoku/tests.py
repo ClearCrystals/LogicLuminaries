@@ -1,3 +1,4 @@
+from unittest.mock import patch
 from django.test import TestCase
 from sudoku.models import Users
 from .sudoku import Sudoku, KillerSudoku
@@ -179,4 +180,13 @@ class KillerSudokuAlgoTests(TestCase):
         killer_sudoku._generate_cages()
         cage_validity = [killer_sudoku.is_cage_valid(cage_id) 
                          for cage_id in killer_sudoku.cages]
+        self.assertTrue(all(cage_validity))
+
+    @patch('random.shuffle')
+    @patch('random.randint')
+    def test_generate_cages(self, mock_randint, mock_shuffle):
+        mock_randint.return_value = 2
+        mock_shuffle.side_effect = lambda x: x.reverse()
+        killer_sudoku = KillerSudoku("Hard")
+        cage_validity = [killer_sudoku.is_cage_valid(cage_id) for cage_id in killer_sudoku.cages]
         self.assertTrue(all(cage_validity))
