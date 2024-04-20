@@ -1,10 +1,12 @@
 # Sudoku by Logic Luminaries
+
 ![Logo](./documentation/images/LLLogo.jpg){width=50%}
+
 ## Requirements and Specification Document
 
 ### Project Abstract
 
-The Sudoku game software is a straightforward and engaging puzzle application suitable for *all skill levels*. It has an intuitive interface, with options to choose different difficulty levels. Key features include hints for assistance and a timer for tracking game duration. The game involves filling a 9x9 grid so that each column, row, and 3x3 subgrid contains all digits from 1 to 9. This project aims to provide a fun and challenging experience for users, enhancing their problem-solving skills and concentration.
+The Sudoku game software is a straightforward and engaging puzzle application suitable for _all skill levels_. It has an intuitive interface, with options to choose different difficulty levels. Key features include hints for assistance and a timer for tracking game duration. The game involves filling a 9x9 grid so that each column, row, and 3x3 subgrid contains all digits from 1 to 9. This project aims to provide a fun and challenging experience for users, enhancing their problem-solving skills and concentration.
 
 <!-- This was the example paragraph that is being commented out.
 This is an example paragraph written in markdown. You can use *italics*, **bold**, and other formatting options. You can also <u>use inline html</u> to format your text. The example sections included in this document are not necessarily all the sections you will want, and it is possible that you won't use all the one's provided. It is your responsibility to create a document that adequately conveys all the information about your project specifications and requirements.
@@ -23,22 +25,22 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 <!-- Here is a user requirements sample from [Crookshanks](https://learning-oreilly-com.ezproxy.library.wisc.edu/library/view/practical-software-development/9781484206201/9781484206218_Ch02.xhtml):-->
 
-| ID   | Description                                                  | Priority | Status |
-| ---- | ------------------------------------------------------------ | -------- | ------ |
-| 30 | User can login | High      | Complete   |
-| 53 | User can play a new game | High     | Complete   |
-| 53 | User can edit and add numbers into a new game | High     | Complete   |
-| 72 | User can see win screen | Low     | Open   |
-| 68 | User can save game | Med     | Complete   |
-| 70 | User can leave and come back | High      | Open   |
-| # | User can select variant | Med | Open |
+| ID  | Description                                   | Priority | Status   |
+| --- | --------------------------------------------- | -------- | -------- |
+| 30  | User can login                                | High     | Complete |
+| 53  | User can play a new game                      | High     | Complete |
+| 53  | User can edit and add numbers into a new game | High     | Complete |
+| 72  | User can see win screen                       | Low      | Open     |
+| 68  | User can save game                            | Med      | Complete |
+| 70  | User can leave and come back                  | High     | Open     |
+| #   | User can select variant                       | Med      | Open     |
 
 '#' Means not assigned to an ID yet
 
 <!--<div align="center"><small><i>Excerpt from Crookshanks Table 2-2 showing example user requirements for a timekeeping system</i></small></div>-->
 
 <!-- this is example that is being commented out
-- You 
+- You
   - Can
     - Use
 - Bullet
@@ -55,7 +57,7 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 > As the driver of a car, in order to increase my velocity, I will press my foot harder on the accelerator pedal. -->
 
-<!-- 
+<!--
 1. You
    1. Can
       1. Also
@@ -63,23 +65,24 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
    1. Numbered
       1. Lists
 -->
+
 - Issues 1-18 Setting up communitcation, choosing roles, choosing stack, setting up gitlab to our liking
 - Issues 19-21 Installing software and getting set up with React, MySQL, and Django
 - Issues 22-53 Defining backend models, frontend interface, integrating the two
-- Issues 54-60 Making adjustments to previous definitions after completing walking skeleton, implementing styling 
+- Issues 54-60 Making adjustments to previous definitions after completing walking skeleton, implementing styling
 - Issues 61-69 Adding integrated functionality to walking skeleton, coverage testing for generation algorithm
 - Issues 70-72 Completing frontend/backend/database data transfer, expanding coverage testing, adding win screen
 
 #### Main Epics
 
-| ID   | Description                                                  | Priority | Status |
-| ---- | ------------------------------------------------------------ | -------- | ------ |
-| EPIC#1  | Generate, Backend, 9x9 grid of puzzle and solution | High      | Complete   |
-| EPIC#2  | Provide, Backend, variaing levels of difficulty | High     | Open   |
-| EPIC#3  | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Complete   |
-| EPIC#4  | Create an Interface, front end, where a user can solve the puzzle | Med      | Open   |
-| EPIC#5  | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.  | Low     | Open   |
-| EPIC#6  | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.  | Low     | Open   |
+| ID     | Description                                                                                | Priority | Status   |
+| ------ | ------------------------------------------------------------------------------------------ | -------- | -------- |
+| EPIC#1 | Generate, Backend, 9x9 grid of puzzle and solution                                         | High     | Complete |
+| EPIC#2 | Provide, Backend, variaing levels of difficulty                                            | High     | Open     |
+| EPIC#3 | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Complete |
+| EPIC#4 | Create an Interface, front end, where a user can solve the puzzle                          | Med      | Open     |
+| EPIC#5 | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.           | Low      | Open     |
+| EPIC#6 | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.   | Low      | Open     |
 
 ### User Interface Requirements
 
@@ -121,11 +124,11 @@ flowchart RL
 subgraph Front End
 	A(Javascript: React)
 end
-	
+
 subgraph Back End
 	B(Python: Django with \nDjango Rest Framework)
 end
-	
+
 subgraph Database
 	C[(MySQL)]
 end
@@ -137,10 +140,10 @@ B <-->|Django ORM| C
 #### Database
 
 ---
-ERD for SudokuDB
----
-![ERD image](./Sudoku_DB_Schema_1_.png)
 
+## ERD for SudokuDB
+
+![ERD image](./Sudoku_DB_Schema_1_.png)
 
 #### Class Diagram
 
@@ -236,36 +239,39 @@ See CodingStandardsDocument for a list of our design paradigms.
 
 <!--Here you can document your coding standards and conventions. This includes decisions about naming, style guides, etc.-->
 
-
 ## Scrum Masters and Product Owners:
 
 | Sprints | PO    | SM     |
 | ------- | ----- | ------ |
-|       0 | Grace | Carlos |
-|       1 | Grace | Carlos |
-|       2 | Isaac | Nima   |
-|       3 | Bella | Claire |
+| 0       | Grace | Carlos |
+| 1       | Grace | Carlos |
+| 2       | Isaac | Nima   |
+| 3       | Bella | Claire |
 
 ## Roles:
 
-| Roles              | Major Role | Minor Role |
-| ------------------ | ---------- | ---------- |
-| Backend Engineer   |   Claire   |   Carlos   |
-| Frontend Engineer  |   Bella    |   Grace    |
-| Data Wrangler      |   Isaac    |   Bella    |
-| Algorithm Engineer |    Nima    |   Isaac    |
-| Integration Manager |    Grace    |    Nima    |
-| QA Tester / Jack of All Trades |  Carlos  |    Claire     |
+| Roles                          | Major Role | Minor Role |
+| ------------------------------ | ---------- | ---------- |
+| Backend Engineer               | Claire     | Carlos     |
+| Frontend Engineer              | Bella      | Grace      |
+| Data Wrangler                  | Isaac      | Bella      |
+| Algorithm Engineer             | Nima       | Isaac      |
+| Integration Manager            | Grace      | Nima       |
+| QA Tester / Jack of All Trades | Carlos     | Claire     |
 
 - Every member should write code using test driven devolopment
 - Every member should write their own documentation in how to do stuff (so that another person can follow the instructions)
 
 ## Authors and acknowledgment
+
 Show your appreciation to those who have contributed to the project.
 
 ## License
+
 For open source projects, say how it is licensed.
 
 ## Project status
+
 Healthy and progressing towards completion.
+
 <!--If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.-->

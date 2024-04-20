@@ -6,10 +6,10 @@ stages:
   - release
 
 lint_backend:
-  stage: lint                                          # When to do it
+  stage: lint # When to do it
   image: python:3
   before_script:
-    - pip install -r requirements.txt                 # from lecture
+    - pip install -r requirements.txt # from lecture
   script:
     - black . --check --verbose --diff --color        # verbose -> check not change
       # max width of 100 and ignore unused imports and line break before binary operator

@@ -11,6 +11,7 @@ from rest_framework import status
 from django.contrib.auth.hashers import check_password
 from .sudoku import Sudoku
 import json
+import copy
 from django.http import JsonResponse
 
 
@@ -53,7 +54,9 @@ def signup_view(request):
         print("Received data:", request.data)
         print("Serializer errors:", serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        """
+
+
+"""
     Handle the user signin process via POST request.
 
     Authenticates a user based on the provided email and password. It first checks if
@@ -94,31 +97,44 @@ class BoardView(viewsets.ModelViewSet):
     serializer_class = BoardSerializer
 
 
+"""
+    Handle the user create a new sudoku game process via POST request.
+
+    It receives the user's chosen difficulty, style, and username. Then it createas
+    a new sudoku game based on the chossen difficulty. Then it creates a new row in
+    the Boards table containing all of its relevent information like the answer,
+    status, and style. Once the new row is made, it returns the new game's inital
+    state.
+
+    Parameters:
+    request (Request): A Django REST framework Request object containing the user's
+                       username, chosen difficult, and chosen style.
+    Returns:
+    Response: A Django REST framework Response object. Returns a success message
+              along with the newly created sudoku board data.
+    """
+
+
 @api_view(["POST"])
 def get_game_by_difficulty(request):
-    # print("DEBUG", request.data)
-    difficulty = request.data.get("difficulty")  # Default to "easy"
+    difficulty = request.data.get("difficulty")
     style = request.data.get("style")
     user = request.data.get("user")
-    # ["id", "state", "answer", "difficulty", "style", "user", "isFinished"]
-    # Create board w/ algo
-    # Save it to board database
-    # Send board to frontend
     game = Sudoku(difficulty)
+    status = game.sudoku_status()
+    answer = copy.deepcopy(game)
+    answer.solve_sudoku()
     b = Boards(
         state=str(game.board),
         initial=str(game.board),
-        answer=str(game.solve_sudoku()),
+        answer=str(answer.board),
         difficulty=difficulty,
         style=style,
         user=user,
-        isFinished=game.sudoku_status(),
+        isFinished=status,
     )
     b.save()
     serializer = BoardSerializer(b)
-    print("BOARD", game.board)
-    print("MODEL", b.state)
-    print("DEBUG", serializer.data)
     return Response(serializer.data)
 
 
@@ -145,21 +161,41 @@ def choose_saved_game(request):
         return Response({"message": "No saved game found"}, status=404)
 
 
+"""
+    Handle the user saving a sudoku game prgoress process via POST request.
+
+    It receives the current sudoku board id and the new board state. Then it
+    searches for the board row in the Boards table based on the board id. If it
+    finds the board, it then updates both the progress field and the state to its
+    new state. If it doesn't find it, it throws an error.
+
+    Parameters:
+    request (Request): A Django REST framework Request object containing the user's
+                       username, chosen difficult, and chosen style.
+    Returns:
+    Response: A Django REST framework Response object. Returns a success message with
+              a 200 OK status if the board was saved successfully. Returns an error
+              message with a 404 status if the board was not found.
+    """
+
+
 @api_view(["POST"])
 def save_game_state(request):
-    # make changes to the board
     board_id = request.data.get("board_id")
     new_state = json.loads(request.data.get("state"))
-
     try:
         board = Boards.objects.get(id=board_id)
+        board.state = new_state
         game = Sudoku()
         game.board = new_state
-        if game.solve_sudoku():
-            board.state = new_state
-            board.save()
-        else:
-            return Response({"message": "Bad move"})
+        new_status = game.sudoku_status()
+        board.isFinished = new_status
+        board.save()
+        # if game.solve_sudoku():
+        # board.state = new_state
+        # board.save()
+        # else:
+        #    return Response({"message": "Bad move"})
         return Response({"message": "Game saved successfully"})
     except Boards.DoesNotExist:
         return Response({"message": "Board not found"}, status=404)
