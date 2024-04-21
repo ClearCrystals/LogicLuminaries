@@ -2,6 +2,7 @@ from django.test import TestCase
 from sudoku.models import Users
 from .sudoku import Sudoku, KillerSudoku
 
+
 class UserModelTests(TestCase):
     def test_add_single_user(self):
         # Adding a single user to the database

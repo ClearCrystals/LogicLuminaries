@@ -157,7 +157,7 @@ class KillerSudoku(Sudoku):
         # Iterate over all the possible locations
         for start_cell in all_cells:
             if start_cell not in visited:
-            # If the cells has not been visited create a cage around it with ran length
+                # If the cells has not been visited create a cage around it with ran length
                 current_cage = []
                 cells_to_visit = [start_cell]
                 cells_in_cage = random.randint(2, 5)
