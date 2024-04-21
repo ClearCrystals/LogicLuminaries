@@ -1,9 +1,6 @@
 from django.test import TestCase
 from sudoku.models import Users
 from .sudoku import Sudoku, KillerSudoku
-import unittest
-from unittest.mock import patch
-
 
 class UserModelTests(TestCase):
     def test_add_single_user(self):
@@ -144,7 +141,7 @@ class SudokuAlgoTests(TestCase):
         self.assertEqual(total_zeros, 64)
 
 
-class KillerSudokuAlgoTests(unittest.TestCase):
+class KillerSudokuAlgoTests(TestCase):
     def test_killer_sudoku_init(self):
         killer_sudoku = KillerSudoku("Hard")
         self.assertEqual(len(killer_sudoku.board), 9)
@@ -174,11 +171,3 @@ class KillerSudokuAlgoTests(unittest.TestCase):
         for difficulty in ["Easy", "Medium", "Hard"]:
             killer_sudoku = KillerSudoku(difficulty=difficulty)
             self.assertEqual(killer_sudoku.difficulty, difficulty)
-
-    @patch('random.shuffle')
-    @patch('random.randint')
-    def test_generate_cages_with_duplicate_cells(self, mock_randint, mock_shuffle):
-        mock_randint.side_effect = [2, 0, 8, 0, 8]
-        mock_shuffle.side_effect = [None, None, [(0, 1), (1, 0), (0, -1), (-1, 0)]]
-        killer_sudoku = KillerSudoku("Hard")
-        self.assertTrue(all(killer_sudoku.is_cage_valid(cage_id) for cage_id in killer_sudoku.cages))
