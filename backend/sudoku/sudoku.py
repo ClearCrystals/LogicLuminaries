@@ -156,32 +156,30 @@ class KillerSudoku(Sudoku):
 
         # Iterate over all the possible locations
         for start_cell in all_cells:
-            if start_cell in visited:
-                continue
-            # If the cells has not been visited create a cage around it with ran length
-            current_cage = []
-            cells_to_visit = [start_cell]
-            cells_in_cage = random.randint(2, 5)
+            if start_cell not in visited:
+                # If the cells has not been visited create a cage around it with ran length
+                current_cage = []
+                cells_to_visit = [start_cell]
+                cells_in_cage = random.randint(2, 5)
             # Step and traverse randomly until wanted length or no more possible locations
             while cells_to_visit and len(current_cage) < cells_in_cage:
                 cell = cells_to_visit.pop()
-                if cell in visited:
-                    continue
-                current_cage.append(cell)
-                visited.add(cell)
-                row, col = cell
-                possible_directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-                random.shuffle(possible_directions)
-                # Step randomly into a different location only adjacent locations possible
-                for change in possible_directions:
-                    dif_row, dif_col = change
-                    adj_cell = (row + dif_row, col + dif_col)
-                    if (
-                        0 <= adj_cell[0] < 9
-                        and 0 <= adj_cell[1] < 9
-                        and adj_cell not in visited
-                    ):
-                        cells_to_visit.append(adj_cell)
+                if cell not in visited:
+                    current_cage.append(cell)
+                    visited.add(cell)
+                    row, col = cell
+                    possible_directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+                    random.shuffle(possible_directions)
+                    # Step randomly into a different location only adjacent locations possible
+                    for change in possible_directions:
+                        dif_row, dif_col = change
+                        adj_cell = (row + dif_row, col + dif_col)
+                        if (
+                            0 <= adj_cell[0] < 9
+                            and 0 <= adj_cell[1] < 9
+                            and adj_cell not in visited
+                        ):
+                            cells_to_visit.append(adj_cell)
             # Cages have desired cells, or nowhere else to traverse sum and add to dictionary
             cage_sum = sum(self.solved_board[row][col] for row, col in current_cage)
             self.cages[cage_id] = {"sum": cage_sum, "cells": current_cage}
