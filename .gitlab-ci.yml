@@ -14,7 +14,7 @@ lint_backend:
   before_script:
     - pip install -r requirements.txt # from lecture
   script:
-    - black . --check --verbose --diff --color        # verbose -> check not change
+    - black . --check --verbose --diff --color # verbose -> check not change
       # max width of 100 and ignore unused imports and line break before binary operator
     - flake8 --max-line-length=100 --ignore=F401,W503 .
   tags:
