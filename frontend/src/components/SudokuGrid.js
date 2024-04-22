@@ -8,7 +8,8 @@ axios.defaults.xsrfCookieName = "csrfToken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const SudokuGrid = ({ difficulty, username, savedGrid }) => {
-  const createEmptyGrid = () => Array(9).fill(Array(9).fill({ value: "", editable: true }));
+  const createEmptyGrid = () =>
+    Array(9).fill(Array(9).fill({ value: "", editable: true }));
   const [gridData, setGridData] = useState(createEmptyGrid());
   const [selectedCell, setSelectedCell] = useState({ row: null, col: null });
   const [showNumberSelector, setShowNumberSelector] = useState(false);
@@ -41,7 +42,7 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
           row.map((value, colIndex) => ({
             value: value === 0 ? "" : value.toString(),
             editable: parsedInitial[rowIndex][colIndex] === 0, // editable if parsedInitial has zero
-          }))
+          })),
         );
 
         setId(response.data.id);
@@ -64,7 +65,7 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
         row.map((value, colIndex) => ({
           value: value.toString(),
           editable: parsedInitial[rowIndex][colIndex] === 0,
-        }))
+        })),
       );
 
       setId(savedGrid.id);
@@ -79,7 +80,7 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
     const saveData = {
       board_id: id,
       state: JSON.stringify(
-        gridData.map((row) => row.map((cell) => parseInt(cell.value) || 0)) // Convert empty to zero for saving
+        gridData.map((row) => row.map((cell) => parseInt(cell.value) || 0)), // Convert empty to zero for saving
       ),
     };
 
@@ -94,7 +95,6 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
       .catch((error) => console.error("Error saving grid:", error));
   };
 
-
   const debouncedSaveGridData = _.debounce(saveGridData, 2000);
 
   const handleCellSelect = (row, col) => {
@@ -105,7 +105,11 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
   };
 
   const handleNumberSelect = (number) => {
-    if (selectedCell.row != null && selectedCell.col != null && gridData[selectedCell.row][selectedCell.col].editable) {
+    if (
+      selectedCell.row != null &&
+      selectedCell.col != null &&
+      gridData[selectedCell.row][selectedCell.col].editable
+    ) {
       const newGrid = gridData.map((row) => [...row]);
 
       newGrid[selectedCell.row][selectedCell.col].value = number.toString();
@@ -126,7 +130,8 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
     const isCorrect = gridData.every((row, rowIndex) =>
       row.every(
         (cell, colIndex) =>
-          cell.value.toString() === correctAnswer[rowIndex][colIndex].toString(),
+          cell.value.toString() ===
+          correctAnswer[rowIndex][colIndex].toString(),
       ),
     );
 
