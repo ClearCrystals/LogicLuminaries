@@ -8,7 +8,7 @@ axios.defaults.xsrfCookieName = "csrfToken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const SudokuGrid = ({ difficulty, username, savedGrid }) => {
-  const createEmptyGrid = () => Array(9).fill(Array(9).fill(""));
+  const createEmptyGrid = () => Array(9).fill(Array(9).fill({ value: "", editable: true }));
   const [gridData, setGridData] = useState(createEmptyGrid());
   const [selectedCell, setSelectedCell] = useState({ row: null, col: null });
   const [showNumberSelector, setShowNumberSelector] = useState(false);
@@ -33,34 +33,42 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
         },
       });
       if (response.status === 200) {
-        // Assuming 200 is the success status code
-        console.log("Fetched data:", response.data);
-
-        // Assuming response.data.state is your grid data
-        // Parse it to a format that your component can use
-        const parsedGridData = JSON.parse(response.data.state);
+        const parsedInitial = JSON.parse(response.data.initial);
+        const parsedState = JSON.parse(response.data.state);
         const parsedAnswer = JSON.parse(response.data.answer);
 
+        const newGrid = parsedState.map((row, rowIndex) =>
+          row.map((value, colIndex) => ({
+            value: value === 0 ? "" : value.toString(),
+            editable: parsedInitial[rowIndex][colIndex] === 0, // editable if parsedInitial has zero
+          }))
+        );
+
         setId(response.data.id);
-        setGridData(parsedGridData);
+        setGridData(newGrid);
         setCorrectAnswer(parsedAnswer);
       }
 
       console.log(`${data} response:`, response.data);
     } catch (error) {
-      console.error(`Error during ${data}:`, error);
+      console.error(`Error fetching data:`, error);
     }
   };
 
   useEffect(() => {
-    if (savedGrid != undefined) {
-      console.log(savedGrid);
-      const parsedGridData = JSON.parse(savedGrid.state);
-      const parsedAnswer = JSON.parse(savedGrid.answer);
+    if (savedGrid) {
+      const parsedInitial = JSON.parse(savedGrid.initial);
+      const parsedState = JSON.parse(savedGrid.state);
+
+      const newGrid = parsedState.map((row, rowIndex) =>
+        row.map((value, colIndex) => ({
+          value: value.toString(),
+          editable: parsedInitial[rowIndex][colIndex] === 0,
+        }))
+      );
 
       setId(savedGrid.id);
-      setGridData(parsedGridData);
-      setCorrectAnswer(parsedAnswer);
+      setGridData(newGrid);
     } else {
       fetchData();
     }
@@ -68,45 +76,42 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
 
   const saveGridData = () => {
     const csrfToken = Cookies.get("csrfToken");
-    let d = {
+    const saveData = {
       board_id: id,
-      state: JSON.stringify(gridData),
-      //row: ,
-      //column: ,
-      //num: ,
+      state: JSON.stringify(
+        gridData.map((row) => row.map((cell) => parseInt(cell.value) || 0)) // Convert empty to zero for saving
+      ),
     };
+
     axios
-      .post("http://localhost:8000/api/save/", JSON.stringify(d), {
+      .post("http://localhost:8000/api/save/", JSON.stringify(saveData), {
         headers: {
           "Content-Type": "application/json",
           "X-CSRFToken": csrfToken,
         },
       })
-      .then((response) => {
-        console.log("Grid saved");
-      })
-      .catch((error) => {
-        console.error("Error saving grid", error);
-      });
+      .then(() => console.log("Grid saved"))
+      .catch((error) => console.error("Error saving grid:", error));
   };
+
 
   const debouncedSaveGridData = _.debounce(saveGridData, 2000);
 
   const handleCellSelect = (row, col) => {
-    setSelectedCell({ row, col });
-    setShowNumberSelector(true);
+    if (gridData[row][col].editable) {
+      setSelectedCell({ row, col });
+      setShowNumberSelector(true);
+    }
   };
 
   const handleNumberSelect = (number) => {
-    if (selectedCell.row != null && selectedCell.col != null) {
-      // Deep copy of gridData
-      let newData = gridData.map((row) => [...row]);
-      //toString()
-      newData[selectedCell.row][selectedCell.col] = number;
-      setGridData(newData);
-      setSelectedCell({ row: null, col: null }); // Optionally deselect after choosing a number
-      setShowNumberSelector(false);
+    if (selectedCell.row != null && selectedCell.col != null && gridData[selectedCell.row][selectedCell.col].editable) {
+      const newGrid = gridData.map((row) => [...row]);
 
+      newGrid[selectedCell.row][selectedCell.col].value = number.toString();
+      setGridData(newGrid);
+      setSelectedCell({ row: null, col: null });
+      setShowNumberSelector(false);
       debouncedSaveGridData();
     }
   };
@@ -121,7 +126,7 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
     const isCorrect = gridData.every((row, rowIndex) =>
       row.every(
         (cell, colIndex) =>
-          cell.toString() === correctAnswer[rowIndex][colIndex].toString(),
+          cell.value.toString() === correctAnswer[rowIndex][colIndex].toString(),
       ),
     );
 
@@ -137,8 +142,9 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
               <input
                 type="text"
                 className="form-control"
-                value={cell}
-                readOnly
+                style={{ color: cell.editable ? "black" : "blue" }} // Blue for non-editable cells
+                readOnly={!cell.editable}
+                value={cell.value || ""}
                 onClick={() => handleCellSelect(rowIndex, colIndex)}
               />
             </Col>
