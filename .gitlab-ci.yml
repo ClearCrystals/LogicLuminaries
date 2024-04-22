@@ -70,10 +70,10 @@ release:
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     - docker compose build backend
-    - docker tag backend:latest $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG
+    - docker tag registry.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/t_10/logicluminaries/backend:latest $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG
     - docker push $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG
     - docker compose build frontend
-    - docker tag frontend:latest $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG
+    - docker tag registry.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/t_10/logicluminaries/frontend:latest $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG
     - docker push $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG
   tags:
     - dind
