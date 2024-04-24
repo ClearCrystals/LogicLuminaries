@@ -169,12 +169,10 @@ class KillerSudokuAlgoTests(TestCase):
         killer_sudoku._generate_sudoku()
         self.assertEqual(len(killer_sudoku.board), 9)
 
-
     def test_difficulty_setting_initialization(self):
         for difficulty in ["Easy", "Medium", "Hard"]:
             killer_sudoku = KillerSudoku(difficulty=difficulty)
             self.assertEqual(killer_sudoku.difficulty, difficulty)
-    
 
     def test_cage_composition(self):
         killer_sudoku = KillerSudoku("Medium")
@@ -183,7 +181,6 @@ class KillerSudokuAlgoTests(TestCase):
             cage_cells = set(cage["cells"])
             self.assertTrue(all_cells.isdisjoint(cage_cells))
             all_cells.update(cage_cells)
-
 
     def test_cage_sum_integrity(self):
         killer_sudoku = KillerSudoku("Medium")
