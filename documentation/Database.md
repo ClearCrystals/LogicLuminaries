@@ -26,7 +26,7 @@ Users are keyed by their id/username. Boards are keyed by their id. This is a ma
 
 ### Relational diagram:
 
-![ERD](./Sudoku DB Schema_updated.png)
+![ERD](Sudoku DB Schema_updated.png)
 
 ### Example query:
 
