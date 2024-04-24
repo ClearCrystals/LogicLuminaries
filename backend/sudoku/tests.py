@@ -185,7 +185,9 @@ class KillerSudokuAlgoTests(TestCase):
         killer_sudoku = KillerSudoku("Medium")
         for cage_id, cage in killer_sudoku.cages.items():
             expected_sum = cage['sum']
-            actual_sum = sum(killer_sudoku.solved_board[row][col] for row, col in cage['cells'])
+            actual_sum = sum(
+                killer_sudoku.solved_board[row][col] for row, col in cage['cells']
+            )
             self.assertEqual(expected_sum, actual_sum)
 
     def test_serialization(self):
