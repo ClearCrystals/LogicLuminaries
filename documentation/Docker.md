@@ -2,7 +2,7 @@
 
 1. Open Docker Desktop to start the docker daemon
 2. Navigate to projects root directory
-3. Run `docker compose -p sudoku up --build` to build images, install dependencies, and run the container
+3. Run `docker compose -p sudoku up` to build images, install dependencies, and run the container
 4. Access Sudoku by navigating to `localhost:3000` in your web browser
 5. Press `C-c` to exit docker
 
