@@ -162,7 +162,7 @@ class KillerSudokuAlgoTests(TestCase):
     def test_is_cage_valid(self):
         killer_sudoku = KillerSudoku("Hard")
         for cage_id in killer_sudoku.cages:
-            self.assertTrue(killer_sudoku.is_cage_valid(cage_id))
+            self.assertTrue(killer_sudoku._is_cage_valid(cage_id))
 
     def test_generate_killer_sudoku(self):
         killer_sudoku = KillerSudoku("Hard")
