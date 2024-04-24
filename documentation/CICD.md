@@ -28,13 +28,34 @@ Each stage comprises specific jobs that execute defined tasks:
 ### Static Analysis Stage
 
 - **Job: `static_analysis_backend`**
-  - **Purpose**: Placeholder for future analysis to be integrated into the pipeline
+  - **Purpose**: See the potential bugs or quality of the code
+  - **Environment**: Uses the default `python:3` image
+  - **Pre-script Task**: Installs dependencies from `requirements.txt`
+  - **Scripts**:
+    - PYTHONPATH=backend:$PYTHONPATH mypy -p backend
+    - Runs the mypy created by Django
+
+### Tests
+
+- **Job: `unit_test_backend`**
+  - **Purpose**: Test the backend django code, and also run unit tests for algorithms
   - **Environment**: Uses the default `python` image
   - **Pre-script Task**: Installs dependencies from `requirements.txt`
   - **Scripts**:
-    - A placeholder echo command. WE NEED TO CHANGE THIS LATER
+    - Run coverage script on the code for the algorithms and the django backend
+    - Display the results of this 
 
-## Future Work
 
-- **Static Analysis Integration**: The static analysis stage will be further developed to include tools like `mypy` for comprehensive code quality checks.
-- **Tests**: Need to intergrate the unit tests into the CI pipeline.
+## How to run the pipelines
+To run the given commands individually you can use: `sh runner.sh <job>`
+And choose from the given job list
+`jobs:`
+- lint_backend
+- lint_frontend
+- static_analysis_backend
+- unit_test_backend 
+
+For example: 
+Say you want to run the unit tests you would do:
+`sh runner.sh lint_backend`
+
