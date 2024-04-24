@@ -180,7 +180,7 @@ class KillerSudoku(Sudoku):
                                 and adj_cell not in visited
                             ):
                                 cells_to_visit.append(adj_cell)
-                    # Cages have desired cells, or nowhere else to traverse sum and add to dictionary
+                # Cages have desired cells, or nowhere else to traverse sum and add to dictionary
                 cage_sum = sum(self.solved_board[row][col] for row, col in current_cage)
                 self.cages[cage_id] = {"sum": cage_sum, "cells": current_cage}
                 cage_id += 1
