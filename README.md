@@ -143,7 +143,7 @@ B <-->|Django ORM| C
 
 ## ERD for SudokuDB
 
-![ERD image](./Sudoku_DB_Schema_updated.png)
+![ERD image](./Sudoku DB Schema_updated.png)
 
 #### Class Diagram
 
