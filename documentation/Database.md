@@ -4,11 +4,12 @@ Our app will use one table to store users and another to store boards. They are 
 
 ### Signature:
 
-`user(id, pwd, token)`  
-id: username user inputs to access account  
-pwd: password user inputs to access account  
+`user(id, email, pwd, token)`  
+id: username associated with particular user 
+email: email user inputs to access account
+pwd: password user inputs to access account
 token: authentication program uses to verify user has signed in properly  
-`board(id, state, difficulty, answer, style, user, isfinished)`  
+`board(id, state, difficulty, answer, style, user, isfinished, initState)`  
 id: unique identifier for board  
 state: current user progress  
 difficulty: easy, medium, or hard  
@@ -16,6 +17,7 @@ answer: solution (final state)
 style: variant selected by user  
 user: user id (who is solving this board)  
 isfinished: 0 or 1 based on whether board is completed
+initState: the initial generated state of the board
 
 ### Relations and typing:
 
@@ -23,7 +25,7 @@ Users are keyed by their id/username. Boards are keyed by their id. This is a ma
 
 ### Relational diagram:
 
-![ERD](./Sudoku_DB_Schema_1_.png)
+![ERD](./Sudoku DB Schema_updated.png)
 
 ### Example query:
 
