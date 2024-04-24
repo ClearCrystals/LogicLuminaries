@@ -38,3 +38,6 @@ Each stage comprises specific jobs that execute defined tasks:
 
 - **Static Analysis Integration**: The static analysis stage will be further developed to include tools like `mypy` for comprehensive code quality checks.
 - **Tests**: Need to intergrate the unit tests into the CI pipeline.
+
+## How to run the pipelines
+
