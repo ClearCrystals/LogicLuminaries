@@ -144,7 +144,6 @@ class KillerSudoku(Sudoku):
         self.cages = {}
         self._generate_cages()
 
-
     def _generate_cages(self):
 
         # Make a list of all possible locations and shuffle as to not miss a location
