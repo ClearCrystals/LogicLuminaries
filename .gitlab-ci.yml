@@ -72,9 +72,13 @@ release:
     - docker compose build backend
     - docker tag $CI_REGISTRY_IMAGE/backend:latest $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG
     - docker push $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG
+    - docker tag $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG $CI_REGISTRY_IMAGE/backend:latest
+    - docker push $CI_REGISTRY_IMAGE/backend:latest
     - docker compose build frontend
     - docker tag $CI_REGISTRY_IMAGE/frontend:latest $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG
     - docker push $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG
+    - docker tag $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG $CI_REGISTRY_IMAGE/frontend:latest
+    - docker push $CI_REGISTRY_IMAGE/frontend:latest
   tags:
     - dind
   only:
