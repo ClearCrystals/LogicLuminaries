@@ -4,6 +4,18 @@ import { Link } from "react-router-dom";
 import { useUser } from "./UserContext";
 const emailRegex = /^(.*?)@/; // Regular expression to get text before '@'
 
+/**
+ * Games component that displays a list of game options.
+ *
+ * This component renders a welcome message and provides buttons
+ * for different game options, such as playing Sudoku. It also includes
+ * a logout button that redirects the user to the signin page. Additional
+ * games can be added as commented out, like the Killer Sudoku option.
+ *
+ * @returns {React.Component} A React component representing the games
+ *         selection interface, including navigation options for each game
+ *         and a logout button.
+ */
 const Games = () => {
   const { username } = useUser();
   // If username is an email, extract the part before '@'
