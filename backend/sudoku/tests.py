@@ -199,7 +199,8 @@ class KillerSudokuAlgoTests(TestCase):
         serialized = json.dumps(killer_sudoku.board)
         deserialized = json.loads(serialized)
         self.assertEqual(killer_sudoku.board, deserialized)
-        
+
+
 class UsersSerializerTest(APITestCase):
     def setUp(self):
         self.user_attributes = {
