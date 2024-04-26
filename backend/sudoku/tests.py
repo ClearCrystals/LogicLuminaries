@@ -311,68 +311,7 @@ class BoardSerializerTest(APITestCase):
         self.assertEqual(board.isFinished, self.board_attributes["isFinished"])
 
 
-class ViewTestCase(APITestCase):
-    def setUp(self):
-        self.client = APIClient()
-        self.user = Users.objects.create(
-            id="testuser", pwd="testpassword", email="test@gmail.com"
-        )
-        self.board = Boards.objects.create(
-            state="""[[5,3,0,0,7,0,0,0,0],
-            [6,0,0,1,9,5,0,0,0],
-            [0,9,8,0,0,0,0,6,0],
-            [8,0,0,0,6,0,0,0,3],
-            [4,0,0,8,0,3,0,0,1],
-            [7,0,0,0,2,0,0,0,6],
-            [0,6,0,0,0,0,2,8,0],
-            [0,0,0,4,1,9,0,0,5],
-            [0,0,0,0,8,0,0,7,9]]""",
-            user=self.user.id,
-        )
-
-    def test_index_view(self):
-        response = self.client.get(reverse("index"))
-        self.assertEqual(response.status_code, 200)
-
-    def test_signup_view(self):
-        data = {"id": "testuser2", "pwd": "testpassword2", "email": "test2@gmail.com"}
-        response = self.client.post(reverse("signup"), data)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-    def test_signin_view(self):
-        data = {"id": "testuser", "pwd": "testpassword"}
-        response = self.client.post(reverse("signin"), data)
-        if response.status_code != status.HTTP_200_OK:
-            print(response.data)  # Print response data
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    def test_get_game_by_difficulty(self):
-        data = {"difficulty": "easy", "style": "classic", "user": self.user.id}
-        response = self.client.post(reverse("board"), data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    def test_load_saved_game(self):
-        response = self.client.get(reverse("saved-game"), {"username": self.user.id})
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    def test_save_game_state(self):
-        data = {
-            "board_id": self.board.id,
-            "state": """[[5,3,0,0,7,0,0,0,0],
-            [6,0,0,1,9,5,0,0,0],
-            [0,9,8,0,0,0,0,6,0],
-            [8,0,0,0,6,0,0,0,3],
-            [4,0,0,8,0,3,0,0,1],
-            [7,0,0,0,2,0,0,0,6],
-            [0,6,0,0,0,0,2,8,0],
-            [0,0,0,4,1,9,0,0,5],
-            [0,0,0,0,8,0,0,7,9]]""",
-        }
-        response = self.client.post(reverse("save"), data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-
-class SudokuTestCase(TestCase):
+class ViewTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.user = Users.objects.create(email="test@example.com", pwd="testpassword")
@@ -380,7 +319,7 @@ class SudokuTestCase(TestCase):
             state=str(Sudoku().board),
             initial=str(Sudoku().board),
             answer=str(Sudoku().board),
-            difficulty="easy",
+            difficulty="Easy",
             style="normal",
             user=self.user,
             isFinished=0,
@@ -408,13 +347,13 @@ class SudokuTestCase(TestCase):
 
     def test_get_game_by_difficulty(self):
         response = self.client.post(
-            "/get_game_by_difficulty/",
-            {"difficulty": "easy", "style": "normal", "user": self.user.id},
+            "/board/",
+            {"difficulty": "Easy", "style": "normal", "user": self.user.id},
         )
         self.assertEqual(response.status_code, 200)
 
     def test_load_saved_game(self):
-        response = self.client.get("/load_saved_game/", {"username": self.user.email})
+        response = self.client.get("/saved-game/", {"username": self.user.email})
         self.assertEqual(response.status_code, 200)
 
     def test_choose_saved_game(self):
@@ -423,7 +362,7 @@ class SudokuTestCase(TestCase):
 
     def test_save_game_state(self):
         response = self.client.post(
-            "/save_game_state/",
+            "/save/",  # Use "/save/" instead of "/save_game_state/"
             {"board_id": self.board.id, "state": str(Sudoku().board)},
         )
         self.assertEqual(response.status_code, 200)
