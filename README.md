@@ -117,24 +117,36 @@ You can make headings at different levels by writing `# Heading` with the number
 
 #### Technology Stack
 
-Here are some sample technology stacks that you can use for inspiration:
+The following is the tech stack for our Sudoku project
 
 ```mermaid
 flowchart RL
 subgraph Front End
-	A(Javascript: React)
+    A(JavaScript: React)
 end
 
 subgraph Back End
-	B(Python: Django with \nDjango Rest Framework)
+    B(Python: Django with \nDjango Rest Framework)
 end
 
 subgraph Database
-	C[(MySQL)]
+    C[(MySQL)]
+end
+
+subgraph Testing
+    D(Unit Testing: Django's built-in test framework)
+    E(Integration Testing: Django REST Framework's testing tools)
+end
+
+subgraph CI_CD
+    F(GitLab CI)
 end
 
 A <-->|"REST API"| B
 B <-->|Django ORM| C
+B -->|Testing| D
+B -->|Testing| E
+B --> F
 ```
 
 #### Database
@@ -143,55 +155,51 @@ B <-->|Django ORM| C
 
 ## ERD for SudokuDB
 
-![ERD image](./documentation/images/Sudoku%20DB%20Schema_updated.png)
+![ERD image](./Sudoku DB Schema_updated.png)
 
 #### Class Diagram
 
 ```mermaid
 ---
-title: Sample Class Diagram for Animal Program
+title: Class Diagram for Sudoku Program
 ---
 classDiagram
-    class Animal {
-        - String name
-        + Animal(String name)
-        + void setName(String name)
-        + String getName()
-        + void makeSound()
+    class Sudoku {
+        - List[List[int]] board
+        - String difficulty
+        + Sudoku(String difficulty)
+        + float sudoku_status()
+        + bool solve_sudoku()
+        + void _generate_sudoku()
     }
-    class Dog {
-        + Dog(String name)
-        + void makeSound()
+    class KillerSudoku {
+        - Dictionary cages
+        + KillerSudoku(String difficulty)
+        + bool is_cage_valid(int cage_id)
+        + void _generate_sudoku()
     }
-    class Cat {
-        + Cat(String name)
-        + void makeSound()
-    }
-    class Bird {
-        + Bird(String name)
-        + void makeSound()
-    }
-    Animal <|-- Dog
-    Animal <|-- Cat
-    Animal <|-- Bird
+    Sudoku <|-- KillerSudoku
+
 ```
 
 #### Flowchart
 
 ```mermaid
 ---
-title: Sample Program Flowchart
+title: Sudoku Game Operation Flowchart
 ---
 graph TD;
-    Start([Start]) --> Input_Data[/Input Data/];
-    Input_Data --> Process_Data[Process Data];
-    Process_Data --> Validate_Data{Validate Data};
-    Validate_Data -->|Valid| Process_Valid_Data[Process Valid Data];
-    Validate_Data -->|Invalid| Error_Message[/Error Message/];
-    Process_Valid_Data --> Analyze_Data[Analyze Data];
-    Analyze_Data --> Generate_Output[Generate Output];
-    Generate_Output --> Display_Output[/Display Output/];
-    Display_Output --> End([End]);
+    Start([Start]) --> Select_Difficulty[/Select Difficulty/];
+    Select_Difficulty --> Generate_Board[Generate Sudoku Board];
+    Generate_Board --> Play_Game[Play Game];
+    Play_Game --> Validate_Board{Validate Board};
+    Validate_Board -->|Valid| Process_Valid_Board[Process Valid Board];
+    Validate_Board -->|Invalid| Error_Message[/Error Message/];
+    Process_Valid_Board --> Check_Completion[Check Completion];
+    Check_Completion -->|Complete| Game_Won[Game Won];
+    Check_Completion -->|Incomplete| Play_Game;
+    Game_Won --> Display_Congratulations[/Display Congratulations/];
+    Display_Congratulations --> End([End]);
     Error_Message --> End;
 ```
 
@@ -199,16 +207,17 @@ graph TD;
 
 ```mermaid
 ---
-title: Sample State Diagram For Coffee Application
+title: Sudoku Board State Diagram
 ---
 stateDiagram
-    [*] --> Ready
-    Ready --> Brewing : Start Brewing
-    Brewing --> Ready : Brew Complete
-    Brewing --> WaterLowError : Water Low
-    WaterLowError --> Ready : Refill Water
-    Brewing --> BeansLowError : Beans Low
-    BeansLowError --> Ready : Refill Beans
+    [*] --> Idle
+    Idle --> Playing : Start Game
+    Playing --> Check : Place Number
+    Check --> Playing : No Conflict
+    Check --> Error : Number Conflict
+    Error --> Playing : Correct Error
+    Playing --> Won : Complete Board
+    Won --> [*]
 ```
 
 #### Sequence Diagram
@@ -216,21 +225,34 @@ stateDiagram
 ```mermaid
 sequenceDiagram
 
-participant ReactFrontend
-participant DjangoBackend
-participant MySQLDatabase
+participant ReactFrontend as React Frontend
+participant DjangoBackend as Django Backend
+participant MySQL as MySQL Database
 
-ReactFrontend ->> DjangoBackend: HTTP Request (e.g., GET /api/data)
+ReactFrontend ->> DjangoBackend: HTTP Request (e.g., GET /api/new_board?difficulty=easy)
 activate DjangoBackend
 
-DjangoBackend ->> MySQLDatabase: Query (e.g., SELECT * FROM data_table)
-activate MySQLDatabase
+DjangoBackend ->> MySQL: Query (e.g., Generate New Board)
+activate MySQL
 
-MySQLDatabase -->> DjangoBackend: Result Set
-deactivate MySQLDatabase
+MySQL -->> DjangoBackend: Board Data
+deactivate MySQL
 
-DjangoBackend -->> ReactFrontend: JSON Response
+DjangoBackend -->> ReactFrontend: JSON Response (Board)
 deactivate DjangoBackend
+
+ReactFrontend ->> DjangoBackend: HTTP Request (e.g., POST /api/save_board)
+activate DjangoBackend
+
+DjangoBackend ->> MySQL: Update Board State
+activate MySQL
+
+MySQL -->> DjangoBackend: Save Confirmation
+deactivate MySQL
+
+DjangoBackend -->> ReactFrontend: JSON Response (Save Status)
+deactivate DjangoBackend
+
 ```
 
 ### Standards & Conventions
