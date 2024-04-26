@@ -6,6 +6,18 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useUser } from "./UserContext";
 
+/**
+ * The SudokuGame component provides an interface for users to play Sudoku.
+ * It allows users to start a new game or load a previously saved game.
+ * The component has different modes, such as selecting a new game,
+ * choosing difficulty, or loading a saved game.
+ *
+ * @returns {React.Component} A React component that displays game mode
+ * selection, difficulty selection, and handles loading saved games. It
+ * also has navigation elements to switch between the Sudoku game and other
+ * parts of the application.
+ */
+
 const SudokuGame = () => {
   const [gameMode, setGameMode] = useState(""); // 'new' or 'saved'
   const [difficulty, setDifficulty] = useState(null);

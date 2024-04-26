@@ -7,6 +7,24 @@ import _ from "lodash";
 axios.defaults.xsrfCookieName = "csrfToken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
+/**
+ * The SudokuGrid component represents a Sudoku game grid, allowing users
+ * to fill in numbers and submit their solution. It displays the Sudoku grid
+ * with editable and non-editable cells based on the initial state of the grid.
+ *
+ * - Blue cells represent the original, non-editable numbers.
+ * - Black cells represent user-entered numbers and are editable.
+ *
+ * @param {string} difficulty - The difficulty level of the Sudoku game.
+ * @param {string} username - The name of the user playing the game.
+ * @param {Object} [savedGrid] - Optional. If provided, represents a saved
+ *   Sudoku game state.
+ *
+ * @returns {React.Component} A React component displaying a Sudoku grid with
+ *   editable and non-editable cells, along with control buttons for number
+ *   selection and game submission.
+ */
+
 const SudokuGrid = ({ difficulty, username, savedGrid }) => {
   const createEmptyGrid = () =>
     Array(9).fill(Array(9).fill({ value: "", editable: true }));
