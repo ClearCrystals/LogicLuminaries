@@ -225,7 +225,7 @@ class KillerSudokuAlgoTests(TestCase):
         serialized = json.dumps(killer_sudoku.board)
         deserialized = json.loads(serialized)
         self.assertEqual(killer_sudoku.board, deserialized)
-        
+
     def test_status_over_time(self):
         killer_sudoku = KillerSudoku("Hard")
         status_old = killer_sudoku.sudoku_status()
