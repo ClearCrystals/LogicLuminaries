@@ -136,6 +136,12 @@ class KillerSudoku(Sudoku):
     """
 
     def __init__(self, difficulty="Medium"):
+        """
+        Initializes a KillerSudoku object with the specified difficulty level.
+
+        Args:
+            difficulty (str, optional): The difficulty of the KillerSudoku puzzle
+        """
         super().__init__(difficulty)
         temp = [row[:] for row in self.board]
         self.solve_sudoku()
@@ -145,7 +151,10 @@ class KillerSudoku(Sudoku):
         self._generate_cages()
 
     def _generate_cages(self):
-
+        """
+        Generates cages for the puzzle. A cage is a group of cells randomly clustered
+        together with a specific sum. They are adjacent to each other no wraping
+        """
         # Make a list of all possible locations and shuffle as to not miss a location
         all_cells = [(row, col) for row in range(9) for col in range(9)]
         random.shuffle(all_cells)
@@ -186,6 +195,15 @@ class KillerSudoku(Sudoku):
                 cage_id += 1
 
     def _is_cage_valid(self, cage_id):
+        """
+        Checks the sum of the specifiend cage, and compare that to cage dictionary.
+
+        Args:
+            cage_id (int): The specified ID for the cage of interest.
+
+        Returns:
+            bool: Returns true if the sum is true when compared to answer.
+        """
         cage = self.cages[cage_id]
         cage_sum = sum(self.solved_board[row][col] for row, col in cage["cells"])
         return cage_sum == cage["sum"]
