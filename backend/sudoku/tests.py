@@ -229,13 +229,13 @@ class KillerSudokuAlgoTests(TestCase):
         self.assertEqual(killer_sudoku.board, deserialized)
 
     def test_status_over_time(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         status_old = killer_sudoku.sudoku_status()
         killer_sudoku.solve_sudoku()
         self.assertFalse(status_old == killer_sudoku.sudoku_status())
 
     def test_killer_sudoku_solution(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         killer_sudoku.board = [
             [1, 1, 1, 9, 1, 1, 1, 1, 1],
             [0, 0, 0, 0, 4, 0, 0, 0, 0],
@@ -250,7 +250,7 @@ class KillerSudokuAlgoTests(TestCase):
         self.assertFalse(killer_sudoku.solve_sudoku())
 
     def test_rules_enforcement_within_cages(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         cage_change = killer_sudoku.cages
         set_add = (0, 0)
         cage_change[1]["cells"].append(set_add)
