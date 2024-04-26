@@ -3,10 +3,10 @@ stages:
   - lint
   - static_analysis
   - unit_test
-  - release
+  # - release
 
-variables:
-  RELEASE_TAG: release-$CI_PIPELINE_IID
+# variables:
+#   RELEASE_TAG: release-$CI_PIPELINE_IID
 
 lint_backend:
   stage: lint # When to do it
@@ -62,24 +62,24 @@ unit_test_backend:
   tags:
     - dind
 
-release:
-  stage: release
-  image: docker:20.10.16
-  services:
-    - docker:20.10.16-dind
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker compose build backend
-    - docker tag $CI_REGISTRY_IMAGE/backend:latest $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG
-    - docker push $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG
-    - docker tag $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG $CI_REGISTRY_IMAGE/backend:latest
-    - docker push $CI_REGISTRY_IMAGE/backend:latest
-    - docker compose build frontend
-    - docker tag $CI_REGISTRY_IMAGE/frontend:latest $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG
-    - docker push $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG
-    - docker tag $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG $CI_REGISTRY_IMAGE/frontend:latest
-    - docker push $CI_REGISTRY_IMAGE/frontend:latest
-  tags:
-    - dind
-  only:
-    - main
+# release:
+#   stage: release
+#   image: docker:20.10.16
+#   services:
+#     - docker:20.10.16-dind
+#   script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#     - docker compose build backend
+#     - docker tag $CI_REGISTRY_IMAGE/backend:latest $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG
+#     - docker push $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG
+#     - docker tag $CI_REGISTRY_IMAGE/backend:$RELEASE_TAG $CI_REGISTRY_IMAGE/backend:latest
+#     - docker push $CI_REGISTRY_IMAGE/backend:latest
+#     - docker compose build frontend
+#     - docker tag $CI_REGISTRY_IMAGE/frontend:latest $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG
+#     - docker push $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG
+#     - docker tag $CI_REGISTRY_IMAGE/frontend:$RELEASE_TAG $CI_REGISTRY_IMAGE/frontend:latest
+#     - docker push $CI_REGISTRY_IMAGE/frontend:latest
+#   tags:
+#     - dind
+#   only:
+#     - main
