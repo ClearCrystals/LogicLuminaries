@@ -339,12 +339,12 @@ class ViewTestCase(APITestCase):
         response = self.client.post(reverse("signup"), data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-    # def test_signin_view(self):
-    #     data = {"id": "testuser", "pwd": "testpassword"}
-    #     response = self.client.post(reverse("signin"), data)
-    #     if response.status_code != status.HTTP_200_OK:
-    #         print(response.data)  # Print response data
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+    def test_signin_view(self):
+        data = {"id": "testuser", "pwd": "testpassword"}
+        response = self.client.post(reverse("signin"), data)
+        if response.status_code != status.HTTP_200_OK:
+            print(response.data)  # Print response data
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_game_by_difficulty(self):
         data = {"difficulty": "easy", "style": "classic", "user": self.user.id}
@@ -370,3 +370,60 @@ class ViewTestCase(APITestCase):
         }
         response = self.client.post(reverse("save"), data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+class SudokuTestCase(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.user = Users.objects.create(email="test@example.com", pwd="testpassword")
+        self.board = Boards.objects.create(
+            state=str(Sudoku().board),
+            initial=str(Sudoku().board),
+            answer=str(Sudoku().board),
+            difficulty="easy",
+            style="normal",
+            user=self.user,
+            isFinished=0,
+        )
+
+    def test_index(self):
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.content.decode(), "Hello, world. You are at the sudoku index."
+        )
+
+    def test_signup_view(self):
+        response = self.client.post(
+            "/signup/", {"email": "newuser@example.com", "pwd": "newpassword"}
+        )
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(Users.objects.count(), 2)
+
+    def test_signin_view(self):
+        response = self.client.post(
+            "/signin/", {"email": "test@example.com", "pwd": "testpassword"}
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_get_game_by_difficulty(self):
+        response = self.client.post(
+            "/get_game_by_difficulty/",
+            {"difficulty": "easy", "style": "normal", "user": self.user.id},
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_load_saved_game(self):
+        response = self.client.get("/load_saved_game/", {"username": self.user.email})
+        self.assertEqual(response.status_code, 200)
+
+    def test_choose_saved_game(self):
+        response = self.client.get("/choose_saved_game/", {"id": self.board.id})
+        self.assertEqual(response.status_code, 200)
+
+    def test_save_game_state(self):
+        response = self.client.post(
+            "/save_game_state/",
+            {"board_id": self.board.id, "state": str(Sudoku().board)},
+        )
+        self.assertEqual(response.status_code, 200)
