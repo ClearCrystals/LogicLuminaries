@@ -253,4 +253,4 @@ class KillerSudokuAlgoTests(TestCase):
         set_add = (0, 0)
         cage_change[1]["cells"].append(set_add)
         killer_sudoku.cages = cage_change
-        self.assertFalse(killer_sudoku.is_cage_valid(1))
+        self.assertFalse(killer_sudoku._is_cage_valid(1))
