@@ -158,8 +158,6 @@ class KillerSudoku(Sudoku):
         # Make a list of all possible locations and shuffle as to not miss a location
         all_cells = [(row, col) for row in range(9) for col in range(9)]
         random.shuffle(all_cells)
-
-        # Make a set of where you visit the cells, and unique id for cage dict
         visited = set()
         cage_id = 1
 
