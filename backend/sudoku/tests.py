@@ -1,8 +1,7 @@
 from django.test import TestCase
-from sudoku.models import Users, Boards
+from .models import Users
 from .sudoku import Sudoku, KillerSudoku
 from rest_framework.test import APITestCase
-from .models import Users, Boards
 from .serializers import UsersSerializer, BoardSerializer
 import json
 
