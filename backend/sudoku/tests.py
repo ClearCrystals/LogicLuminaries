@@ -165,10 +165,12 @@ class SudokuAlgoTests(TestCase):
         # Test an impossible board
         sudoku = Sudoku()
         sudoku.solve_sudoku()
-        solved = sudoku.board
-        solved[1][0] = 9
-        solved[0][0] = 9
-        sudoku.board = solved
+        faulty_board = sudoku.board
+        faulty_board[0][0] = 9
+        faulty_board[1][0] = 9
+        faulty_board[2][0] = 9
+        faulty_board[3][0] = 0
+        sudoku.board = faulty_board
         self.assertFalse(sudoku.solve_sudoku())
 
 
