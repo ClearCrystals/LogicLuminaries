@@ -131,7 +131,7 @@ class KillerSudoku(Sudoku):
 
     Methods:
         __init__(self, difficulty="Medium"): Initializes a Killer Sudoku object
-        is_cage_valid(self): Checks the validity of the cages and checks their sum.
+        _is_cage_valid(self): Checks the validity of the cages and checks their sum.
         solve_killer_sudoku(self): Fills the board up with answers.
     """
 
@@ -185,7 +185,7 @@ class KillerSudoku(Sudoku):
                 self.cages[cage_id] = {"sum": cage_sum, "cells": current_cage}
                 cage_id += 1
 
-    def is_cage_valid(self, cage_id):
+    def _is_cage_valid(self, cage_id):
         cage = self.cages[cage_id]
         cage_sum = sum(self.solved_board[row][col] for row, col in cage["cells"])
         return cage_sum == cage["sum"]
@@ -200,5 +200,5 @@ class KillerSudoku(Sudoku):
         filled_percentage = super().sudoku_status()
 
         # If all cages aren't valid, return 0
-        all_cages_valid = all(self.is_cage_valid(cage_id) for cage_id in self.cages)
+        all_cages_valid = all(self._is_cage_valid(cage_id) for cage_id in self.cages)
         return filled_percentage if all_cages_valid else 0.0
