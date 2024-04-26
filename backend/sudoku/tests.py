@@ -142,6 +142,35 @@ class SudokuAlgoTests(TestCase):
         total_zeros = sum(cell == 0 for row in sudoku.board for cell in row)
         self.assertEqual(total_zeros, 64)
 
+    def test_edge_case_solve(self):
+        # Test solve on a nearly finished board
+        sudoku = Sudoku()
+        sudoku.solve_sudoku()
+        solved = sudoku.board
+        solved[0][0] = 0
+        sudoku.board = solved
+        sudoku.solve_sudoku()
+        self.assertEqual(sudoku.solve_sudoku(), True)
+
+    def test_status_edge_case(self):
+        # test correct status when only one cell is empty
+        sudoku = Sudoku()
+        sudoku.solve_sudoku()
+        solved = sudoku.board
+        solved[0][0] = 0
+        sudoku.board = solved
+        self.assertTrue(sudoku.sudoku_status() > 98)
+
+    def test_imposible_board(self):
+        # Test an impossible board
+        sudoku = Sudoku()
+        sudoku.solve_sudoku()
+        solved = sudoku.board
+        solved[1][0] = 9
+        solved[0][0] = 9
+        sudoku.board = solved
+        self.assertFalse(sudoku.solve_sudoku())
+
 
 class KillerSudokuAlgoTests(TestCase):
     def test_killer_sudoku_init(self):
@@ -196,3 +225,32 @@ class KillerSudokuAlgoTests(TestCase):
         serialized = json.dumps(killer_sudoku.board)
         deserialized = json.loads(serialized)
         self.assertEqual(killer_sudoku.board, deserialized)
+        
+    def test_status_over_time(self):
+        killer_sudoku = KillerSudoku("Hard")
+        status_old = killer_sudoku.sudoku_status()
+        killer_sudoku.solve_sudoku()
+        self.assertFalse(status_old == killer_sudoku.sudoku_status())
+
+    def test_killer_sudoku_solution(self):
+        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku.board = [
+            [1, 1, 1, 9, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 4, 0, 0, 0, 0],
+            [6, 0, 0, 0, 0, 1, 0, 5, 0],
+            [0, 0, 0, 0, 0, 0, 4, 0, 0],
+            [0, 0, 0, 0, 0, 0, 7, 0, 9],
+            [0, 0, 0, 0, 1, 0, 0, 2, 6],
+            [0, 0, 0, 2, 0, 0, 0, 3, 0],
+            [2, 0, 0, 0, 0, 0, 0, 9, 0],
+            [0, 0, 0, 0, 0, 5, 0, 0, 4],
+        ]
+        self.assertFalse(killer_sudoku.solve_sudoku())
+
+    def test_rules_enforcement_within_cages(self):
+        killer_sudoku = KillerSudoku("Hard")
+        cage_change = killer_sudoku.cages
+        set_add = (0, 0)
+        cage_change[1]["cells"].append(set_add)
+        killer_sudoku.cages = cage_change
+        self.assertFalse(killer_sudoku.is_cage_valid(1))
