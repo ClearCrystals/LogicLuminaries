@@ -3,7 +3,6 @@ from django.urls import reverse
 from .models import Users, Boards
 from .sudoku import Sudoku, KillerSudoku
 from rest_framework.test import APITestCase, APIClient
-from rest_framework import status
 from .serializers import UsersSerializer, BoardSerializer
 import json
 
