@@ -98,7 +98,7 @@ class Sudoku:
 
     def solve_sudoku(self):
         """
-        Solves the Sudoku puzzle using backtracking.
+        Solves the generated Sudoku puzzle using backtracking.
 
         Returns:
             bool: True if the puzzle is solvable, False otherwise.
