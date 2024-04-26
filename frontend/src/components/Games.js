@@ -34,7 +34,8 @@ const Games = () => {
         <header>
           <br />
           <h1>
-            <b>Welcome, {displayName}</b> {/* Corrected to use the extracted part */}
+            <b>Welcome, {displayName}</b>{" "}
+            {/* Corrected to use the extracted part */}
           </h1>
           <br />
         </header>
