@@ -1,7 +1,11 @@
 from django.test import TestCase
-from sudoku.models import Users
+from sudoku.models import Users, Boards
 from .sudoku import Sudoku, KillerSudoku
 import json
+from django.contrib.auth.hashers import check_password
+from rest_framework.test import APITestCase
+from sudoku.serializers import UsersSerializer, BoardSerializer
+
 
 
 class UserModelTests(TestCase):
@@ -196,3 +200,39 @@ class KillerSudokuAlgoTests(TestCase):
         serialized = json.dumps(killer_sudoku.board)
         deserialized = json.loads(serialized)
         self.assertEqual(killer_sudoku.board, deserialized)
+        
+class UsersSerializerTest(APITestCase):
+    def setUp(self):
+        self.user_attributes = {
+            'id': 'testuser',
+            'pwd': 'testpassword',
+            'email': 'test@gmail.com'
+        }
+        self.serializer_data = UsersSerializer().data
+
+    def test_contains_expected_fields(self):
+        self.assertEqual(set(self.serializer_data.keys()), set(['id', 'pwd', 'email']))
+
+    def test_password_field_encrypted(self):
+        serializer = UsersSerializer(data=self.user_attributes)
+        if serializer.is_valid():
+            user = serializer.save()
+            self.assertTrue(check_password(self.user_attributes['pwd'], user.pwd))
+
+class BoardSerializerTest(APITestCase):
+    def setUp(self):
+        self.user = Users.objects.create(id='testuser', pwd='testpassword', email='test@gmail.com')
+        self.board_attributes = {
+            'id': 1,
+            'state': '[[5,3,0,0,7,0,0,0,0],[6,0,0,1,9,5,0,0,0],[0,9,8,0,0,0,0,6,0],[8,0,0,0,6,0,0,0,3],[4,0,0,8,0,3,0,0,1],[7,0,0,0,2,0,0,0,6],[0,6,0,0,0,0,2,8,0],[0,0,0,4,1,9,0,0,5],[0,0,0,0,8,0,0,7,9]]',
+            'answer': '[[5,3,4,6,7,8,9,1,2],[6,7,2,1,9,5,3,4,8],[1,9,8,3,4,2,5,6,7],[8,5,9,7,6,1,4,2,3],[4,2,6,8,5,3,7,9,1],[7,1,3,9,2,4,8,5,6],[9,6,1,5,3,7,2,8,4],[2,8,7,4,1,9,6,3,5],[3,4,5,2,8,6,1,7,9]]',
+            'initial': '[[5,3,0,0,7,0,0,0,0],[6,0,0,1,9,5,0,0,0],[0,9,8,0,0,0,0,6,0],[8,0,0,0,6,0,0,0,3],[4,0,0,8,0,3,0,0,1],[7,0,0,0,2,0,0,0,6],[0,6,0,0,0,0,2,8,0],[0,0,0,4,1,9,0,0,5],[0,0,0,0,8,0,0,7,9]]',
+            'difficulty': 'Easy',
+            'style': 'Classic',
+            'user': self.user,
+            'isFinished': False
+        }
+        self.serializer_data = BoardSerializer().data
+
+    def test_contains_expected_fields(self):
+        self.assertEqual(set(self.serializer_data.keys()), set(['id', 'state', 'answer', 'initial', 'difficulty', 'style', 'user', 'isFinished']))
