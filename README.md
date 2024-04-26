@@ -75,14 +75,125 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 #### Main Epics
 
-| ID     | Description                                                                                | Priority | Status   |
-| ------ | ------------------------------------------------------------------------------------------ | -------- | -------- |
-| EPIC#1 | Generate, Backend, 9x9 grid of puzzle and solution                                         | High     | Complete |
-| EPIC#2 | Provide, Backend, variaing levels of difficulty                                            | High     | Open     |
-| EPIC#3 | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Complete |
-| EPIC#4 | Create an Interface, front end, where a user can solve the puzzle                          | Med      | Open     |
-| EPIC#5 | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.           | Low      | Open     |
-| EPIC#6 | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.   | Low      | Open     |
+| ID     | Description                                                                                |
+| ------ | ------------------------------------------------------------------------------------------ | 
+| [SRS-001](#1)    |             |
+| [SRS-002](#2)    |             |
+| [SRS-003](#3)    |             |
+| [SRS-004](#4)    |             |
+| [SRS-005](#5)    |             |
+| [SRS-006](#6)    |             |
+| [SRS-007](#7)    |             |
+| [SRS-008](#8)    |             |
+| [SRS-009](#9)    |             |
+| [SRS-010](#10)   |             |
+| [SRS-011](#11)   |             |
+| [SRS-012](#12)   |             |
+| [SRS-013](#13)   |             |
+| [SRS-014](#14)   |             |
+| [SRS-015](#15)   |             |
+| [SRS-016](#16)   |             |
+| [SRS-017](#17)   |             |
+| [SRS-018](#18)   |             |
+| [SRS-019](#19)   |             |
+| [SRS-020](#20)   |             |
+| [SRS-021](#21)   |             |
+| [SRS-022](#22)   |             |
+| [SRS-023](#23)   |             |
+| [SRS-024](#24)   |             |
+| [SRS-025](#25)   |             |
+| [SRS-026](#26)   |             |
+| [SRS-027](#27)   |             |
+| [SRS-028](#28)   |             |
+| [SRS-029](#29)   |             |
+| [SRS-030](#30)   |             |
+| [SRS-031](#31)   |             |
+| [SRS-032](#32)   |             |
+| [SRS-033](#33)   |             |
+| [SRS-034](#34)   |             |
+| [SRS-035](#35)   |             |
+| [SRS-036](#36)   |             |
+| [SRS-037](#37)   |             |
+| [SRS-038](#38)   |             |
+| [SRS-039](#39)   |             |
+| [SRS-040](#40)   |             |
+| [SRS-041](#41)   |             |
+| [SRS-042](#42)   |             |
+| [SRS-043](#43)   |             |
+| [SRS-044](#44)   |             |
+| [SRS-045](#45)   |             |
+| [SRS-046](#46)   |             |
+| [SRS-047](#47)   |             |
+| [SRS-048](#48)   |             |
+| [SRS-049](#49)   |             |
+| [SRS-050](#50)   |             |
+| [SRS-051](#51)   |             |
+| [SRS-052](#52)   |             |
+| [SRS-053](#53)   |             |
+| [SRS-054](#54)   |             |
+| [SRS-055](#55)   |             |
+| [SRS-056](#56)   |             |
+| [SRS-057](#57)   |             |
+| [SRS-058](#58)   |             |
+| [SRS-059](#59)   |             |
+| [SRS-060](#60)   |             |
+| [SRS-061](#61)   |             |
+| [SRS-062](#62)   |             |
+| [SRS-063](#63)   |             |
+| [SRS-064](#64)   |             |
+| [SRS-065](#65)   |             |
+| [SRS-066](#66)   |             |
+| [SRS-067](#67)   |             |
+| [SRS-068](#68)   |             |
+| [SRS-069](#69)   |             |
+| [SRS-070](#70)   |             |
+| [SRS-071](#71)   |             |
+| [SRS-072](#72)   |             |
+| [SRS-073](#73)   |             |
+| [SRS-074](#74)   |             |
+| [SRS-075](#75)   |             |
+| [SRS-076](#76)   |             |
+| [SRS-077](#77)   |             |
+| [SRS-078](#78)   |             |
+| [SRS-079](#79)   |             |
+| [SRS-080](#80)   |             |
+| [SRS-081](#81)   |             |
+| [SRS-082](#82)   |             |
+| [SRS-083](#83)   |             |
+| [SRS-084](#84)   |             |
+| [SRS-085](#85)   |             |
+| [SRS-086](#86)   |             |
+| [SRS-087](#87)   |             |
+| [SRS-088](#88)   |             |
+| [SRS-089](#89)   |             |
+| [SRS-090](#90)   |             |
+| [SRS-091](#91)   |             |
+| [SRS-092](#92)   |             |
+| [SRS-093](#93)   |             |
+| [SRS-094](#94)   |             |
+| [SRS-095](#95)   |             |
+| [SRS-096](#96)   |             |
+| [SRS-097](#97)   |             |
+| [SRS-098](#98)   |             |
+| [SRS-099](#99)   |             |
+| [SRS-100](#100)  |             |
+| [SRS-101](#101)  |             |
+| [SRS-102](#102)  |             |
+| [SRS-103](#103)  |             |
+| [SRS-104](#104)  |             |
+| [SRS-105](#105)  |             |
+| [SRS-106](#106)  |             |
+| [SRS-107](#107)  |             |
+| [SRS-108](#108)  |             |
+| [SRS-109](#109)  |             |
+| [SRS-110](#110)  |             |
+| [SRS-111](#111)  |             |
+| [SRS-112](#112)  |             |
+| [SRS-113](#113)  |             |
+| [SRS-114](#114)  |             |
+| [SRS-115](#115)  |             |
+| [SRS-116](#116)  |             |
+
 
 ### User Interface Requirements
 
