@@ -9,7 +9,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth.hashers import check_password
-from .sudoku import Sudoku
+from .sudoku import Sudoku, KillerSudoku
 import json
 import copy
 from django.http import JsonResponse
@@ -120,11 +120,14 @@ def get_game_by_difficulty(request):
     difficulty = request.data.get("difficulty")
     style = request.data.get("style")
     user = request.data.get("user")
-    game = Sudoku(difficulty)
+    if style == "killer":
+        game = KillerSudoku(difficulty)
+    else:
+        game = Sudoku(difficulty)
     status = game.sudoku_status()
     answer = copy.deepcopy(game)
     answer.solve_sudoku()
-    b = Boards(
+    board = Boards(
         state=str(game.board),
         initial=str(game.board),
         answer=str(answer.board),
@@ -133,18 +136,17 @@ def get_game_by_difficulty(request):
         user=user,
         isFinished=status,
     )
-    b.save()
-    serializer = BoardSerializer(b)
+    board.save()
+    serializer = BoardSerializer(board)
     return Response(serializer.data)
 
 
 @api_view(["GET"])
 def load_saved_game(request):
-    # finding the game
     try:
-        print("USERNAME", request.query_params.get("username"))
-        board = Boards.objects.filter(user=request.query_params.get("username"))
-        serializer = BoardSerializer(board, many=True)
+        username = request.query_params.get("username")
+        boards = Boards.objects.filter(user=username, isFinished__lt=100.0)
+        serializer = BoardSerializer(boards, many=True)
         return Response(serializer.data)
     except Boards.DoesNotExist:
         return Response({"message": "No saved game found"}, status=404)
@@ -152,7 +154,6 @@ def load_saved_game(request):
 
 @api_view(["GET"])
 def choose_saved_game(request):
-    # finding the game
     try:
         board = Boards.objects.filter(id=request.data.get("id"))
         serializer = BoardSerializer(board)
@@ -189,13 +190,11 @@ def save_game_state(request):
         game = Sudoku()
         game.board = new_state
         new_status = game.sudoku_status()
+        if new_status == 100.0:
+            if json.dumps(new_state) != board.answer:
+                new_status = 95.0
         board.isFinished = new_status
         board.save()
-        # if game.solve_sudoku():
-        # board.state = new_state
-        # board.save()
-        # else:
-        #    return Response({"message": "Bad move"})
         return Response({"message": "Game saved successfully"})
     except Boards.DoesNotExist:
         return Response({"message": "Board not found"}, status=404)
