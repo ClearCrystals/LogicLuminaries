@@ -362,7 +362,7 @@ class ViewTestCase(TestCase):
 
     def test_save_game_state(self):
         response = self.client.post(
-            "/save/",  # Use "/save/" instead of "/save_game_state/"
+            "/save/",
             {"board_id": self.board.id, "state": str(Sudoku().board)},
         )
         self.assertEqual(response.status_code, 200)
