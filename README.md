@@ -1,5 +1,7 @@
 # Sudoku by Logic Luminaries
 
+[![pipeline](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/badges/main/pipeline.svg)](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/-/pipelines)
+
 ![Logo](./documentation/images/LLLogo.jpg){width=50%}
 
 ## Requirements and Specification Document
