@@ -2,7 +2,7 @@
 
 [![pipeline](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/badges/main/pipeline.svg)](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/-/pipelines) 
 [![coverage](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/badges/main/coverage.svg?job=unit_test_backend)](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/-/graphs/main/charts)
-[![Python Version](https://img.shields.io/badge/python-3.8-blue)](https://docs.python.org/3.12/)
+[![Python Version](https://img.shields.io/badge/python-3.12-blue)](https://docs.python.org/3.12/)
 [![Django Version](https://img.shields.io/badge/django-5.0.2-green)](https://docs.djangoproject.com/en/5.0/releases/5.0.2/)
 [![React Version](https://img.shields.io/badge/react-18.0.2-blue)](https://react.dev/)
 [![MySQL Version](https://img.shields.io/badge/mysql-8.0-orange)](https://www.mysql.com/)
