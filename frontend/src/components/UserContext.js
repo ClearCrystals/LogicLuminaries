@@ -14,15 +14,19 @@ import React, { createContext, useContext, useState } from "react";
  *
  * @returns {React.Component} The `UserProvider` component, providing user context to its children.
  */
+
 // Creating the context
 const UserContext = createContext(null);
 
 // Exporting the context provider
 export const UserProvider = ({ children }) => {
   const [username, setUsername] = useState("");
+  const [sudokuStyle, setSudokuStyle] = useState("normal"); // Default value
 
   return (
-    <UserContext.Provider value={{ username, setUsername }}>
+    <UserContext.Provider
+      value={{ username, setUsername, sudokuStyle, setSudokuStyle }}
+    >
       {children}
     </UserContext.Provider>
   );

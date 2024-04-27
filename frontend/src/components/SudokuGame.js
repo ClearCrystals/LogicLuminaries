@@ -19,33 +19,31 @@ import { useUser } from "./UserContext";
  */
 
 const SudokuGame = () => {
+  // Get 'sudokuStyle' from context
   const [gameMode, setGameMode] = useState(""); // 'new' or 'saved'
   const [difficulty, setDifficulty] = useState(null);
   const [savedGames, setSavedGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState(null);
-  const { username, setUsername } = useUser();
+  const { username, sudokuStyle } = useUser();
 
   const data = {
     username: username,
   };
+
   const loadSavedGame = async () => {
     try {
-      //Fetch the saved game data from your backend
       const csrfToken = Cookies.get("csrfToken");
       const response = await axios.get(
         "http://localhost:8000/api/saved-game/",
         {
-          params: { username: username },
+          params: { username, style: sudokuStyle },
           headers: {
             "Content-Type": "application/json",
             "X-CSRFToken": csrfToken,
           },
         },
       );
-      console.log(response);
       setSavedGames(response.data);
-      // setSavedGridData(response.data.gridData);
-      // setDifficulty(response.data.difficulty);
     } catch (error) {
       console.error("Error fetching saved game data", error);
     }
@@ -59,22 +57,14 @@ const SudokuGame = () => {
   };
 
   const handleSavedGameSelect = (gameId) => {
-    // Find and set the specific saved game data
     const game = savedGames.find((game) => game.id === gameId);
-    setSelectedGame(game); // Set the selected game state
-    setGameMode("saved"); // Update game mode to 'saved'
+    setSelectedGame(game); // Set the specific saved game data
+    setGameMode("saved"); // Change game mode
   };
 
   const handleDifficultySelect = (selectedDifficulty) => {
-    setDifficulty(selectedDifficulty);
-    // Fetch new grid data based on the selected difficulty here (if necessary)
+    setDifficulty(selectedDifficulty); // Change difficulty
   };
-
-  const handleUsernameSelect = (selectedUsername) => {
-    setUsername(selectedUsername);
-    // Fetch new grid data based on the selected difficulty here (if necessary)
-  };
-
   return (
     <div>
       <div>

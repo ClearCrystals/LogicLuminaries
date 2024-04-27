@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
 import _ from "lodash";
+import { useUser } from "./UserContext"; // Importing the context
 
 axios.defaults.xsrfCookieName = "csrfToken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
@@ -25,7 +26,7 @@ axios.defaults.xsrfHeaderName = "X-CSRFToken";
  *   selection and game submission.
  */
 
-const SudokuGrid = ({ difficulty, username, savedGrid }) => {
+const SudokuGrid = ({ difficulty, savedGrid }) => {
   const createEmptyGrid = () =>
     Array(9).fill(Array(9).fill({ value: "", editable: true }));
   const [gridData, setGridData] = useState(createEmptyGrid());
@@ -34,10 +35,12 @@ const SudokuGrid = ({ difficulty, username, savedGrid }) => {
   const [id, setId] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState(null);
 
+  const { username, sudokuStyle } = useUser(); // Get username and sudokuStyle from context
+
   const url = "http://localhost:8000/api/board/";
   const data = {
     difficulty: difficulty,
-    style: "normal",
+    style: sudokuStyle,
     user: username,
   };
 
