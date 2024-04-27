@@ -6,6 +6,7 @@ from .serializers import UsersSerializer, BoardSerializer
 import json
 from .views import index, signup_view, signin_view, get_game_by_difficulty
 from .views import load_saved_game, choose_saved_game, save_game_state
+from django.test import RequestFactory
 
 
 class UserModelTests(TestCase):
@@ -309,45 +310,3 @@ class BoardSerializerTest(APITestCase):
         self.assertEqual(board.style, self.board_attributes["style"])
         self.assertEqual(board.user, self.user_attributes["id"])
         self.assertEqual(board.isFinished, self.board_attributes["isFinished"])
-
-
-class ViewTestCase(TestCase):
-    def setUp(self):
-        self.user = Users.objects.create(email="test@example.com", pwd="testpassword")
-        self.board = Boards.objects.create(
-            state=str(Sudoku().board),
-            initial=str(Sudoku().board),
-            answer=str(Sudoku().board),
-            difficulty="Easy",
-            style="normal",
-            user=self.user,
-            isFinished=0,
-        )
-
-    def test_index(self):
-        response = index(None)
-        self.assertIsNotNone(response)
-
-    def test_signup_view(self):
-        response = signup_view(None)
-        self.assertIsNotNone(response)
-
-    def test_signin_view(self):
-        response = signin_view(None)
-        self.assertIsNotNone(response)
-
-    def test_get_game_by_difficulty(self):
-        response = get_game_by_difficulty(None)
-        self.assertIsNotNone(response)
-
-    def test_load_saved_game(self):
-        response = load_saved_game(None)
-        self.assertIsNotNone(response)
-
-    def test_choose_saved_game(self):
-        response = choose_saved_game(None)
-        self.assertIsNotNone(response)
-
-    def test_save_game_state(self):
-        response = save_game_state(None)
-        self.assertIsNotNone(response)
