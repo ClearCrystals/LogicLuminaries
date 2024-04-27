@@ -15,7 +15,7 @@ services:
       - mysql_data:/var/lib/mysql
 
   backend:
-    image: registry.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/t_10/logicluminaries/backend:latest 
+    image: registry.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/t_10/logicluminaries/backend:latest
     build:
       context: ./backend/
       dockerfile: Dockerfile
@@ -32,7 +32,7 @@ services:
       - db
 
   frontend:
-    image: registry.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/t_10/logicluminaries/frontend:latest 
+    image: registry.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/t_10/logicluminaries/frontend:latest
     build: ./frontend
     ports:
       - "3000:3000"
