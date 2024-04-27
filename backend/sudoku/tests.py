@@ -9,6 +9,8 @@ import json
 from rest_framework.test import force_authenticate
 from django.urls import reverse
 from sudoku.views import index, signup_view, signin_view, get_game_by_difficulty, load_saved_game, choose_saved_game, save_game_state
+from django.contrib.auth.models import User
+
 
 
 class UserModelTests(TestCase):
