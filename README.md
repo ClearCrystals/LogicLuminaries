@@ -169,7 +169,7 @@ B --> F
 
 ## ERD for SudokuDB
 
-![ERD image](./Sudoku DB Schema_updated.png)
+![ERD image](./documentation/images/Sudoku%20DB%20Schema_updated.png)
 
 #### Class Diagram
 
