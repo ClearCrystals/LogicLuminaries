@@ -35,9 +35,9 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 | [SRS-006](#122) |If user clicks the "Submit" button on the "Sign Up" Page there shall appear a green confirmation button.|
 | [SRS-007](#123) |If the user clicks the submit button on the Sign in page then the page shall correctly authenticate and go to the Games page.|
 | [SRS-008](#124) |The Games page must have The text "Welcome, [user]" as well as the cards that have their own respective buttons that the user can choose between which game they would like to play.|
-| [SRS-009](#1)    | |
-| [SRS-010](#1)   |             |
-| [SRS-011](#1)   |             |
+| [SRS-009](#125)    |When the User has chosen a game, by clicking on the respective button. Both games Killer Sudoku and Normal Sudoku. The software shall take the user to Game Mode Selection Page where there are two buttons: New Game and Load Saved Game|
+| [SRS-010](#126)   |If the user choose Load game the Software Shall go to the list of Saved Games.|
+| [SRS-011](#127)   |If the User choose Create new Game, the software shall go to another page and ask if the game difficulty that they want is easy medium or hard in the form of buttons.|
 | [SRS-012](#1)   |             |
 | [SRS-013](#1)   |             |
 | [SRS-014](#1)   |             |
