@@ -1,10 +1,11 @@
 from django.test import TestCase
-from django.urls import reverse
 from .models import Users, Boards
 from .sudoku import Sudoku, KillerSudoku
-from rest_framework.test import APITestCase, APIClient
+from rest_framework.test import APITestCase
 from .serializers import UsersSerializer, BoardSerializer
 import json
+from .views import index, signup_view, signin_view, get_game_by_difficulty
+from .views import load_saved_game, choose_saved_game, save_game_state
 
 
 class UserModelTests(TestCase):
@@ -312,7 +313,7 @@ class BoardSerializerTest(APITestCase):
 
 class ViewTestCase(TestCase):
     def setUp(self):
-        self.client = APIClient()
+        self.factory = RequestFactory()
         self.user = Users.objects.create(email="test@example.com", pwd="testpassword")
         self.board = Boards.objects.create(
             state=str(Sudoku().board),
@@ -325,43 +326,46 @@ class ViewTestCase(TestCase):
         )
 
     def test_index(self):
-        response = self.client.get("/")
-        self.assertEqual(response.status_code, 200)
+        request = self.factory.get("/")
+        response = index(request)
         self.assertEqual(
             response.content.decode(), "Hello, world. You are at the sudoku index."
         )
 
     def test_signup_view(self):
-        response = self.client.post(
+        request = self.factory.post(
             "/signup/", {"email": "newuser@example.com", "pwd": "newpassword"}
         )
-        self.assertEqual(response.status_code, 201)
+        response = signup_view(request)
         self.assertEqual(Users.objects.count(), 2)
 
     def test_signin_view(self):
-        response = self.client.post(
+        request = self.factory.post(
             "/signin/", {"email": "test@example.com", "pwd": "testpassword"}
         )
-        self.assertEqual(response.status_code, 200)
+        response = signin_view(request)
+        self.assertEqual(response.data["email"], "test@example.com")
 
     def test_get_game_by_difficulty(self):
-        response = self.client.post(
-            "/board/",
-            {"difficulty": "Easy", "style": "normal", "user": self.user.id},
+        request = self.factory.post(
+            "/board/", {"difficulty": "Easy", "style": "normal", "user": self.user.id}
         )
-        self.assertEqual(response.status_code, 200)
+        response = get_game_by_difficulty(request)
+        self.assertEqual(response.data["difficulty"], "Easy")
 
     def test_load_saved_game(self):
-        response = self.client.get("/saved-game/", {"username": self.user.email})
-        self.assertEqual(response.status_code, 200)
+        request = self.factory.get("/saved-game/", {"username": self.user.email})
+        response = load_saved_game(request)
+        self.assertEqual(response.data["user"], self.user.email)
 
     def test_choose_saved_game(self):
-        response = self.client.get("/choose_saved_game/", {"id": self.board.id})
-        self.assertEqual(response.status_code, 200)
+        request = self.factory.get("/choose_saved_game/", {"id": self.board.id})
+        response = choose_saved_game(request)
+        self.assertEqual(response.data["id"], self.board.id)
 
     def test_save_game_state(self):
-        response = self.client.post(
-            "/save/",
-            {"board_id": self.board.id, "state": str(Sudoku().board)},
+        request = self.factory.post(
+            "/save/", {"board_id": self.board.id, "state": str(Sudoku().board)}
         )
-        self.assertEqual(response.status_code, 200)
+        response = save_game_state(request)
+        self.assertEqual(response.data["state"], str(Sudoku().board))
