@@ -1,6 +1,7 @@
 # Sudoku by Logic Luminaries
 
 [![pipeline](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/badges/main/pipeline.svg)](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/-/pipelines)
+![coverage](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/badges/main/coverage.svg?job=unit_test_backend)
 
 ![Logo](./documentation/images/LLLogo.jpg){width=50%}
 
