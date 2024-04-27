@@ -25,17 +25,33 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 <!-- Here is a user requirements sample from [Crookshanks](https://learning-oreilly-com.ezproxy.library.wisc.edu/library/view/practical-software-development/9781484206201/9781484206218_Ch02.xhtml):-->
 
-| ID  | Description                                   | Priority | Status   |
-| --- | --------------------------------------------- | -------- | -------- |
-| 30  | User can login                                | High     | Complete |
-| 53  | User can play a new game                      | High     | Complete |
-| 53  | User can edit and add numbers into a new game | High     | Complete |
-| 72  | User can see win screen                       | Low      | Open     |
-| 68  | User can save game                            | Med      | Complete |
-| 70  | User can leave and come back                  | High     | Open     |
-| #   | User can select variant                       | Med      | Open     |
+| ID     | Description                                                                                |
+| ------ | ------------------------------------------------------------------------------------------ | 
+| [SRS-001](#117) |When user visits the homepage of the application, the frontend software SHALL display a homepage which is substantially similar to the figma wireframe of the homepage|
+| [SRS-002](#118) |When user visits the homepage of the application, the frontend software SHALL present the user with a series of options, represented as buttons with text contained Login and Register|
+| [SRS-003](#119) |When the User clicks "Sign up" or "Register" the software shall go to the User Sign up Page or the Register Page.|
+| [SRS-004](#120) |When the user arrives at "Register" page there must be 3 text box inputs one for username, one for email and one for password. There also must be a button that shall get the user to the "Sign up" Page.|
+| [SRS-005](#1) ||
+| [SRS-006](#1) |             |
+| [SRS-007](#1) |             |
+| [SRS-008](#1)    |             |
+| [SRS-009](#1)    | |
+| [SRS-010](#1)   |             |
+| [SRS-011](#1)   |             |
+| [SRS-012](#1)   |             |
+| [SRS-013](#1)   |             |
+| [SRS-014](#1)   |             |
+| [SRS-015](#15)   |             |
+| [SRS-016](#16)   |             |
+| [SRS-017](#17)   |             |
+| [SRS-018](#18)   |             |
+| [SRS-019](#19)   |             |
+| [SRS-020](#20)   |             |
+| [SRS-021](#21)   |             |
+| [SRS-022](#22)   |             |
+| [SRS-023](#23)   |             |
+| [SRS-024](#24)   |             |
 
-'#' Means not assigned to an ID yet
 
 <!--<div align="center"><small><i>Excerpt from Crookshanks Table 2-2 showing example user requirements for a timekeeping system</i></small></div>-->
 
@@ -75,32 +91,15 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 #### Main Epics
 
-| ID     | Description                                                                                |
-| ------ | ------------------------------------------------------------------------------------------ | 
-| [SRS-001](#117) |When user visits the homepage of the application, the frontend software SHALL display a homepage which is substantially similar to the figma wireframe of the homepage|
-| [SRS-002](#118) |When user visits the homepage of the application, the frontend software SHALL present the user with a series of options, represented as buttons with text contained Login and Register|
-| [SRS-003](#119) |When the User clicks "Sign up" or "Register" the software shall go to the User Sign up Page or the Register Page.|
-| [SRS-004](#120) |When the user arrives at "Register" page there must be 3 text box inputs one for username, one for email and one for password. There also must be a button that shall get the user to the "Sign up" Page.|
-| [SRS-005](#1) ||
-| [SRS-006](#1) |             |
-| [SRS-007](#1) |             |
-| [SRS-008](#1)    |             |
-| [SRS-009](#1)    | |
-| [SRS-010](#1)   |             |
-| [SRS-011](#1)   |             |
-| [SRS-012](#1)   |             |
-| [SRS-013](#1)   |             |
-| [SRS-014](#1)   |             |
-| [SRS-015](#15)   |             |
-| [SRS-016](#16)   |             |
-| [SRS-017](#17)   |             |
-| [SRS-018](#18)   |             |
-| [SRS-019](#19)   |             |
-| [SRS-020](#20)   |             |
-| [SRS-021](#21)   |             |
-| [SRS-022](#22)   |             |
-| [SRS-023](#23)   |             |
-| [SRS-024](#24)   |             |
+
+| ID     | Description                                                                                | Priority | Status   |
+| ------ | ------------------------------------------------------------------------------------------ | -------- | -------- |
+| EPIC#1 | Generate, Backend, 9x9 grid of puzzle and solution                                         | High     | Complete |
+| EPIC#2 | Provide, Backend, variaing levels of difficulty                                            | High     | Open     |
+| EPIC#3 | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Complete |
+| EPIC#4 | Create an Interface, front end, where a user can solve the puzzle                          | Med      | Open     |
+| EPIC#5 | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.           | Low      | Open     |
+| EPIC#6 | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.   | Low      | Open     |
 
 
 ### User Interface Requirements
