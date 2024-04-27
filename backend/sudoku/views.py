@@ -120,6 +120,7 @@ def get_game_by_difficulty(request):
     difficulty = request.data.get("difficulty")
     style = request.data.get("style")
     user = request.data.get("user")
+    print(style)
     if style == "killer":
         game = KillerSudoku(difficulty)
     else:
@@ -144,12 +145,23 @@ def get_game_by_difficulty(request):
 @api_view(["GET"])
 def load_saved_game(request):
     try:
-        username = request.query_params.get("username")
-        boards = Boards.objects.filter(user=username, isFinished__lt=100.0)
+        username = request.query_params.get("username")  # Fetch the username parameter
+        style = request.query_params.get("style")  # Fetch the style parameter
+
+        # Filter based on username and style
+        if style:
+            boards = Boards.objects.filter(user=username, style=style, isFinished__lt=100.0)
+        else:
+            boards = Boards.objects.filter(user=username, isFinished__lt=100.0)
+
+        if not boards.exists():
+            return Response({"message": "No saved game found"}, status=404)
+
         serializer = BoardSerializer(boards, many=True)
         return Response(serializer.data)
-    except Boards.DoesNotExist:
-        return Response({"message": "No saved game found"}, status=404)
+    except Exception as e:
+        return Response({"message": f"Error: {str(e)}"}, status=500)
+
 
 
 @api_view(["GET"])

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Navbar, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "./UserContext";
-const emailRegex = /^(.*?)@/; // Regular expression to get text before '@'
+const emailRegex = /^(.*?)@/;
 
 /**
  * Games component that displays a list of game options.
@@ -16,10 +16,29 @@ const emailRegex = /^(.*?)@/; // Regular expression to get text before '@'
  *         selection interface, including navigation options for each game
  *         and a logout button.
  */
+
 const Games = () => {
-  const { username } = useUser();
-  // If username is an email, extract the part before '@'
-  const displayName = username.match(emailRegex)?.[1] || username; // Use match to extract and handle possible null/undefined cases
+  const { username, sudokuStyle, setSudokuStyle } = useUser();
+  const navigate = useNavigate();
+  const displayName = username.match(emailRegex)?.[1] || username;
+
+  const updateStyle = async (style) => {
+    setSudokuStyle(style); // Save style in user context
+    console.log("Sudoku style updated to:", style); // Log the intended style
+    setTimeout(() => {
+      console.log("Current sudokuStyle after delay:", sudokuStyle); // Log after delay
+    }, 9000);
+  };
+
+  const handleKillerSudoku = () => {
+    updateStyle("killer");
+    //console.log("Current sudokuStyle:", sudokuStyle); // Log the current state value
+  };
+
+  const handleNormalSudoku = () => {
+    updateStyle("normal");
+  };
+
   return (
     <div>
       <Navbar bg="dark" data-bs-theme="dark">
@@ -34,31 +53,40 @@ const Games = () => {
         <header>
           <br />
           <h1>
-            <b>Welcome, {displayName}</b>{" "}
-            {/* Corrected to use the extracted part */}
+            <b>Welcome, {displayName}</b>
           </h1>
           <br />
         </header>
         <Row>
           <Col className="gamesCol">
             <h3>
-              <b>Play classic sudoku</b>
+              <b>Classic Sudoku</b>
             </h3>
             <br />
-            <div>
-              <Link to="/components/SudokuGame">
-                <Button variant="secondary" size="lg">
-                  Generate
-                </Button>
-              </Link>
-            </div>
+            <Link to="/components/SudokuGame">
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={handleNormalSudoku}
+              >
+                Play
+              </Button>
+            </Link>
           </Col>
           <Col className="gamesCol">
             <h3>
-              <b>Play killer sudoku</b>
+              <b>Killer Sudoku</b>
             </h3>
             <br />
-            <p>TODO add killer generation</p>
+            <Link to="/components/SudokuGame">
+              <Button
+                variant="secondary"
+                size="lg"
+                onClick={handleKillerSudoku}
+              >
+                Play
+              </Button>
+            </Link>
           </Col>
         </Row>
       </Container>
