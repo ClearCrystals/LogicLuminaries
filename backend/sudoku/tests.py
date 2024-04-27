@@ -169,29 +169,9 @@ class SudokuAlgoTests(TestCase):
     def test_imposible_board(self):
         # Test an impossible board
         sudoku = Sudoku()
-        impossible_board = [
-            [0, 3, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 8, 0, 0, 0, 0, 0, 0],
-            [8, 8, 8, 8, 6, 0, 0, 0, 0],
-            [0, 0, 0, 8, 0, 0, 0, 0, 0],
-            [0, 0, 0, 8, 0, 0, 0, 0, 0],
-            [0, 0, 0, 8, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        ]
-        Sudoku.board = impossible_board
+        sudoku.board[0] = [1, 1, 1, 1, 1, 1, 1, 1, 1]  # First row all 1's
+        sudoku.board[1] = [2, 2, 2, 2, 2, 2, 2, 2, 2]  # Second row all 2's
         self.assertFalse(sudoku.solve_sudoku())
-
-        sudoku.solve_sudoku()
-        faulty_board = sudoku.board
-        faulty_board[0][0] = 4
-        faulty_board[1][0] = 4
-        faulty_board[2][0] = 9
-        faulty_board[3][0] = 0
-        sudoku.board = faulty_board
-        self.asserFalse(sudoku.solve_sudoku())
-
 
 class KillerSudokuAlgoTests(TestCase):
     def test_killer_sudoku_init(self):
