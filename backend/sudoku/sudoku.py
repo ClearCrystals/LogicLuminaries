@@ -160,7 +160,7 @@ class KillerSudoku(Sudoku):
         visited = set()
         cage_id = 1
 
-        # Iterate over each cell 
+        # Iterate over each cell
         for start_cell in all_cells:
             if start_cell not in visited:
                 current_cage = []
