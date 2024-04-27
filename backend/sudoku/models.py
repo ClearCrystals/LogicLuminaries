@@ -1,6 +1,8 @@
 from django.db import models
 
-"""
+
+class Users(models.Model):
+    """
     Handles SQL queries to the Users table
 
     This is the Django model class that is used to connect to the Users
@@ -13,16 +15,15 @@ from django.db import models
         email: The user's email, used for authentication purposes
 
     For more information on how to use this to connect to the table, see the Django documentation.
-"""
+    """
 
-
-class Users(models.Model):
     id = models.CharField(primary_key=True, max_length=30)
     pwd = models.CharField(max_length=128)
     email = models.CharField(max_length=200)
 
 
-"""
+class Boards(models.Model):
+    """
     Handles SQL queries to the Boards table
 
     This is the Django model class that is used to connect to the Boards
@@ -41,10 +42,8 @@ class Users(models.Model):
         isFinished: A float that represents the percentage of completion of the sudoku board
 
     For more information on how to use this to connect to the table, see the Django documentation.
-"""
+    """
 
-
-class Boards(models.Model):
     id = models.AutoField(primary_key=True)
     state = models.CharField(max_length=500)
     answer = models.CharField(max_length=500)

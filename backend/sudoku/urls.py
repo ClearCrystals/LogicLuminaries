@@ -12,6 +12,7 @@ from . import views
         signup: the page that handles the sign up request
         board: the page that handles creating a new board
         save: the page that handles saving a board
+        saved-game: the page that handles gathering the boards of a user
 """
 
 
