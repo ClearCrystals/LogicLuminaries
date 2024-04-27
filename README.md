@@ -95,10 +95,10 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 | ID     | Description                                                                                | Priority | Status   |
 | ------ | ------------------------------------------------------------------------------------------ | -------- | -------- |
 | EPIC#1 | Generate, Backend, 9x9 grid of puzzle and solution                                         | High     | Complete |
-| EPIC#2 | Provide, Backend, variaing levels of difficulty                                            | High     | Open     |
+| EPIC#2 | Provide, Backend, variaing levels of difficulty                                            | High     | Complete     |
 | EPIC#3 | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Complete |
-| EPIC#4 | Create an Interface, front end, where a user can solve the puzzle                          | Med      | Open     |
-| EPIC#5 | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.           | Low      | Open     |
+| EPIC#4 | Create an Interface, front end, where a user can solve the puzzle                          | Med      | Complete     |
+| EPIC#5 | (Stretch Goals) Support multiple variants of Sudoku, such as killer, etc.           | Low      | Open     |
 | EPIC#6 | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.   | Low      | Open     |
 
 
