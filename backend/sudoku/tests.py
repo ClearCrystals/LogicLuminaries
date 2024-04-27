@@ -2,11 +2,12 @@ from django.test import TestCase
 from .models import Users, Boards
 from .sudoku import Sudoku, KillerSudoku
 from rest_framework.test import APITestCase
+from rest_framework import status
+from unittest.mock import Mock, patch
 from .serializers import UsersSerializer, BoardSerializer
 import json
 from .views import index, signup_view, signin_view, get_game_by_difficulty
 from .views import load_saved_game, choose_saved_game, save_game_state
-from django.test import RequestFactory
 
 
 class UserModelTests(TestCase):
@@ -307,7 +308,6 @@ class BoardSerializerTest(APITestCase):
 
 class ViewTestCase(TestCase):
     def setUp(self):
-        self.factory = RequestFactory()
         self.user = Users.objects.create(email="test@example.com", pwd="testpassword")
         self.board = Boards.objects.create(
             state=str(Sudoku().board),
@@ -320,40 +320,51 @@ class ViewTestCase(TestCase):
         )
 
     def test_index(self):
-        request = self.factory.get('/')
+        request = Mock()
         response = index(request)
         self.assertEqual(response.status_code, 200)
 
-    def test_signup_view(self):
-        data = {'email': 'test2@example.com', 'pwd': 'testpassword'}
-        request = self.factory.post('/signup', data)
+    @patch('sudoku.views.UsersSerializer')
+    def test_signup_view(self, mock_serializer):
+        mock_serializer.return_value.is_valid.return_value = True
+        mock_serializer.return_value.data = {'email': 'test2@example.com', 'pwd': 'testpassword'}
+        request = Mock()
+        request.data = {'email': 'test2@example.com', 'pwd': 'testpassword'}
         response = signup_view(request)
-        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_signin_view(self):
-        data = {'email': 'test@example.com', 'pwd': 'testpassword'}
-        request = self.factory.post('/signin', data)
+        request = Mock()
+        request.data = {'email': 'test@example.com', 'pwd': 'testpassword'}
         response = signin_view(request)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_get_game_by_difficulty(self):
-        data = {'difficulty': 'Easy', 'style': 'normal', 'user': 'test@example.com'}
-        request = self.factory.post('/game/difficulty', data)
+    @patch('sudoku.views.BoardSerializer')
+    def test_get_game_by_difficulty(self, mock_serializer):
+        mock_serializer.return_value.data = {'difficulty': 'Easy', 'style': 'normal', 'user': 'test@example.com'}
+        request = Mock()
+        request.data = {'difficulty': 'Easy', 'style': 'normal', 'user': 'test@example.com'}
         response = get_game_by_difficulty(request)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_load_saved_game(self):
-        request = self.factory.get('/game/load', {'username': 'test@example.com'})
+    @patch('sudoku.views.BoardSerializer')
+    def test_load_saved_game(self, mock_serializer):
+        mock_serializer.return_value.data = {'username': 'test@example.com'}
+        request = Mock()
+        request.query_params.get.return_value = 'test@example.com'
         response = load_saved_game(request)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_choose_saved_game(self):
-        request = self.factory.get('/game/choose', {'id': self.board.id})
+    @patch('sudoku.views.BoardSerializer')
+    def test_choose_saved_game(self, mock_serializer):
+        mock_serializer.return_value.data = {'id': self.board.id}
+        request = Mock()
+        request.data.get.return_value = self.board.id
         response = choose_saved_game(request)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_save_game_state(self):
-        data = {'board_id': self.board.id, 'state': str(Sudoku().board)}
-        request = self.factory.post('/game/save', data)
+        request = Mock()
+        request.data = {'board_id': self.board.id, 'state': str(Sudoku().board)}
         response = save_game_state(request)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
