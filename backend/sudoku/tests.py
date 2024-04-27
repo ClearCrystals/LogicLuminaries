@@ -321,6 +321,7 @@ class BoardSerializerTest(APITestCase):
 class ViewTestCase(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
+        self.user = User.objects.create_user(username="test", password="test")
 
     def test_index(self):
         request = self.factory.get("/")
@@ -348,6 +349,7 @@ class ViewTestCase(TestCase):
 
     def test_get_game_by_difficulty(self):
         request = self.factory.get("/get_game_by_difficulty")
+        request.user = self.user
         try:
             get_game_by_difficulty(request)
             self.assertTrue(True)
@@ -356,24 +358,27 @@ class ViewTestCase(TestCase):
 
     def test_load_saved_game(self):
         request = self.factory.get("/load_saved_game")
+        request.user = self.user
         try:
             load_saved_game(request)
             self.assertTrue(True)
         except Exception:
             self.assertTrue(False)
 
-    # def test_choose_saved_game(self):
-    #     request = self.factory.get("/choose_saved_game")
-    #     try:
-    #         choose_saved_game(request)
-    #         self.assertTrue(True)
-    #     except Exception:
-    #         self.assertTrue(False)
+    def test_choose_saved_game(self):
+        request = self.factory.get("/choose_saved_game")
+        request.user = self.user
+        try:
+            choose_saved_game(request)
+            self.assertTrue(True)
+        except Exception:
+            self.assertTrue(False)
 
-    # def test_save_game_state(self):
-    #     request = self.factory.post("/save_game_state", {})
-    #     try:
-    #         save_game_state(request)
-    #         self.assertTrue(True)
-    #     except Exception:
-    #         self.assertTrue(False)
+    def test_save_game_state(self):
+        request = self.factory.post("/save_game_state", {})
+        request.user = self.user
+        try:
+            save_game_state(request)
+            self.assertTrue(True)
+        except Exception:
+            self.assertTrue(False)
