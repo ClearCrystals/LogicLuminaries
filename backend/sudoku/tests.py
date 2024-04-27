@@ -375,7 +375,7 @@ class ViewTestCase(TestCase):
         except Exception:
             self.assertTrue(False)
 
-    def test_save_game_state(self):
+    def test_choose_saved_game(self):
         request = self.factory.get("/choose_saved_game", {"id": self.board.id})
         request.user = self.user
         try:
