@@ -165,7 +165,6 @@ def load_saved_game(request):
         return Response({"message": f"Error: {str(e)}"}, status=500)
 
 
-
 @api_view(["GET"])
 def choose_saved_game(request):
     try:
