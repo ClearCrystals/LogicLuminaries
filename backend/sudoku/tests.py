@@ -322,6 +322,7 @@ class ViewTestCase(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
         self.user = User.objects.create_user(username="test", password="test")
+        self.board = Boards.objects.create()
 
     def test_index(self):
         request = self.factory.get("/")
@@ -375,10 +376,10 @@ class ViewTestCase(TestCase):
             self.assertTrue(False)
 
     def test_save_game_state(self):
-        request = self.factory.post("/save_game_state", {})
+        request = self.factory.get("/choose_saved_game", {"id": self.board.id})
         request.user = self.user
         try:
-            save_game_state(request)
+            choose_saved_game(request)
             self.assertTrue(True)
         except Exception:
             self.assertTrue(False)
