@@ -324,7 +324,7 @@ class ViewTestCase(TestCase):
         signin_view(request)
 
     def test_get_game_by_difficulty(self):
-        request = self.factory.post('/board/')
+        request = self.factory.post('/board/', {'difficulty': 'easy'})  # Add difficulty data
         get_game_by_difficulty(request)
 
     def test_load_saved_game(self):
@@ -333,8 +333,9 @@ class ViewTestCase(TestCase):
 
     def test_choose_saved_game(self):
         request = self.factory.get('/saved-game/')
+        request.user = User.objects.create_user('username', 'email@test.com', 'password')  # Add this line
         choose_saved_game(request)
 
     def test_save_game_state(self):
-        request = self.factory.post('/save/')
+        request = self.factory.post('/save/', {'state': 'some_state'})  # Add state data
         save_game_state(request)
