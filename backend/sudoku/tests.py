@@ -176,7 +176,7 @@ class SudokuAlgoTests(TestCase):
         faulty_board[2][0] = 9
         faulty_board[3][0] = 0
         sudoku.board = faulty_board
-        self.assertTrue(sudoku.solve_sudoku())
+        self.assertFalse(sudoku.solve_sudoku())
 
 
 class KillerSudokuAlgoTests(TestCase):
