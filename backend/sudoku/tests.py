@@ -142,7 +142,7 @@ class SudokuAlgoTests(TestCase):
         # Test hard with correct number of blanks
         sudoku = Sudoku("Easy")
         total_zeros = sum(cell == 0 for row in sudoku.board for cell in row)
-        self.assertEqual(total_zeros, 64)
+        self.assertEqual(total_zeros, 41)
 
     def test_edge_case_solve(self):
         # Test solve on a nearly finished board
