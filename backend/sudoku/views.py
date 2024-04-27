@@ -16,15 +16,32 @@ from django.http import JsonResponse
 
 
 def index(request):
+    """
+    A function that creates a simple welcome page. Not seen by the users.
+    Created when first initialized the Django project.
+    """
     return HttpResponse("Hello, world. You are at the sudoku index.")
 
 
 class UsersView(viewsets.ModelViewSet):
-    serializer_class = UsersSerializer  # This is where user input data is
-    queryset = Users.objects.all()
+    """
+    Class responsible for the pages that handle requests to the Users table.
+
+    ATTRIBUTES:
+        serializer_class: a serializer which is where the data from the frontend is stored.
+                          See serializers.py for more information
+
+    METHODS:
+        signup_view: Handles signup process
+        signin_view: Handles signin process
+    """
+
+    serializer_class = UsersSerializer
 
 
-"""
+@api_view(["POST"])
+def signup_view(request):
+    """
     Handles the user signup process.
 
     This view function processes POST requests for user registration. It uses a
@@ -42,10 +59,6 @@ class UsersView(viewsets.ModelViewSet):
                   it returns the user data with a 201 CREATED status. On failure, it
                   returns the validation errors with a 400 BAD REQUEST status.
     """
-
-
-@api_view(["POST"])
-def signup_view(request):
     serializer = UsersSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -56,7 +69,9 @@ def signup_view(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-"""
+@api_view(["POST"])
+def signin_view(request):
+    """
     Handle the user signin process via POST request.
 
     Authenticates a user based on the provided email and password. It first checks if
@@ -72,10 +87,6 @@ def signup_view(request):
               a 200 OK status if the authentication is successful. Returns an error
               message with a 401 UNAUTHORIZED status if the credentials are invalid.
     """
-
-
-@api_view(["POST"])
-def signin_view(request):
     email = request.data.get("email")
     password = request.data.get("pwd")
     try:
@@ -94,10 +105,25 @@ def signin_view(request):
 
 
 class BoardView(viewsets.ModelViewSet):
+    """
+    Class responsible for the pages that handle requests to the Boards table.
+
+    ATTRIBUTES:
+        serializer_class: a serializer which is where the data from the frontend is stored.
+                          See serializers.py for more information
+
+    METHODS:
+        get_game_by_difficulty: Used when user selects create a new game
+        load_saved_game: Used when user wants to load a game they already saved
+        save_game_state: Used whenever the game's state is updated
+    """
+
     serializer_class = BoardSerializer
 
 
-"""
+@api_view(["POST"])
+def get_game_by_difficulty(request):
+    """
     Handle the user create a new sudoku game process via POST request.
 
     It receives the user's chosen difficulty, style, and username. Then it createas
@@ -113,14 +139,9 @@ class BoardView(viewsets.ModelViewSet):
     Response: A Django REST framework Response object. Returns a success message
               along with the newly created sudoku board data.
     """
-
-
-@api_view(["POST"])
-def get_game_by_difficulty(request):
     difficulty = request.data.get("difficulty")
     style = request.data.get("style")
     user = request.data.get("user")
-    print(style)
     if style == "killer":
         game = KillerSudoku(difficulty)
     else:
@@ -144,6 +165,21 @@ def get_game_by_difficulty(request):
 
 @api_view(["GET"])
 def load_saved_game(request):
+    """
+    Handle the user create a new sudoku game process via POST request.
+
+    It receives the current user's username and style. Then it makes a query to
+    the Boards table filtering all the rows for that username, that style, and
+    who's progress is less than 100%. It then returns this query as a list of
+    boards to the frontend.
+
+    Parameters:
+    request (Request): A Django REST framework Request object containing the user's
+                       username and style of board.
+    Returns:
+    Response: A Django REST framework Response object. Returns a success message
+              along with the array of all the sudoku board data that was requested.
+    """
     try:
         username = request.query_params.get("username")  # Fetch the username parameter
         style = request.query_params.get("style")  # Fetch the style parameter
@@ -165,17 +201,9 @@ def load_saved_game(request):
         return Response({"message": f"Error: {str(e)}"}, status=500)
 
 
-@api_view(["GET"])
-def choose_saved_game(request):
-    try:
-        board = Boards.objects.filter(id=request.data.get("id"))
-        serializer = BoardSerializer(board)
-        return Response(serializer.data)
-    except Boards.DoesNotExist:
-        return Response({"message": "No saved game found"}, status=404)
-
-
-"""
+@api_view(["POST"])
+def save_game_state(request):
+    """
     Handle the user saving a sudoku game prgoress process via POST request.
 
     It receives the current sudoku board id and the new board state. Then it
@@ -191,10 +219,6 @@ def choose_saved_game(request):
               a 200 OK status if the board was saved successfully. Returns an error
               message with a 404 status if the board was not found.
     """
-
-
-@api_view(["POST"])
-def save_game_state(request):
     board_id = request.data.get("board_id")
     new_state = json.loads(request.data.get("state"))
     try:
