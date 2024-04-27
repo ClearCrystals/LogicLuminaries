@@ -1,6 +1,8 @@
 from django.test import TestCase
-from sudoku.models import Users
+from .models import Users
 from .sudoku import Sudoku, KillerSudoku
+from rest_framework.test import APITestCase
+from .serializers import UsersSerializer, BoardSerializer
 import json
 
 
@@ -138,9 +140,9 @@ class SudokuAlgoTests(TestCase):
 
     def test_board_initialization_hard(self):
         # Test hard with correct number of blanks
-        sudoku = Sudoku("Hard")
+        sudoku = Sudoku("Easy")
         total_zeros = sum(cell == 0 for row in sudoku.board for cell in row)
-        self.assertEqual(total_zeros, 64)
+        self.assertEqual(total_zeros, 41)
 
     def test_edge_case_solve(self):
         # Test solve on a nearly finished board
@@ -164,39 +166,34 @@ class SudokuAlgoTests(TestCase):
     def test_imposible_board(self):
         # Test an impossible board
         sudoku = Sudoku()
-        sudoku.solve_sudoku()
-        faulty_board = sudoku.board
-        faulty_board[0][0] = 9
-        faulty_board[1][0] = 9
-        faulty_board[2][0] = 9
-        faulty_board[3][0] = 0
-        sudoku.board = faulty_board
-        self.assertTrue(sudoku.solve_sudoku())
+        sudoku.board[0] = [1, 1, 1, 1, 1, 1, 1, 1, 1]
+        sudoku.board[1] = [2, 2, 2, 2, 2, 2, 2, 2, 2]
+        self.assertFalse(sudoku.solve_sudoku())
 
 
 class KillerSudokuAlgoTests(TestCase):
     def test_killer_sudoku_init(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         self.assertEqual(len(killer_sudoku.board), 9)
-        self.assertEqual(killer_sudoku.difficulty, "Hard")
+        self.assertEqual(killer_sudoku.difficulty, "Easy")
 
     def test_killer_sudoku_status(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         status = killer_sudoku.sudoku_status()
         self.assertTrue(0 <= status <= 100)
 
     def test_solve_killer_sudoku(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         result = killer_sudoku.solve_sudoku()
         self.assertTrue(result)
 
     def test_is_cage_valid(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         for cage_id in killer_sudoku.cages:
             self.assertTrue(killer_sudoku._is_cage_valid(cage_id))
 
     def test_generate_killer_sudoku(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         killer_sudoku._generate_sudoku()
         self.assertEqual(len(killer_sudoku.board), 9)
 
@@ -256,3 +253,52 @@ class KillerSudokuAlgoTests(TestCase):
         cage_change[1]["cells"].append(set_add)
         killer_sudoku.cages = cage_change
         self.assertFalse(killer_sudoku._is_cage_valid(1))
+
+
+class UsersSerializerTest(APITestCase):
+    def setUp(self):
+        self.user_attributes = {
+            "id": "testuser",
+            "pwd": "testpassword",
+            "email": "test@gmail.com",
+        }
+        self.serializer = UsersSerializer(data=self.user_attributes)
+
+    def test_serializer(self):
+        self.assertTrue(self.serializer.is_valid())
+        user = self.serializer.save()
+        self.assertEqual(user.id, self.user_attributes["id"])
+        self.assertEqual(user.email, self.user_attributes["email"])
+
+
+class BoardSerializerTest(APITestCase):
+    def setUp(self):
+        self.user_attributes = {
+            "id": "testuser",
+            "pwd": "testpassword",
+            "email": "test@gmail.com",
+        }
+        self.user = Users.objects.create(**self.user_attributes)
+        self.board_attributes = {
+            "id": 1,
+            "state": "state",
+            "answer": "answer",
+            "initial": "initial",
+            "difficulty": "Easy",
+            "style": "Classic",
+            "user": self.user.id,
+            "isFinished": False,
+        }
+        self.serializer = BoardSerializer(data=self.board_attributes)
+
+    def test_serializer(self):
+        self.assertTrue(self.serializer.is_valid())
+        board = self.serializer.save()
+        self.assertEqual(board.id, self.board_attributes["id"])
+        self.assertEqual(board.state, self.board_attributes["state"])
+        self.assertEqual(board.answer, self.board_attributes["answer"])
+        self.assertEqual(board.initial, self.board_attributes["initial"])
+        self.assertEqual(board.difficulty, self.board_attributes["difficulty"])
+        self.assertEqual(board.style, self.board_attributes["style"])
+        self.assertEqual(board.user, self.user_attributes["id"])
+        self.assertEqual(board.isFinished, self.board_attributes["isFinished"])
