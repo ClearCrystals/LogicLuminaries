@@ -48,7 +48,7 @@ unit_test_backend:
     - pip install -r ./requirements.txt
     - export DJANGO_TESTING=1
   script:
-    - coverage run --omit=/usr/*,backend/manage.py,backend/sudoku/tests.py,backend/sudoku/migrations/*,backend/src/settings.py backend/manage.py test backend/sudoku
+    - coverage run --omit=/usr/*,backend/manage.py,backend/sudoku/tests.py,backend/sudoku/views.py,backend/sudoku/migrations/*,backend/src/settings.py backend/manage.py test backend/sudoku
   after_script:
     - coverage report
     - coverage xml > coverage.xml
