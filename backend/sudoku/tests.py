@@ -1,23 +1,9 @@
-from django.test import TestCase, RequestFactory, Client
-from .models import Users, Boards
+from django.test import TestCase
+from .models import Users
 from .sudoku import Sudoku, KillerSudoku
 from rest_framework.test import APITestCase
-from rest_framework import status
-from unittest.mock import Mock, patch
 from .serializers import UsersSerializer, BoardSerializer
 import json
-from rest_framework.test import force_authenticate
-from django.urls import reverse
-from sudoku.views import (
-    index,
-    signup_view,
-    signin_view,
-    get_game_by_difficulty,
-    load_saved_game,
-    choose_saved_game,
-    save_game_state,
-)
-from django.contrib.auth.models import User
 
 
 class UserModelTests(TestCase):
