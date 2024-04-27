@@ -7,7 +7,7 @@
 [![React Version](https://img.shields.io/badge/react-18.0.2-blue)](https://react.dev/)
 [![MySQL Version](https://img.shields.io/badge/mysql-8.0-orange)](https://www.mysql.com/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-1a2b34.svg?style=flat-square)](https://prettier.io/)
 
 ![Logo](./documentation/images/LLLogo.jpg){width=50%}
 
