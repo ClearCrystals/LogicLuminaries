@@ -25,17 +25,23 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 <!-- Here is a user requirements sample from [Crookshanks](https://learning-oreilly-com.ezproxy.library.wisc.edu/library/view/practical-software-development/9781484206201/9781484206218_Ch02.xhtml):-->
 
-| ID  | Description                                   | Priority | Status   |
-| --- | --------------------------------------------- | -------- | -------- |
-| 30  | User can login                                | High     | Complete |
-| 53  | User can play a new game                      | High     | Complete |
-| 53  | User can edit and add numbers into a new game | High     | Complete |
-| 72  | User can see win screen                       | Low      | Open     |
-| 68  | User can save game                            | Med      | Complete |
-| 70  | User can leave and come back                  | High     | Open     |
-| #   | User can select variant                       | Med      | Open     |
+| ID     | Description                                                                                |
+| ------ | ------------------------------------------------------------------------------------------ | 
+| [SRS-001](#117) |When user visits the homepage of the application, the frontend software SHALL display a homepage which is substantially similar to the figma wireframe of the homepage|
+| [SRS-002](#118) |When user visits the homepage of the application, the frontend software SHALL present the user with a series of options, represented as buttons with text contained Login and Register|
+| [SRS-003](#119) |When the User clicks "Sign up" or "Register" the software shall go to the User Sign up Page or the Register Page.|
+| [SRS-004](#120) |When the user arrives at "Register" page there must be 3 text box inputs one for username, one for email and one for password. There also must be a button that shall get the user to the "Sign up" Page.|
+| [SRS-005](#121) |When the user arrives at "Login" page there must be 2 text box inputs one for email and one for password. There also must be a button that shall get the user to the "Sign up" Page and there must also be a "Submit" button.|
+| [SRS-006](#122) |If user clicks the "Submit" button on the "Sign Up" Page there shall appear a green confirmation button.|
+| [SRS-007](#123) |If the user clicks the submit button on the Sign in page then the page shall correctly authenticate and go to the Games page.|
+| [SRS-008](#124) |The Games page must have The text "Welcome, [user]" as well as the cards that have their own respective buttons that the user can choose between which game they would like to play.|
+| [SRS-009](#125)    |When the User has chosen a game, by clicking on the respective button. Both games Killer Sudoku and Normal Sudoku. The software shall take the user to Game Mode Selection Page where there are two buttons: New Game and Load Saved Game|
+| [SRS-010](#126)   |If the user choose Load game the Software Shall go to the list of Saved Games.|
+| [SRS-011](#127)   |If the User choose Create new Game, the software shall go to another page and ask if the game difficulty that they want is easy medium or hard in the form of buttons.|
+| [SRS-012](#128)   |In both cases where the user clicked on a button, that generated a board. One case for if they chose difficult on a new board or if they chose a saved game. The software must show a 9x9 grid where the user can input numbers by clicking on a cell and then must be able to click on a number pop up in order to replace or put the number on the cell. The Board must be generated as a Sudoku board where all the Blue numbers are un editable and all the numbers that are inputted thereafter are editable.|
+| [SRS-013](#129)   |On the Sudoku board page there should be a submit button in relation to when all the numbers of the board are submitted. There is a green confirmation that the game is correct.|
+| [SRS-014](#130)   |On every page frontend page minus the home page. There must exist a Banner at the top that leads back to your logged in page.|
 
-'#' Means not assigned to an ID yet
 
 <!--<div align="center"><small><i>Excerpt from Crookshanks Table 2-2 showing example user requirements for a timekeeping system</i></small></div>-->
 
@@ -75,14 +81,16 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 #### Main Epics
 
+
 | ID     | Description                                                                                | Priority | Status   |
 | ------ | ------------------------------------------------------------------------------------------ | -------- | -------- |
 | EPIC#1 | Generate, Backend, 9x9 grid of puzzle and solution                                         | High     | Complete |
-| EPIC#2 | Provide, Backend, variaing levels of difficulty                                            | High     | Open     |
+| EPIC#2 | Provide, Backend, variaing levels of difficulty                                            | High     | Complete     |
 | EPIC#3 | Store the values, Data Wrangler, of the the puzzle grid and solution in the MySQL Database | High     | Complete |
-| EPIC#4 | Create an Interface, front end, where a user can solve the puzzle                          | Med      | Open     |
-| EPIC#5 | (Stretch Goals) Support multiple variants of Sudoku, such as arrow, killer, etc.           | Low      | Open     |
+| EPIC#4 | Create an Interface, front end, where a user can solve the puzzle                          | Med      | Complete     |
+| EPIC#5 | (Stretch Goals) Support multiple variants of Sudoku, such as killer, etc.           | Low      | Open     |
 | EPIC#6 | (Stretch goal) Include tools for solving, such as pencil marking, coloring, and hinting.   | Low      | Open     |
+
 
 ### User Interface Requirements
 
