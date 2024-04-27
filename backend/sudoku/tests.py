@@ -171,8 +171,8 @@ class SudokuAlgoTests(TestCase):
         sudoku = Sudoku()
         sudoku.solve_sudoku()
         faulty_board = sudoku.board
-        faulty_board[0][0] = 9
-        faulty_board[1][0] = 9
+        faulty_board[0][0] = 4
+        faulty_board[1][0] = 4
         faulty_board[2][0] = 9
         faulty_board[3][0] = 0
         sudoku.board = faulty_board
