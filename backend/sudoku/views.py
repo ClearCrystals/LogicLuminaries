@@ -154,9 +154,7 @@ def load_saved_game(request):
                 user=username, style=style, isFinished__lt=100.0
             )
         else:
-            boards = Boards.objects.filter(
-                user=username, isFinished__lt=100.0
-            )
+            boards = Boards.objects.filter(user=username, isFinished__lt=100.0)
 
         if not boards.exists():
             return Response({"message": "No saved game found"}, status=404)
