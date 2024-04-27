@@ -31,10 +31,10 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 | [SRS-002](#118) |When user visits the homepage of the application, the frontend software SHALL present the user with a series of options, represented as buttons with text contained Login and Register|
 | [SRS-003](#119) |When the User clicks "Sign up" or "Register" the software shall go to the User Sign up Page or the Register Page.|
 | [SRS-004](#120) |When the user arrives at "Register" page there must be 3 text box inputs one for username, one for email and one for password. There also must be a button that shall get the user to the "Sign up" Page.|
-| [SRS-005](#1) ||
-| [SRS-006](#1) |             |
-| [SRS-007](#1) |             |
-| [SRS-008](#1)    |             |
+| [SRS-005](#121) |When the user arrives at "Login" page there must be 2 text box inputs one for email and one for password. There also must be a button that shall get the user to the "Sign up" Page and there must also be a "Submit" button.|
+| [SRS-006](#122) |If user clicks the "Submit" button on the "Sign Up" Page there shall appear a green confirmation button.|
+| [SRS-007](#123) |If the user clicks the submit button on the Sign in page then the page shall correctly authenticate and go to the Games page.|
+| [SRS-008](#124) |The Games page must have The text "Welcome, [user]" as well as the cards that have their own respective buttons that the user can choose between which game they would like to play.|
 | [SRS-009](#1)    | |
 | [SRS-010](#1)   |             |
 | [SRS-011](#1)   |             |
