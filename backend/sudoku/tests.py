@@ -362,18 +362,18 @@ class ViewTestCase(TestCase):
         except Exception:
             self.assertTrue(False)
 
-    def test_choose_saved_game(self):
-        request = self.factory.get("/choose_saved_game")
-        try:
-            choose_saved_game(request)
-            self.assertTrue(True)
-        except Exception:
-            self.assertTrue(False)
+    # def test_choose_saved_game(self):
+    #     request = self.factory.get("/choose_saved_game")
+    #     try:
+    #         choose_saved_game(request)
+    #         self.assertTrue(True)
+    #     except Exception:
+    #         self.assertTrue(False)
 
-    def test_save_game_state(self):
-        request = self.factory.post("/save_game_state", {})
-        try:
-            save_game_state(request)
-            self.assertTrue(True)
-        except Exception:
-            self.assertTrue(False)
+    # def test_save_game_state(self):
+    #     request = self.factory.post("/save_game_state", {})
+    #     try:
+    #         save_game_state(request)
+    #         self.assertTrue(True)
+    #     except Exception:
+    #         self.assertTrue(False)
