@@ -8,7 +8,7 @@ Within models.py are classes that are the data models in Django. With these, you
 
 Users: the model that interacts with the user table in the database.
 
-Board: the model that interacts with the board table in the database.
+Boards: the model that interacts with the board table in the database.
 
 For information about the classes themselves, view comments in the models.py file.
 
@@ -21,8 +21,8 @@ To represent the database table, this is how Django does it. The class represent
 The following Django code initializes an instance of the User class. This is equal to the Insert statement in MySQL.
 
 ```
-from src.models import User
-u = User(id="username", pwd="password", token=token)
+from sudoku.models import Users
+u = Users(id="username", pwd="password", email="test@email.com")
 u.save()
 ```
 
@@ -33,7 +33,7 @@ Note: Django **does not** connect to the database until you call `save`
 There is a shortcut you can use to create a row in the database. The `create` method combined creating an instance and then applying the `save` function all in one go. An example code snippet is below.
 
 ```
-alt_u = User.objects.create(id="user", pwd="pass", token= token)
+alt_u = Users.objects.create(id="user", pwd="pass", email="something@test.com")
 ```
 
 Note: It requires you to use `objects` on the **class**. See below for further details.
@@ -45,38 +45,40 @@ To retrieve rows of data from our database, we must create a QuerySet on our mod
 See an example Select all users statement.
 
 ```
-all_users = User.objects.all()
+all_users = Users.objects.all()
 ```
 
 And here's an example of a Select statment with a Where filter.
 
 ```
-r_users = User.objects.filter(id__startsWith("R"))
+r_users = Users.objects.filter(id__startsWith("R"))
 ```
 
 And here's an example of getting a specific user.
 
 ```
-one_user = User.get(id="Bucky Badger")
+one_user = Users.get(id="Bucky Badger")
 ```
 
-Note: QuerySets are lazy thus creating a QuerySet does not involve database activity. The SQL query is only run once the QuerySet is evaluated. For more information, view Making Queries reference.
+Note: QuerySets are lazy thus creating a QuerySet does not involve database activity. The SQL query is only run once the QuerySet is evaluated. For more information, view the Making Queries reference at the end of the document.
 
 ###### Update
 
-Once you have an instance, either via creating a new instance or retrieving one via get, you can then make any change then call `save` is the equivalent of the Update. For example:
+Once you have an instance, either via creating a new instance or retrieving one via get, you can then make any change then call `save`. This is the equivalent of the Update in SQL. For example:
 
 ```
 one_user.password = "p@ssw0rd"
 one_user.save()
 ```
 
-This performs an Update statement that changes Bucky Badger's username. Note: Like when inserting, Django does not hit the database until you call `save`.
+This performs an Update statement that changes Bucky Badger's password.
 
-You are also able to edit several rows at once with the `update` method. For example, if we wanted to change the token for all the users that start with the letter R this is how we would do it:
+Note: Like when inserting, Django does not hit the database until you call `save`.
+
+You are also able to edit several rows at once with the `update` method. For example, if we wanted to change the email for all the users that start with the letter R this is how we would do it:
 
 ```
-r_users.update(token=newToken)
+r_users.update(email="share@email.com")
 ```
 
 ###### Delete
