@@ -160,7 +160,7 @@ class KillerSudoku(Sudoku):
         visited = set()
         cage_id = 1
 
-        # Iterate over each cell to potentially start a new cage
+        # Iterate over each cell 
         for start_cell in all_cells:
             if start_cell not in visited:
                 current_cage = []
@@ -172,7 +172,7 @@ class KillerSudoku(Sudoku):
                     if cell not in visited:
                         current_cage.append(cell)
                         visited.add(cell)
-                        # Add adjacent cells to the visit list
+                        # aadd adjacent cells to the visit list
                         row, col = cell
                         possible_directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
                         random.shuffle(possible_directions)
@@ -184,7 +184,7 @@ class KillerSudoku(Sudoku):
                                 and (adj_cell not in visited)
                             ):
                                 cells_to_visit.append(adj_cell)
-                # Calculate the sum of the numbers in the cage using the solved board
+                # find de sum of the numbers in the cage using the solved board
                 if current_cage:
                     cage_sum = sum(
                         self.solved_board[row][col] for row, col in current_cage
