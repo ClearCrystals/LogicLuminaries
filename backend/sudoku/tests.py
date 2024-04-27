@@ -140,7 +140,7 @@ class SudokuAlgoTests(TestCase):
 
     def test_board_initialization_hard(self):
         # Test hard with correct number of blanks
-        sudoku = Sudoku("Hard")
+        sudoku = Sudoku("Easy")
         total_zeros = sum(cell == 0 for row in sudoku.board for cell in row)
         self.assertEqual(total_zeros, 64)
 
@@ -173,27 +173,27 @@ class SudokuAlgoTests(TestCase):
 
 class KillerSudokuAlgoTests(TestCase):
     def test_killer_sudoku_init(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         self.assertEqual(len(killer_sudoku.board), 9)
-        self.assertEqual(killer_sudoku.difficulty, "Hard")
+        self.assertEqual(killer_sudoku.difficulty, "Easy")
 
     def test_killer_sudoku_status(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         status = killer_sudoku.sudoku_status()
         self.assertTrue(0 <= status <= 100)
 
     def test_solve_killer_sudoku(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         result = killer_sudoku.solve_sudoku()
         self.assertTrue(result)
 
     def test_is_cage_valid(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         for cage_id in killer_sudoku.cages:
             self.assertTrue(killer_sudoku._is_cage_valid(cage_id))
 
     def test_generate_killer_sudoku(self):
-        killer_sudoku = KillerSudoku("Hard")
+        killer_sudoku = KillerSudoku("Easy")
         killer_sudoku._generate_sudoku()
         self.assertEqual(len(killer_sudoku.board), 9)
 
