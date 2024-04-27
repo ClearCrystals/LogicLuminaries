@@ -38,19 +38,9 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 | [SRS-009](#125)    |When the User has chosen a game, by clicking on the respective button. Both games Killer Sudoku and Normal Sudoku. The software shall take the user to Game Mode Selection Page where there are two buttons: New Game and Load Saved Game|
 | [SRS-010](#126)   |If the user choose Load game the Software Shall go to the list of Saved Games.|
 | [SRS-011](#127)   |If the User choose Create new Game, the software shall go to another page and ask if the game difficulty that they want is easy medium or hard in the form of buttons.|
-| [SRS-012](#1)   |             |
-| [SRS-013](#1)   |             |
-| [SRS-014](#1)   |             |
-| [SRS-015](#15)   |             |
-| [SRS-016](#16)   |             |
-| [SRS-017](#17)   |             |
-| [SRS-018](#18)   |             |
-| [SRS-019](#19)   |             |
-| [SRS-020](#20)   |             |
-| [SRS-021](#21)   |             |
-| [SRS-022](#22)   |             |
-| [SRS-023](#23)   |             |
-| [SRS-024](#24)   |             |
+| [SRS-012](#128)   |In both cases where the user clicked on a button, that generated a board. One case for if they chose difficult on a new board or if they chose a saved game. The software must show a 9x9 grid where the user can input numbers by clicking on a cell and then must be able to click on a number pop up in order to replace or put the number on the cell. The Board must be generated as a Sudoku board where all the Blue numbers are un editable and all the numbers that are inputted thereafter are editable.|
+| [SRS-013](#129)   |On the Sudoku board page there should be a submit button in relation to when all the numbers of the board are submitted. There is a green confirmation that the game is correct.|
+| [SRS-014](#130)   |On every page frontend page minus the home page. There must exist a Banner at the top that leads back to your logged in page.|
 
 
 <!--<div align="center"><small><i>Excerpt from Crookshanks Table 2-2 showing example user requirements for a timekeeping system</i></small></div>-->
