@@ -8,9 +8,16 @@ from .serializers import UsersSerializer, BoardSerializer
 import json
 from rest_framework.test import force_authenticate
 from django.urls import reverse
-from sudoku.views import index, signup_view, signin_view, get_game_by_difficulty, load_saved_game, choose_saved_game, save_game_state
+from sudoku.views import (
+    index,
+    signup_view,
+    signin_view,
+    get_game_by_difficulty,
+    load_saved_game,
+    choose_saved_game,
+    save_game_state,
+)
 from django.contrib.auth.models import User
-
 
 
 class UserModelTests(TestCase):
@@ -177,6 +184,7 @@ class SudokuAlgoTests(TestCase):
         sudoku.board[1] = [2, 2, 2, 2, 2, 2, 2, 2, 2]
         self.assertFalse(sudoku.solve_sudoku())
 
+
 class KillerSudokuAlgoTests(TestCase):
     def test_killer_sudoku_init(self):
         killer_sudoku = KillerSudoku("Hard")
@@ -309,52 +317,63 @@ class BoardSerializerTest(APITestCase):
         self.assertEqual(board.user, self.user_attributes["id"])
         self.assertEqual(board.isFinished, self.board_attributes["isFinished"])
 
+
 class ViewTestCase(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
     def test_index(self):
+        request = self.factory.get("/")
         try:
-            index(None)
+            index(request)
             self.assertTrue(True)
         except Exception:
             self.assertTrue(False)
 
     def test_signup_view(self):
+        request = self.factory.post("/signup", {})
         try:
-            signup_view(None)
+            signup_view(request)
             self.assertTrue(True)
         except Exception:
             self.assertTrue(False)
 
     def test_signin_view(self):
+        request = self.factory.post("/signin", {})
         try:
-            signin_view(None)
+            signin_view(request)
             self.assertTrue(True)
         except Exception:
             self.assertTrue(False)
 
     def test_get_game_by_difficulty(self):
+        request = self.factory.get("/get_game_by_difficulty")
         try:
-            get_game_by_difficulty(None)
+            get_game_by_difficulty(request)
             self.assertTrue(True)
         except Exception:
             self.assertTrue(False)
 
     def test_load_saved_game(self):
+        request = self.factory.get("/load_saved_game")
         try:
-            load_saved_game(None)
+            load_saved_game(request)
             self.assertTrue(True)
         except Exception:
             self.assertTrue(False)
 
     def test_choose_saved_game(self):
+        request = self.factory.get("/choose_saved_game")
         try:
-            choose_saved_game(None)
+            choose_saved_game(request)
             self.assertTrue(True)
         except Exception:
             self.assertTrue(False)
 
     def test_save_game_state(self):
+        request = self.factory.post("/save_game_state", {})
         try:
-            save_game_state(None)
+            save_game_state(request)
             self.assertTrue(True)
         except Exception:
             self.assertTrue(False)
