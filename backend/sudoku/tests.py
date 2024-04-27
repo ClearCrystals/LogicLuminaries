@@ -311,33 +311,38 @@ class BoardSerializerTest(APITestCase):
 
 class ViewTestCase(TestCase):
     def setUp(self):
-        self.factory = RequestFactory()
+        self.client = Client()
+        self.user = User.objects.create_user('username', 'email@test.com', 'password')
 
     def test_index(self):
-        request = self.factory.get('/')
-        index(request)
+        self.client.login(username='username', password='password')
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 200)
 
     def test_signup_view(self):
-        request = self.factory.post('/signup/')
-        signup_view(request)
+        response = self.client.post(reverse('signup'), {'username': 'newuser', 'password': 'newpassword'})
+        self.assertEqual(response.status_code, 302)
 
     def test_signin_view(self):
-        request = self.factory.post('/signin/')
-        signin_view(request)
+        response = self.client.post(reverse('signin'), {'username': 'username', 'password': 'password'})
+        self.assertEqual(response.status_code, 302)
 
     def test_get_game_by_difficulty(self):
-        request = self.factory.post('/board/', {'difficulty': 'easy'})  # Add difficulty data
-        get_game_by_difficulty(request)
+        self.client.login(username='username', password='password')
+        response = self.client.post(reverse('get_game_by_difficulty'), {'difficulty': 'easy'})
+        self.assertEqual(response.status_code, 200)
 
     def test_load_saved_game(self):
-        request = self.factory.get('/saved-game/')
-        load_saved_game(request)
+        self.client.login(username='username', password='password')
+        response = self.client.get(reverse('load_saved_game'))
+        self.assertEqual(response.status_code, 200)
 
     def test_choose_saved_game(self):
-        request = self.factory.get('/saved-game/')
-        request.user = User.objects.create_user('username', 'email@test.com', 'password')  # Add this line
-        choose_saved_game(request)
+        self.client.login(username='username', password='password')
+        response = self.client.get(reverse('choose_saved_game'))
+        self.assertEqual(response.status_code, 200)
 
     def test_save_game_state(self):
-        request = self.factory.post('/save/', {'state': 'some_state'})  # Add state data
-        save_game_state(request)
+        self.client.login(username='username', password='password')
+        response = self.client.post(reverse('save_game_state'), {'state': 'some_state'})
+        self.assertEqual(response.status_code, 200)
