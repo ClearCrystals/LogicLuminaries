@@ -80,7 +80,7 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 | [SRS-001](#117) |When user visits the homepage of the application, the frontend software SHALL display a homepage which is substantially similar to the figma wireframe of the homepage|
 | [SRS-002](#118) |When user visits the homepage of the application, the frontend software SHALL present the user with a series of options, represented as buttons with text contained Login and Register|
 | [SRS-003](#119) |When the User clicks "Sign up" or "Register" the software shall go to the User Sign up Page or the Register Page.|
-| [SRS-004](#117) | |
+| [SRS-004](#120) |When the user arrives at "Register" page there must be 3 text box inputs one for username, one for email and one for password. There also must be a button that shall get the user to the "Sign up" Page.|
 | [SRS-005](#1) ||
 | [SRS-006](#1) |             |
 | [SRS-007](#1) |             |
