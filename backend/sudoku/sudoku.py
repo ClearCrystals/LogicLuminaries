@@ -155,44 +155,42 @@ class KillerSudoku(Sudoku):
         Generates cages for the puzzle. A cage is a group of cells randomly clustered
         together with a specific sum. They are adjacent to each other no wraping
         """
-        # Make a list of all possible locations and shuffle as to not miss a location
         all_cells = [(row, col) for row in range(9) for col in range(9)]
         random.shuffle(all_cells)
-
-        # Make a set of where you visit the cells, and unique id for cage dict
         visited = set()
         cage_id = 1
 
-        # Iterate over all the possible locations
+        # Iterate over each cell
         for start_cell in all_cells:
-            if not (start_cell in visited):
-                # If the cells has not been visited create a cage around it with ran length
+            if start_cell not in visited:
                 current_cage = []
                 cells_to_visit = [start_cell]
                 cells_in_cage = random.randint(2, 5)
-                # Step and traverse randomly until wanted length or no more possible locations
+
                 while cells_to_visit and len(current_cage) < cells_in_cage:
                     cell = cells_to_visit.pop()
-                    if not (cell in visited):
+                    if cell not in visited:
                         current_cage.append(cell)
                         visited.add(cell)
+                        # aadd adjacent cells to the visit list
                         row, col = cell
                         possible_directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
                         random.shuffle(possible_directions)
-                        # Step randomly into a different location only adjacent locations possible
-                        for change in possible_directions:
-                            dif_row, dif_col = change
-                            adj_cell = (row + dif_row, col + dif_col)
+                        for d_row, d_col in possible_directions:
+                            adj_cell = (row + d_row, col + d_col)
                             if (
-                                0 <= adj_cell[0] < 9
-                                and 0 <= adj_cell[1] < 9
-                                and adj_cell not in visited
+                                (0 <= adj_cell[0] < 9)
+                                and (0 <= adj_cell[1] < 9)
+                                and (adj_cell not in visited)
                             ):
                                 cells_to_visit.append(adj_cell)
-                # Cages have desired cells, or nowhere else to traverse sum and add to dictionary
-                cage_sum = sum(self.solved_board[row][col] for row, col in current_cage)
-                self.cages[cage_id] = {"sum": cage_sum, "cells": current_cage}
-                cage_id += 1
+                # find de sum of the numbers in the cage using the solved board
+                if current_cage:
+                    cage_sum = sum(
+                        self.solved_board[row][col] for row, col in current_cage
+                    )
+                    self.cages[cage_id] = {"sum": cage_sum, "cells": current_cage}
+                    cage_id += 1
 
     def _is_cage_valid(self, cage_id):
         """
