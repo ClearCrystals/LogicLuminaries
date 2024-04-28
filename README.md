@@ -87,6 +87,11 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 - Issues 54-60 Making adjustments to previous definitions after completing walking skeleton, implementing styling
 - Issues 61-69 Adding integrated functionality to walking skeleton, coverage testing for generation algorithm
 - Issues 70-72 Completing frontend/backend/database data transfer, expanding coverage testing, adding win screen
+- Issues 73-84 Adding continous deployment, static analysis, screens, improving algo, and saving initial state 
+- Issues 85-97 Handling blue/black, rework UI, fix, show progress, and handle duplicate emails
+- Issues 98-107 Implement and add killer Sudoku variant, killer tests, 100% coverage, sphinx docs
+- Issues 108-134 Refactor, update views, add badges, more coments, adding final diagrams and research
+
 
 #### Main Epics
 
