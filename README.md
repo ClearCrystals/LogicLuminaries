@@ -114,14 +114,21 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 <!--Discuss what security requirements are necessary and why. Are there privacy or confidentiality issues? Is your system vulnerable to denial-of-service attacks?-->
 
-### System Requirements
+### System Requirements, Installation, and Usage
 
 <!--List here all of the external entities, other than users, on which your system will depend. For example, if your system inter-operates with sendmail, or if you will depend on Apache for the web server, or if you must target both Unix and Windows, list those requirements here. List also memory requirements, performance/speed requirements, data capacity requirements, if applicable.-->
 
-| You    |    can    |    also |
-| ------ | :-------: | ------: |
-| change |    how    | columns |
-| are    | justified |         |
+You need at least 4 GB of RAM, a 64-bit kernel with CPU support for virtualization, and a Docker Desktop installed. Then run these commands:
+
+``` sh
+ssh -L localhost:8000:localhost:8000 -L localhost:3000:localhost:3000 <username>@cs506-team-10.cs.wisc.edu
+cd /nobackup/
+docker login registry.doit.wisc.edu -u <GAT> -p <GAT>
+git config --global credential.helper store
+git clone https://<GAT>@git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries.git
+cd logicluminaries/
+docker compose -p sudoku up
+```
 
 ### Specification
 
