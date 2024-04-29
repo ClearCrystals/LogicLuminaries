@@ -1,8 +1,8 @@
 # Sudoku by Logic Luminaries
 
-[![pipeline](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/badges/main/pipeline.svg)](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/-/pipelines) 
+[![pipeline](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/badges/main/pipeline.svg)](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/-/pipelines)
 [![coverage](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/badges/main/coverage.svg?job=unit_test_backend)](https://git.doit.wisc.edu/cdis/cs/courses/cs506/sp2024/team/mondaywednesdaylecture/T_10/logicluminaries/-/graphs/main/charts)
-[![Python Version](https://img.shields.io/badge/python-3.8-blue)](https://docs.python.org/3.12/)
+[![Python Version](https://img.shields.io/badge/python-3.12-blue)](https://docs.python.org/3.12/)
 [![Django Version](https://img.shields.io/badge/django-5.0.2-green)](https://docs.djangoproject.com/en/5.0/releases/5.0.2/)
 [![React Version](https://img.shields.io/badge/react-18.0.2-blue)](https://react.dev/)
 [![MySQL Version](https://img.shields.io/badge/mysql-8.0-orange)](https://www.mysql.com/)
@@ -86,6 +86,10 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 - Issues 54-60 Making adjustments to previous definitions after completing walking skeleton, implementing styling
 - Issues 61-69 Adding integrated functionality to walking skeleton, coverage testing for generation algorithm
 - Issues 70-72 Completing frontend/backend/database data transfer, expanding coverage testing, adding win screen
+- Issues 73-84 Adding continous deployment, static analysis, screens, improving algo, and saving initial state
+- Issues 85-97 Handling blue/black, rework UI, fix, show progress, and handle duplicate emails
+- Issues 98-107 Implement and add killer Sudoku variant, killer tests, 100% coverage, sphinx docs
+- Issues 108-134 Refactor, update views, add badges, more coments, adding final diagrams and research
 
 #### Main Epics
 
