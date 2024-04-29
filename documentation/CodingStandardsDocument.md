@@ -54,6 +54,8 @@ if (condition) {
 
 ## Commenting and Documentation
 
+- Single line comments for confusing/unclear pieces of code in all languages
+
 ### Python
 
 - Use docstrings for module, class, and function documentation.
@@ -84,5 +86,3 @@ function calculateTotal(numbers) {
   // code
 }
 ```
-
-## Testing
