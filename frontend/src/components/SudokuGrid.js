@@ -34,8 +34,6 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
   const [showNumberSelector, setShowNumberSelector] = useState(false);
   const [id, setId] = useState(0);
   const [correctAnswer, setCorrectAnswer] = useState(null);
-  const [correctState, setCorrectState] = useState(null);
-  const [completeness, setCompleteness] = useState("");
 
   const { username, sudokuStyle } = useUser(); // Get username and sudokuStyle from context
 
@@ -60,7 +58,6 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
         const parsedInitial = JSON.parse(response.data.initial);
         const parsedState = JSON.parse(response.data.state);
         const parsedAnswer = JSON.parse(response.data.answer);
-        const parsedCompleteness = JSON.parse(response.data.isFinished);
 
         const newGrid = parsedState.map((row, rowIndex) =>
           row.map((value, colIndex) => ({
@@ -72,7 +69,6 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
         setId(response.data.id);
         setGridData(newGrid);
         setCorrectAnswer(parsedAnswer);
-        setCompleteness(parsedCompleteness);
       }
 
       console.log(`${data} response:`, response.data);
@@ -85,7 +81,6 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
     if (savedGrid) {
       const parsedInitial = JSON.parse(savedGrid.initial);
       const parsedState = JSON.parse(savedGrid.state);
-      const parsedCompleteness = JSON.parse(savedGrid.isFinished);
 
       const newGrid = parsedState.map((row, rowIndex) =>
         row.map((value, colIndex) => ({
@@ -96,7 +91,6 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
 
       setId(savedGrid.id);
       setGridData(newGrid);
-      setCompleteness(parsedCompleteness);
     } else {
       fetchData();
     }
@@ -118,9 +112,7 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
           "X-CSRFToken": csrfToken,
         },
       })
-      .then(() => {
-        console.log("Grid saved");
-      })
+      .then(() => console.log("Grid saved"))
       .catch((error) => console.error("Error saving grid:", error));
   };
 
@@ -149,28 +141,6 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
     }
   };
 
-  //checks without saving
-  const handleMessage = () => {
-    if (!correctAnswer) {
-      console.error("No correct answer available for comparison.");
-      return;
-    }
-    const isCorrect = gridData.every((row, rowIndex) =>
-      row.every(
-        (cell, colIndex) =>
-          cell.value.toString() ===
-          correctAnswer[rowIndex][colIndex].toString(),
-      ),
-    );
-
-    setCorrectState(isCorrect ? true : false);
-
-    if (correctState == null) {
-      return;
-    }
-    console.log(correctState);
-  };
-
   const handleSubmit = () => {
     if (!correctAnswer) {
       console.error("No correct answer available for comparison.");
@@ -185,20 +155,12 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
           correctAnswer[rowIndex][colIndex].toString(),
       ),
     );
-    setCorrectState(isCorrect ? true : false);
-    debouncedSaveGridData();
+
     console.log(isCorrect ? "Correct solution!" : "Incorrect solution.");
   };
 
   return (
     <Container>
-      <Row>
-        <Col>
-          <p>
-            <b>Correctness:</b> {correctState ? "Correct" : "Incorrect"}
-          </p>
-        </Col>
-      </Row>
       {gridData.map((row, rowIndex) => (
         <Row key={rowIndex}>
           {row.map((cell, colIndex) => (
@@ -231,22 +193,9 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
       )}
       <Row className="mt-3">
         <Col>
-          <Button
-            variant="success"
-            onClick={handleMessage}
-            style={{ margin: "10px" }}
-          >
-            Check
-          </Button>
-          <br></br>
-          <Button
-            variant="primary"
-            onClick={handleSubmit}
-            style={{ margin: "10px" }}
-          >
+          <Button variant="primary" onClick={handleSubmit}>
             Submit
           </Button>
-          <br></br>
         </Col>
       </Row>
     </Container>
