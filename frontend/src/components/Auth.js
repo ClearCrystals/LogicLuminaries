@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useUser } from "./UserContext";
 
 axios.defaults.xsrfCookieName = "csrfToken";
@@ -37,7 +37,7 @@ export default function AuthForm(props) {
     }
   }, []);
 
-//   This is where authentication needs to occur. Other pages will be blocked depending on auth token.
+//   TODO: This is where authentication needs to occur. Other pages will be blocked depending on auth token.
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -88,10 +88,12 @@ export default function AuthForm(props) {
 
   return (
     //add back button on sign in
+    <div id="wrapper">
     <div id="authContainer">
-      <Container>
+      <Container fluid>
         <Row>
           <Col id="authCol">
+            {/* Success message! */}
             {showSuccess && (
               <div
                 style={{
@@ -101,58 +103,92 @@ export default function AuthForm(props) {
                   marginBottom: "10px",
                 }}
               >
-                Account created successfully! Please signin.
+                Account created successfully!
               </div>
             )}
-            <form className="Auth-form" onSubmit={handleSubmit}>
+            <header>
               <h1 style={{ textAlign: "center" }}>
-                {authMode === "signin" ? "Sign In" : "Sign Up"}
+              {authMode === "signin" ? "Sign In" : "Sign Up"}
               </h1>
-              {/* TODO: bootstrap forms */}
-              {authMode === "signup" && (
-                <div className="form_item">
-                  <label className="form_label">ID </label>
-                  <input
-                    type="text"
-                    placeholder="Enter ID"
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
-                  />
-                </div>
+            </header> 
+            <br></br>
+              {/* depending on the authmode, the content of the screen is determined */}
+              {authMode === "signin" && (
+                <Form className="Auth-form">
+                  <Form.Group className="mb-3" as={Row}>
+                    <Form.Label column sm={2}>Email Address</Form.Label>
+                    <Col sm={10}>
+                    <Form.Control 
+                      type="email"
+                      placeholder="Enter email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}/>
+                    </Col>
+                  </Form.Group>
+                  <Form.Group as={Row}>
+                    <Form.Label column sm={2}>Password</Form.Label>
+                    <Col sm={10}>
+                    <Form.Control 
+                      type="password"
+                      placeholder="Enter password"
+                      value={pwd}
+                      onChange={(e) => setPwd(e.target.value)}/>
+                    </Col>
+                  </Form.Group>
+                </Form>
               )}
-              <div className="form_item">
-                <label className="form_label">Email address </label>
-                <input
-                  type="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="form_item">
-                <label className="form_label">Password </label>
-                <input
-                  type="password"
-                  placeholder="Enter password"
-                  value={pwd}
-                  onChange={(e) => setPwd(e.target.value)}
-                />
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
+              {authMode === "signup" && (
+                <Form className="Auth-form">
+                  <Form.Group className="mb-3" as={Row}>
+                    <Form.Label column sm={2}>ID</Form.Label>
+                    <Col sm={10}>
+                    <Form.Control 
+                      type="text" 
+                      placeholder="Enter ID" 
+                      value={id} 
+                      onChange={(e) => setId(e.target.value)}/>
+                    </Col>
+                  </Form.Group>
+                  <Form.Group className="mb-3" as={Row}>
+                    <Form.Label column sm={2}>Email Address</Form.Label>
+                    <Col sm={10}>
+                    <Form.Control 
+                      type="email"
+                      placeholder="Enter email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}/>
+                    </Col>
+                  </Form.Group>
+                  <Form.Group as={Row}>
+                    <Form.Label column sm={2}>Password</Form.Label>
+                    <Col sm={10}>
+                    <Form.Control 
+                      type="password"
+                      placeholder="Enter password"
+                      value={pwd}
+                      onChange={(e) => setPwd(e.target.value)}/>
+                    </Col>
+                  </Form.Group>
+                </Form>
+              )}
+              <br></br>
+              <Button variant="primary" onClick={handleSubmit} size="lg">Submit</Button>
+              {/* SIGNIN REROUTE */}
               <p className="text-center mt-2">
                 {authMode === "signin"
                   ? "Need an account? "
                   : "Already registered? "}
-                <button className="link-like-button" onClick={changeAuthMode}>
-                  {authMode === "signin" ? "Sign Up" : "Sign In"}
-                </button>
+                <Button variant="secondary" onClick={changeAuthMode} size="sm"> 
+                {authMode === "signin" ? "Sign Up" : "Sign In"} 
+                </Button>
               </p>
-            </form>
+              <Link to="/">
+              <Button variant="secondary">Back Home</Button>
+              </Link>
           </Col>
         </Row>
       </Container>
+    </div>
     </div>
   );
 }
