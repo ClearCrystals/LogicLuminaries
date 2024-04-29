@@ -106,6 +106,10 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 
 <!--Describes any customer user interface requirements including graphical user interface requirements as well as data exchange format requirements. This also should include necessary reporting and other forms of human readable input and output. This should focus on how the feature or product and user interact to create the desired workflow. Describing your intended interface as “easy” or “intuitive” will get you nowhere unless it is accompanied by details.-->
 
+Link to Figma prototype board: [Prototype](https://www.figma.com/file/sHQWq1l1Ohp6OeOpo6M7Uj/Sudoku-Prototype?type=design&node-id=0%3A1&mode=design&t=vHhiSbuQ8qf681xa-1)
+
+Intentionally designed with accessibility and simplicity in mind (contrasting colors that are colorblind friendly, large and easy to read typeface). Lots of sudoku apps on the web are needlessly complicated, ours will not be. This site is a simple place to solve boards, no more, no less, and the design should reflect that.
+
 <!--NOTE: Please include illustrations or screenshots of what your user interface would look like -- even if they’re rough -- and interleave it with your description.-->
 
 <!-- Images can be included with `![alt_text](image_path)` -->
@@ -113,6 +117,7 @@ The target customers for this Sudoku game software are puzzle enthusiasts of all
 ### Security Requirements
 
 <!--Discuss what security requirements are necessary and why. Are there privacy or confidentiality issues? Is your system vulnerable to denial-of-service attacks?-->
+As of now there is an issue where games pages are accessible to non-users, however they cannot load or save boards without an account to post to the database. So, those pages that are accessible are ultimately useless without logging in anyways.
 
 ### System Requirements, Installation, and Usage
 
@@ -137,8 +142,6 @@ docker compose -p sudoku up
 <!--Include sections, for example, illustrating the database architecture (with, for example, an ERD).-->
 
 <!--Included below are some sample diagrams, including some example tech stack diagrams.-->
-
-You can make headings at different levels by writing `# Heading` with the number of `#` corresponding to the heading level (e.g. `## h2`).
 
 #### Technology Stack
 
@@ -309,13 +312,6 @@ See CodingStandardsDocument for a list of our design paradigms.
 - Every member should write code using test driven devolopment
 - Every member should write their own documentation in how to do stuff (so that another person can follow the instructions)
 
-## Authors and acknowledgment
-
-Show your appreciation to those who have contributed to the project.
-
-## License
-
-For open source projects, say how it is licensed.
 
 ## Project status
 
