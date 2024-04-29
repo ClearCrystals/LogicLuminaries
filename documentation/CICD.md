@@ -43,19 +43,19 @@ Each stage comprises specific jobs that execute defined tasks:
   - **Pre-script Task**: Installs dependencies from `requirements.txt`
   - **Scripts**:
     - Run coverage script on the code for the algorithms and the django backend
-    - Display the results of this 
-
+    - Display the results of this
 
 ## How to run the pipelines
+
 To run the given commands individually you can use: `sh runner.sh <job>`
 And choose from the given job list
 `jobs:`
+
 - lint_backend
 - lint_frontend
 - static_analysis_backend
-- unit_test_backend 
+- unit_test_backend
 
-For example: 
+For example:
 Say you want to run the unit tests you would do:
 `sh runner.sh lint_backend`
-
