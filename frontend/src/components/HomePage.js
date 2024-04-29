@@ -15,7 +15,7 @@ import { Image, Button } from "react-bootstrap";
 
 const HomePage = () => {
   return (
-      <div id="wrapper">
+    <div id="wrapper">
       <div id="homeContainer">
         <header>
           <Image src="ll_logo.png" alt="logo" id="logo" rounded />
@@ -23,28 +23,28 @@ const HomePage = () => {
             <b>Welcome to Sudoku</b>
           </h1>
         </header>
-          <br></br>
-          <div className="hometext">
-            <h5>Solve, save, and explore new board styles in one place.</h5>
-            <h5>Register or Login to begin.</h5>
+        <br></br>
+        <div className="hometext">
+          <h5>Solve, save, and explore new board styles in one place.</h5>
+          <h5>Register or Login to begin.</h5>
+        </div>
+        <br></br>
+        <div className="home_buttons">
+          <div className="d-grid gap-2">
+            <Link to="/components/auth?mode=signup">
+              <Button variant="secondary" size="lg">
+                Register
+              </Button>
+            </Link>
+            <Link to="/components/auth?mode=signin">
+              <Button variant="secondary" size="lg">
+                Login
+              </Button>
+            </Link>
           </div>
-          <br></br>
-          <div className="home_buttons">
-            <div className="d-grid gap-2">
-              <Link to="/components/auth?mode=signup">
-                <Button variant="secondary" size="lg">
-                  Register
-                </Button>
-              </Link>
-              <Link to="/components/auth?mode=signin">
-                <Button variant="secondary" size="lg">
-                  Login
-                </Button>
-              </Link>
-            </div>
-          </div>
+        </div>
       </div>
-      </div>
+    </div>
   );
 };
 

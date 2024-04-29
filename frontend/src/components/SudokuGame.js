@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
 import SudokuGrid from "./SudokuGrid"; // Ensure this path is correct
 import { Link } from "react-router-dom";
-import { Container, Button, Navbar, Nav, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
+import {
+  Container,
+  Button,
+  Navbar,
+  Nav,
+  ButtonGroup,
+  DropdownButton,
+  Dropdown,
+} from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useUser } from "./UserContext";
@@ -87,7 +95,8 @@ const SudokuGame = () => {
             <div>
               <h3>What do you want to do?</h3>
               <p>
-                 Start a new board, or pick up where you left off with an old one.
+                Start a new board, or pick up where you left off with an old
+                one.
               </p>
               <br></br>
               <ButtonGroup size="lg" className="mb-2">
@@ -139,19 +148,40 @@ const SudokuGame = () => {
                 </Button>
               </ButtonGroup>
               <br></br>
-              <Button variant="secondary" onClick={() => {setGameMode("")}}>Back</Button>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setGameMode("");
+                }}
+              >
+                Back
+              </Button>
             </div>
           )}
-          {!selectedGame &&gameMode === "saved" && savedGames.length > 0 && (
+          {!selectedGame && gameMode === "saved" && savedGames.length > 0 && (
             <div className="loaded-game">
               <h3>Choose one of your old games.</h3>
               <DropdownButton title="Load a game" size="lg">
-              {savedGames.map((game) => (
-                  <Dropdown.Item as="button" key={game.id} variant="secondary" onClick={() => handleSavedGameSelect(game.id)}>Load Game {game.id}</Dropdown.Item>
-              ))}
+                {savedGames.map((game) => (
+                  <Dropdown.Item
+                    as="button"
+                    key={game.id}
+                    variant="secondary"
+                    onClick={() => handleSavedGameSelect(game.id)}
+                  >
+                    Load Game {game.id}
+                  </Dropdown.Item>
+                ))}
               </DropdownButton>
-            <br></br>
-            <Button variant="secondary" onClick={()=>{setGameMode("")}}>Back</Button>
+              <br></br>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setGameMode("");
+                }}
+              >
+                Back
+              </Button>
             </div>
           )}
           {difficulty && (

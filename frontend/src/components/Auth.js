@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate, Link } from "react-router-dom";
@@ -37,7 +37,7 @@ export default function AuthForm(props) {
     }
   }, []);
 
-//   TODO: This is where authentication needs to occur. Other pages will be blocked depending on auth token.
+  //   TODO: This is where authentication needs to occur. Other pages will be blocked depending on auth token.
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -88,50 +88,56 @@ export default function AuthForm(props) {
 
   return (
     <div id="wrapper">
-    <div id="authContainer">
-      <Container fluid>
-        <Row>
-          <Col id="authCol">
-            {/* Success message! */}
-            {showSuccess && (
-              <div
-                style={{
-                  color: "green",
-                  backgroundColor: "lightgreen",
-                  padding: "10px",
-                  marginBottom: "10px",
-                }}
-              >
-                Account created successfully!
-              </div>
-            )}
-            <header>
-              <h1 style={{ textAlign: "center" }}>
-              {authMode === "signin" ? "Sign In" : "Sign Up"}
-              </h1>
-            </header> 
-            <br></br>
+      <div id="authContainer">
+        <Container fluid>
+          <Row>
+            <Col id="authCol">
+              {/* Success message! */}
+              {showSuccess && (
+                <div
+                  style={{
+                    color: "green",
+                    backgroundColor: "lightgreen",
+                    padding: "10px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Account created successfully!
+                </div>
+              )}
+              <header>
+                <h1 style={{ textAlign: "center" }}>
+                  {authMode === "signin" ? "Sign In" : "Sign Up"}
+                </h1>
+              </header>
+              <br></br>
               {/* depending on the authmode, the content of the screen is determined */}
               {authMode === "signin" && (
                 <Form className="Auth-form">
                   <Form.Group className="mb-3" as={Row}>
-                    <Form.Label column sm={2}>Email Address</Form.Label>
+                    <Form.Label column sm={2}>
+                      Email Address
+                    </Form.Label>
                     <Col sm={10}>
-                    <Form.Control 
-                      type="email"
-                      placeholder="Enter email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}/>
+                      <Form.Control
+                        type="email"
+                        placeholder="Enter email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
                     </Col>
                   </Form.Group>
                   <Form.Group as={Row}>
-                    <Form.Label column sm={2}>Password</Form.Label>
+                    <Form.Label column sm={2}>
+                      Password
+                    </Form.Label>
                     <Col sm={10}>
-                    <Form.Control 
-                      type="password"
-                      placeholder="Enter password"
-                      value={pwd}
-                      onChange={(e) => setPwd(e.target.value)}/>
+                      <Form.Control
+                        type="password"
+                        placeholder="Enter password"
+                        value={pwd}
+                        onChange={(e) => setPwd(e.target.value)}
+                      />
                     </Col>
                   </Form.Group>
                 </Form>
@@ -139,55 +145,66 @@ export default function AuthForm(props) {
               {authMode === "signup" && (
                 <Form className="Auth-form">
                   <Form.Group className="mb-3" as={Row}>
-                    <Form.Label column sm={2}>ID</Form.Label>
+                    <Form.Label column sm={2}>
+                      ID
+                    </Form.Label>
                     <Col sm={10}>
-                    <Form.Control 
-                      type="text" 
-                      placeholder="Enter ID" 
-                      value={id} 
-                      onChange={(e) => setId(e.target.value)}/>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter ID"
+                        value={id}
+                        onChange={(e) => setId(e.target.value)}
+                      />
                     </Col>
                   </Form.Group>
                   <Form.Group className="mb-3" as={Row}>
-                    <Form.Label column sm={2}>Email Address</Form.Label>
+                    <Form.Label column sm={2}>
+                      Email Address
+                    </Form.Label>
                     <Col sm={10}>
-                    <Form.Control 
-                      type="email"
-                      placeholder="Enter email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}/>
+                      <Form.Control
+                        type="email"
+                        placeholder="Enter email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
                     </Col>
                   </Form.Group>
                   <Form.Group as={Row}>
-                    <Form.Label column sm={2}>Password</Form.Label>
+                    <Form.Label column sm={2}>
+                      Password
+                    </Form.Label>
                     <Col sm={10}>
-                    <Form.Control 
-                      type="password"
-                      placeholder="Enter password"
-                      value={pwd}
-                      onChange={(e) => setPwd(e.target.value)}/>
+                      <Form.Control
+                        type="password"
+                        placeholder="Enter password"
+                        value={pwd}
+                        onChange={(e) => setPwd(e.target.value)}
+                      />
                     </Col>
                   </Form.Group>
                 </Form>
               )}
               <br></br>
-              <Button variant="primary" onClick={handleSubmit} size="lg">Submit</Button>
+              <Button variant="primary" onClick={handleSubmit} size="lg">
+                Submit
+              </Button>
               {/* SIGNIN REROUTE */}
               <p className="text-center mt-2">
                 {authMode === "signin"
                   ? "Need an account? "
                   : "Already registered? "}
-                <Button variant="secondary" onClick={changeAuthMode} size="sm"> 
-                {authMode === "signin" ? "Sign Up" : "Sign In"} 
+                <Button variant="secondary" onClick={changeAuthMode} size="sm">
+                  {authMode === "signin" ? "Sign Up" : "Sign In"}
                 </Button>
               </p>
               <Link to="/">
-              <Button variant="secondary">Back Home</Button>
+                <Button variant="secondary">Back Home</Button>
               </Link>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 }

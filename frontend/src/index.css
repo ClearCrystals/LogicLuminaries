@@ -1,6 +1,7 @@
 /* GEN */
 
-html, body {
+html,
+body {
   height: 100vh;
 }
 
@@ -23,7 +24,7 @@ code {
 }
 
 #wrapper {
-  height: 100vh;  
+  height: 100vh;
   background: rgba(52, 82, 112, 1);
 }
 
@@ -32,9 +33,9 @@ code {
 #homeContainer {
   background: rgba(52, 82, 112, 1);
   margin-left: auto;
-  margin-right: auto;	
+  margin-right: auto;
   text-align: center;
-  
+
   overflow: hidden;
   display: table;
 }

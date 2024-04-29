@@ -119,7 +119,7 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
         },
       })
       .then(() => {
-        console.log("Grid saved")
+        console.log("Grid saved");
       })
       .catch((error) => console.error("Error saving grid:", error));
   };
@@ -163,13 +163,13 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
       ),
     );
 
-    setCorrectState(isCorrect? true : false);
+    setCorrectState(isCorrect ? true : false);
 
-    if(correctState==null){
+    if (correctState == null) {
       return;
     }
-    console.log(correctState)
-  }
+    console.log(correctState);
+  };
 
   const handleSubmit = () => {
     if (!correctAnswer) {
@@ -185,7 +185,7 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
           correctAnswer[rowIndex][colIndex].toString(),
       ),
     );
-    setCorrectState(isCorrect? true : false);
+    setCorrectState(isCorrect ? true : false);
     debouncedSaveGridData();
     console.log(isCorrect ? "Correct solution!" : "Incorrect solution.");
   };
@@ -193,7 +193,11 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
   return (
     <Container>
       <Row>
-        <Col><p><b>Correctness:</b> {correctState?"Correct":"Incorrect"}</p></Col>
+        <Col>
+          <p>
+            <b>Correctness:</b> {correctState ? "Correct" : "Incorrect"}
+          </p>
+        </Col>
       </Row>
       {gridData.map((row, rowIndex) => (
         <Row key={rowIndex}>
@@ -227,11 +231,19 @@ const SudokuGrid = ({ difficulty, savedGrid }) => {
       )}
       <Row className="mt-3">
         <Col>
-          <Button variant="success" onClick={handleMessage} style={{margin:"10px"}}>
-              Check
+          <Button
+            variant="success"
+            onClick={handleMessage}
+            style={{ margin: "10px" }}
+          >
+            Check
           </Button>
           <br></br>
-          <Button variant="primary" onClick={handleSubmit} style={{margin:"10px"}}>
+          <Button
+            variant="primary"
+            onClick={handleSubmit}
+            style={{ margin: "10px" }}
+          >
             Submit
           </Button>
           <br></br>
