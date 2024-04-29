@@ -19,12 +19,12 @@ const HomePage = () => {
       <div id="homeContainer">
         <header>
           <Image src="ll_logo.png" alt="logo" id="logo" rounded />
-          <h1 class="hometext">
+          <h1 className="hometext">
             <b>Welcome to Sudoku</b>
           </h1>
         </header>
           <br></br>
-          <div class="hometext">
+          <div className="hometext">
             <h5>Solve, save, and explore new board styles in one place.</h5>
             <h5>Register or Login to begin.</h5>
           </div>

@@ -22,6 +22,7 @@ const Games = () => {
   const navigate = useNavigate();
   const displayName = username.match(emailRegex)?.[1] || username;
 
+
   const updateStyle = async (style) => {
     setSudokuStyle(style); // Save style in user context
     console.log("Sudoku style updated to:", style); // Log the intended style
@@ -78,6 +79,7 @@ const Games = () => {
             <h3>
               <b>Killer Sudoku</b>
               <p className="gamesDesc">The sum of the cells in a cage must equal the total given for that cage. Each digit in the cage must be unique.</p>
+              <p><b>UNDER CONSTRUCTION</b></p>
             </h3>
             <br/>
             <Link to="/components/SudokuGame">

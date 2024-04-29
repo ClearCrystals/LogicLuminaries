@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SudokuGrid from "./SudokuGrid"; // Ensure this path is correct
 import { Link } from "react-router-dom";
-import { Container, Button, Navbar, Nav, ButtonGroup } from "react-bootstrap";
+import { Container, Button, Navbar, Nav, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useUser } from "./UserContext";
@@ -21,7 +21,7 @@ import { useUser } from "./UserContext";
 const SudokuGame = () => {
   // Get 'sudokuStyle' from context
   const [gameMode, setGameMode] = useState(""); // 'new' or 'saved'
-  const [reset, trigReset] = useState(false); // triggers a page reload
+  //const [reset, trigReset] = useState(false); // triggers a page reload
   const [difficulty, setDifficulty] = useState(null);
   const [savedGames, setSavedGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState(null);
@@ -66,18 +66,6 @@ const SudokuGame = () => {
   const handleDifficultySelect = (selectedDifficulty) => {
     setDifficulty(selectedDifficulty); // Change difficulty
   };
-
-  useEffect(()=>{
-    //back from difficulty select to saved game choice
-    if(reset && !difficulty){
-      window.location.reload()
-      setGameMode("new")
-    }
-    if(reset && gameMode=="saved"){
-      window.location.reload()
-      setGameMode("")
-    }
-  },[reset]);
 
   return (
     <div>
@@ -151,25 +139,19 @@ const SudokuGame = () => {
                 </Button>
               </ButtonGroup>
               <br></br>
-              <Button variant="secondary" onClick={() => {trigReset(true)}}>Back</Button>
+              <Button variant="secondary" onClick={() => {setGameMode("")}}>Back</Button>
             </div>
           )}
-          {gameMode === "saved" && savedGames.length > 0 && (
-            <div
-              className="btn-group"
-              role="group"
-              aria-label="Saved Games Selection"
-            >
+          {!selectedGame &&gameMode === "saved" && savedGames.length > 0 && (
+            <div className="loaded-game">
+              <h3>Choose one of your old games.</h3>
+              <DropdownButton title="Load a game" size="lg">
               {savedGames.map((game) => (
-                <button
-                  key={game.id}
-                  onClick={() => handleSavedGameSelect(game.id)}
-                  className="btn btn-secondary"
-                >
-                  Load Game {game.id}
-                </button>
+                  <Dropdown.Item as="button" key={game.id} variant="secondary" onClick={() => handleSavedGameSelect(game.id)}>Load Game {game.id}</Dropdown.Item>
               ))}
-            <Button variant="secondary" onClick={()=>{trigReset(true)}}>Back</Button>
+              </DropdownButton>
+            <br></br>
+            <Button variant="secondary" onClick={()=>{setGameMode("")}}>Back</Button>
             </div>
           )}
           {difficulty && (
