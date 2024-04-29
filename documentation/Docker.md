@@ -3,13 +3,13 @@
 1. Open Docker Desktop to start the docker daemon
 2. Navigate to projects root directory
 3. Optionally login to the DoIt Container Registry with `docker login`
-4. Run `docker compose -p sudoku up --build` to build images, install dependencies, and run the container
+4. Run `docker compose -p sudoku up` to build images, install dependencies, and run the container
 5. Access Sudoku by navigating to `localhost:3000` in your web browser
 6. Press `C-c` to exit docker
 
 # Docker Usage for Developers
 
-1. Either use the end-users' one-liner or build individually with:
+1. Either use the end-users' one-liner and make sure to include `--build` or build individually with:
    - `docker compose -p sudoku build`
    - `docker compose up` or `docker compose up -d`to run detached
 2. Access:
