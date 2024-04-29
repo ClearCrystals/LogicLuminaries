@@ -1,21 +1,7 @@
-/* GEN */
-
 html,
-body {
-  height: 100vh;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
+body,
 #root {
+  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -23,21 +9,15 @@ code {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wrapper {
-  height: 100vh;
-  background: rgba(52, 82, 112, 1);
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
-/* HOME SPLASH */
-
 #homeContainer {
-  background: rgba(52, 82, 112, 1);
-  margin-left: auto;
-  margin-right: auto;
+  background-color: rgba(52, 82, 112, 1);
   text-align: center;
-
-  overflow: hidden;
-  display: table;
+  height: 100%;
 }
 
 #logo {
@@ -59,7 +39,6 @@ code {
   text-align: center;
 }
 
-/* AUTH PAGES */
 .Auth-form {
   align-content: center;
   text-align: center;
@@ -92,15 +71,9 @@ code {
   background-color: rgba(70, 125, 156, 1);
 }
 
-/* GAMES SELECT */
 #gamesContainer {
   text-align: center;
   height: 100%;
-}
-
-.gamesDesc {
-  padding: 20px;
-  font-size: medium;
 }
 
 .gamesCol {
@@ -113,9 +86,4 @@ code {
 
 #gameSpace {
   padding: 5%;
-}
-
-.loaded-game {
-  margin-top: 2%;
-  margin-bottom: 2%;
 }

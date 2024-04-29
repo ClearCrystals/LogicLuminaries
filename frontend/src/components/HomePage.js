@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Image, Button } from "react-bootstrap";
+import { Container, Row, Col, Image, Button } from "react-bootstrap";
 
 /**
  * HomePage component serving as the landing page of the Sudoku App.
@@ -15,16 +15,16 @@ import { Image, Button } from "react-bootstrap";
 
 const HomePage = () => {
   return (
-    <div id="wrapper">
-      <div id="homeContainer">
-        <header>
-          <Image src="ll_logo.png" alt="logo" id="logo" rounded />
-          <h1 className="hometext">
-            <b>Welcome to Sudoku</b>
-          </h1>
-        </header>
+    <div id="homeContainer">
+      <header>
+        <Image src="ll_logo.png" alt="logo" id="logo" rounded />
+        <h1 class="hometext">
+          <b>Welcome to Sudoku</b>
+        </h1>
+      </header>
+      <main>
         <br></br>
-        <div className="hometext">
+        <div class="hometext">
           <h5>Solve, save, and explore new board styles in one place.</h5>
           <h5>Register or Login to begin.</h5>
         </div>
@@ -43,7 +43,7 @@ const HomePage = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
