@@ -97,6 +97,11 @@ code {
   height: 100%;
 }
 
+.gamesDesc {
+  padding: 20px;
+  font-size: medium;
+}
+
 .gamesCol {
   background-color: rgba(217, 217, 217, 1);
   color: rgba(52, 82, 112, 1);

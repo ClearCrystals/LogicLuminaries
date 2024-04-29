@@ -87,7 +87,6 @@ export default function AuthForm(props) {
   };
 
   return (
-    //add back button on sign in
     <div id="wrapper">
     <div id="authContainer">
       <Container fluid>

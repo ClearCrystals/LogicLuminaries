@@ -61,6 +61,7 @@ const Games = () => {
           <Col className="gamesCol">
             <h3>
               <b>Classic Sudoku</b>
+              <p className="gamesDesc">The sudoku you're used to.</p>
             </h3>
             <br />
             <Link to="/components/SudokuGame">
@@ -76,8 +77,9 @@ const Games = () => {
           <Col className="gamesCol">
             <h3>
               <b>Killer Sudoku</b>
+              <p className="gamesDesc">The sum of the cells in a cage must equal the total given for that cage. Each digit in the cage must be unique.</p>
             </h3>
-            <br />
+            <br/>
             <Link to="/components/SudokuGame">
               <Button
                 variant="secondary"

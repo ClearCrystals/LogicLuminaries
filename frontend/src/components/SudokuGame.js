@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SudokuGrid from "./SudokuGrid"; // Ensure this path is correct
 import { Link } from "react-router-dom";
 import { Container, Button, Navbar, Nav, ButtonGroup } from "react-bootstrap";
@@ -21,6 +21,7 @@ import { useUser } from "./UserContext";
 const SudokuGame = () => {
   // Get 'sudokuStyle' from context
   const [gameMode, setGameMode] = useState(""); // 'new' or 'saved'
+  const [reset, trigReset] = useState(false); // triggers a page reload
   const [difficulty, setDifficulty] = useState(null);
   const [savedGames, setSavedGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState(null);
@@ -65,6 +66,19 @@ const SudokuGame = () => {
   const handleDifficultySelect = (selectedDifficulty) => {
     setDifficulty(selectedDifficulty); // Change difficulty
   };
+
+  useEffect(()=>{
+    //back from difficulty select to saved game choice
+    if(reset && !difficulty){
+      window.location.reload()
+      setGameMode("new")
+    }
+    if(reset && gameMode=="saved"){
+      window.location.reload()
+      setGameMode("")
+    }
+  },[reset]);
+
   return (
     <div>
       <div>
@@ -83,7 +97,10 @@ const SudokuGame = () => {
         <Container id="gameSpace">
           {!gameMode && (
             <div>
-              <h3>Game Mode Select</h3>
+              <h3>What do you want to do?</h3>
+              <p>
+                 Start a new board, or pick up where you left off with an old one.
+              </p>
               <br></br>
               <ButtonGroup size="lg" className="mb-2">
                 <Button
@@ -99,6 +116,10 @@ const SudokuGame = () => {
                   Load Saved Game
                 </Button>
               </ButtonGroup>
+              <br></br>
+              <Link to="/components/Games">
+                <Button variant="secondary">Back</Button>
+              </Link>
             </div>
           )}
           {gameMode === "new" && !difficulty && (
@@ -129,6 +150,8 @@ const SudokuGame = () => {
                   Hard
                 </Button>
               </ButtonGroup>
+              <br></br>
+              <Button variant="secondary" onClick={() => {trigReset(true)}}>Back</Button>
             </div>
           )}
           {gameMode === "saved" && savedGames.length > 0 && (
@@ -146,16 +169,13 @@ const SudokuGame = () => {
                   Load Game {game.id}
                 </button>
               ))}
+            <Button variant="secondary" onClick={()=>{trigReset(true)}}>Back</Button>
             </div>
           )}
           {difficulty && (
             <SudokuGrid difficulty={difficulty} username={username} />
           )}
           {selectedGame && <SudokuGrid savedGrid={selectedGame} />}
-          <br></br>
-          <Link to="/components/Games">
-            <Button variant="secondary">Back</Button>
-          </Link>
         </Container>
       </div>
     </div>
